@@ -1,0 +1,50 @@
+﻿@model PetCare_system.Models.VaccinationRecord
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VaccinationRecord</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.VaccineName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VaccineName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateGiven)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateGiven)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NextDueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NextDueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.VaccinationId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

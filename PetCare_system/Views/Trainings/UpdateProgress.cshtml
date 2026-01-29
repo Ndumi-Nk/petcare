@@ -1,0 +1,70 @@
+﻿@model PetCare_system.Models.ProgressUpdateViewModel
+
+@{
+    ViewBag.Title = "Update Training Progress";
+}
+
+<div class="container">
+    <h2>Update Progress for @Model.PetName</h2>
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.PetId)
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ObedienceProgress, "Obedience Progress", new { @class = "control-label" })
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.ObedienceProgress, new { htmlAttributes = new { @class = "form-control", min = 0, max = 100 } })
+                        <div class="input-group-append">
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ObedienceProgress, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AgilityProgress, "Agility Progress", new { @class = "control-label" })
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.AgilityProgress, new { htmlAttributes = new { @class = "form-control", min = 0, max = 100 } })
+                        <div class="input-group-append">
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.AgilityProgress, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BehaviorProgress, "Behavior Progress", new { @class = "control-label" })
+                    <div class="input-group">
+                        @Html.EditorFor(model => model.BehaviorProgress, new { htmlAttributes = new { @class = "form-control", min = 0, max = 100 } })
+                        <div class="input-group-append">
+                            <span class="input-group-text">%</span>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.BehaviorProgress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Notes, "Training Notes", new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", rows = 8 })
+                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save Progress" class="btn btn-primary" />
+            @Html.ActionLink("Back to Dashboard", "TrainerDashboard", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

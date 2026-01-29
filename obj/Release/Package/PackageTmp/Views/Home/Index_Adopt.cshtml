@@ -1,0 +1,220 @@
+﻿@model IEnumerable<PetCare_system.Models.Pet_Adoption>
+
+@{
+    ViewBag.Title = "Pet Adoptions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Bootstrap + Font Awesome -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+<style>
+    body {
+        background-color: #eef2f7;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+        margin-top: 40px;
+    }
+    table {
+        width: 200%;
+        table-layout: fixed;
+        word-wrap: break-word;
+    }
+    .page-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #343a40;
+    }
+
+    .search-bar {
+        width: 300px;
+        position: relative;
+    }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 12px 8px 36px;
+            border: 1px solid #ccc;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+            .search-bar input:focus {
+                border-color: #007bff;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+            }
+
+        .search-bar i {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            color: #6c757d;
+        }
+
+    .btn-back {
+        background-color: #6c757d;
+        color: white;
+    }
+
+        .btn-back:hover {
+            background-color: #5a6268;
+        }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        padding: 20px;
+        font-size: 1.25rem;
+        font-weight: 500;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+        color: #343a40;
+        font-weight: 600;
+    }
+
+    .badge.pending {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+    .badge.approved {
+        background-color: #28a745;
+    }
+
+    .badge.rejected {
+        background-color: #dc3545;
+    }
+
+    .btn-sm {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    @@media (max-width: 768px) {
+        .search-bar {
+            width: 100%;
+            margin-top: 15px;
+        }
+    }
+</style>
+
+<div class="container">
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+        <a class="btn btn-back mb-2" href="@Url.Action("Dashboard", "Home")">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <div class="search-bar mb-2">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search adoptions..." onkeyup="filterTable()" />
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-heart"></i> Pet Adoption Applications
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered" id="adoptionTable">
+                    <thead>
+                        <tr>
+                            <th>Adopter</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Pet Name</th>
+                            <th>Type</th>
+                            <th>Breed</th>
+                            <th>DOB</th>
+                            <th>Experience</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                            <th>Agreement</th>
+                            <th>Applied On</th>
+                            <th>Pickup</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var adoption in Model)
+                        {
+                            <tr>
+                                <td>@adoption.AdopterFullName</td>
+                                <td>@adoption.AdopterEmail</td>
+                                <td>@adoption.AdopterPhone</td>
+                                <td>@adoption.PetName</td>
+                                <td>@adoption.PetType</td>
+                                <td>@adoption.PetBreed</td>
+                                <td>@adoption.DateOfBirth.ToString("dd MMM yyyy")</td>
+                                <td>@adoption.ExperienceLevel</td>
+                                <td>@(adoption.AdoptionReason.Length > 30 ? adoption.AdoptionReason.Substring(0, 30) + "..." : adoption.AdoptionReason)</td>
+                                <td>
+                                    <span class="badge @(adoption.Status.ToLower())">
+                                        @adoption.Status
+                                    </span>
+                                </td>
+                                <td>@(adoption.HasAgreedToTerms ? "Yes" : "No")</td>
+                                <td>@adoption.ApplicationDate.ToString("dd MMM yyyy")</td>
+                                <td>@adoption.PickupOrDropoff</td>
+                                <td>
+                                    <a href="@Url.Action("Details", "PetAdoption", new { id = adoption.Adoption_Id })" class="btn btn-sm btn-info">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="@Url.Action("Edit", "PetAdoption", new { id = adoption.Adoption_Id })" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="@Url.Action("Delete", "PetAdoption", new { id = adoption.Adoption_Id })" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this adoption application?');">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function filterTable() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value.toLowerCase();
+        var table = document.getElementById("adoptionTable");
+        var rows = table.getElementsByTagName("tr");
+
+        for (var i = 1; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName("td");
+            var match = false;
+            for (var j = 0; j < cells.length; j++) {
+                if (cells[j] && cells[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                    match = true;
+                    break;
+                }
+            }
+            rows[i].style.display = match ? "" : "none";
+        }
+    }
+</script>

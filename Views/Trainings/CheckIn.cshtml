@@ -1,0 +1,24 @@
+﻿@model PetCare_system.Models.CheckInViewModel
+
+@{
+    ViewBag.Title = "Check In Pet";
+}
+
+<h2>Check In @Model.PetName for @Model.TrainingType Training</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.SessionId)
+    @Html.HiddenFor(model => model.PetName)
+    @Html.HiddenFor(model => model.TrainingType)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Notes, "Initial Observations")
+        @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", rows = 4 })
+        @Html.ValidationMessageFor(model => model.Notes)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Check In</button>
+    @Html.ActionLink("Cancel", "TrainerSessions", null, new { @class = "btn btn-default" })
+}

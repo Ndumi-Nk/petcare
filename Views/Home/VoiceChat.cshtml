@@ -1,0 +1,210 @@
+﻿@* Views/VideoChat/Index.cshtml *@
+@{
+    ViewBag.Title = "Video Chat";
+    string roomId = ViewBag.RoomId as string ?? "";
+    string userId = ViewBag.UserId as string ?? "";
+    string userName = ViewBag.UserName as string ?? "Partner";
+}
+
+<div class="container">
+    <h2>Video Chat with @Html.Raw(HttpUtility.HtmlEncode(userName))</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>You</h4>
+            <video id="localVideo" autoplay muted class="video-box"></video>
+        </div>
+        <div class="col-md-6">
+            <h4>Partner</h4>
+            <video id="remoteVideo" autoplay class="video-box"></video>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <button id="startBtn" class="btn btn-success">Start Call</button>
+            <button id="endBtn" class="btn btn-danger" disabled>End Call</button>
+            <div id="status" class="mt-2 alert alert-info">Ready to connect</div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" id="roomInput" class="form-control" value="@Html.Raw(HttpUtility.HtmlEncode(roomId))" readonly />
+                <div class="input-group-append">
+                    <button id="copyBtn" class="btn btn-secondary">Copy Link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .video-box {
+            width: 100%;
+            max-height: 400px;
+            background: #000;
+            border: 1px solid #ddd;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        const roomId = "@roomId";
+        const userId = "@userId";
+        const userName = "@HttpUtility.JavaScriptStringEncode(userName)";
+
+        const localVideo = document.getElementById('localVideo');
+        const remoteVideo = document.getElementById('remoteVideo');
+
+        let localStream = null;
+        let peerConnection = null;
+
+        const videoHub = $.connection.videoHub;
+
+        const rtcConfig = {
+            iceServers: [{ urls: "stun:stun.l.google.com:19302" }]
+        };
+
+        $(function () {
+            setupSignalR();
+            setupEventHandlers();
+        });
+
+        function setupSignalR() {
+            videoHub.client.userConnected = onUserConnected;
+            videoHub.client.userDisconnected = onUserDisconnected;
+            videoHub.client.receiveSignal = onSignalReceived;
+
+            $.connection.hub.start()
+                .done(() => updateStatus("Connected to SignalR"))
+                .fail(err => {
+                    console.error('SignalR connection error:', err);
+                    updateStatus('SignalR error: ' + err.message);
+                });
+        }
+
+        function setupEventHandlers() {
+            $('#startBtn').click(startCall);
+            $('#endBtn').click(endCall);
+            $('#copyBtn').click(() => {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Room link copied to clipboard!');
+                });
+            });
+        }
+
+        async function startCall() {
+            try {
+                updateStatus('Starting call...');
+                localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+                localVideo.srcObject = localStream;
+                videoHub.server.joinRoom(roomId);
+
+                $('#startBtn').prop('disabled', true);
+                $('#endBtn').prop('disabled', false);
+                updateStatus('Waiting for partner to join...');
+            } catch (err) {
+                console.error('Error starting call:', err);
+                updateStatus('Error: ' + err.message);
+            }
+        }
+
+        function endCall() {
+            if (peerConnection) {
+                peerConnection.close();
+                peerConnection = null;
+            }
+
+            if (localStream) {
+                localStream.getTracks().forEach(track => track.stop());
+                localVideo.srcObject = null;
+            }
+
+            remoteVideo.srcObject = null;
+            $('#startBtn').prop('disabled', false);
+            $('#endBtn').prop('disabled', true);
+
+            updateStatus('Call ended');
+        }
+
+        function onUserConnected(connectedUserId) {
+            updateStatus('Partner joined the room');
+            if (localStream) {
+                createPeerConnection(connectedUserId);
+            }
+        }
+
+        function onUserDisconnected(disconnectedUserId) {
+            updateStatus('Partner disconnected');
+            if (peerConnection) {
+                peerConnection.close();
+                peerConnection = null;
+            }
+        }
+
+        function createPeerConnection(targetUserId) {
+            updateStatus('Creating peer connection...');
+            peerConnection = new RTCPeerConnection(rtcConfig);
+
+            localStream.getTracks().forEach(track => {
+                peerConnection.addTrack(track, localStream);
+            });
+
+            peerConnection.onicecandidate = ({ candidate }) => {
+                if (candidate) {
+                    videoHub.server.sendSignal({ type: 'ice', data: candidate }, targetUserId);
+                }
+            };
+
+            peerConnection.ontrack = ({ streams }) => {
+                remoteVideo.srcObject = streams[0];
+                updateStatus('Call connected!');
+            };
+
+            peerConnection.createOffer()
+                .then(offer => peerConnection.setLocalDescription(offer))
+                .then(() => {
+                    videoHub.server.sendSignal({ type: 'offer', data: peerConnection.localDescription }, targetUserId);
+                })
+                .catch(err => {
+                    console.error('Offer error:', err);
+                    updateStatus('Error creating offer');
+                });
+        }
+
+        function onSignalReceived(signal, senderId) {
+            if (!peerConnection) {
+                createPeerConnection(senderId);
+            }
+
+            switch (signal.type) {
+                case 'offer':
+                    peerConnection.setRemoteDescription(new RTCSessionDescription(signal.data))
+                        .then(() => peerConnection.createAnswer())
+                        .then(answer => peerConnection.setLocalDescription(answer))
+                        .then(() => {
+                            videoHub.server.sendSignal({ type: 'answer', data: peerConnection.localDescription }, senderId);
+                        });
+                    break;
+
+                case 'answer':
+                    peerConnection.setRemoteDescription(new RTCSessionDescription(signal.data));
+                    break;
+
+                case 'ice':
+                    peerConnection.addIceCandidate(new RTCIceCandidate(signal.data));
+                    break;
+            }
+        }
+
+        function updateStatus(message) {
+            $('#status').text(message);
+        }
+    </script>
+}

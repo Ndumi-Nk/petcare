@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "mssql3": {
+      "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Web/sites/PetCaresystem20250611093651/providers/Microsoft.ServiceLinker/linkers/ConnectionStringspetcares_7C6C2B29F1",
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/petcaredbsam/databases/PetCare_system_db",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:petcares"
+    }
+  }
+}

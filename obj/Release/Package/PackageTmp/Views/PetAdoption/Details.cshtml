@@ -1,0 +1,32 @@
+﻿@model PetCare_system.Models.Pet_Adoption
+
+@{
+    ViewBag.Title = "Adoption Details";
+}
+
+<h2>Adoption Details</h2>
+
+<div>
+    <h4>Pet Info</h4>
+    <p><strong>Name:</strong> @Model.PetName</p>
+    <p><strong>Type:</strong> @Model.PetType</p>
+    <p><strong>Breed:</strong> @Model.PetBreed</p>
+    <p><strong>Date of Birth:</strong> @Model.DateOfBirth.ToShortDateString()</p>
+
+    <h4>Adopter Info</h4>
+    <p><strong>Name:</strong> @Model.AdopterFullName</p>
+    <p><strong>Email:</strong> @Model.AdopterEmail</p>
+    <p><strong>Phone:</strong> @Model.AdopterPhone</p>
+
+    <h4>Application Details</h4>
+    <p><strong>Experience Level:</strong> @Model.ExperienceLevel</p>
+    <p><strong>Home Environment:</strong> @Model.HomeDescription</p>
+    <p><strong>Reason for Adoption:</strong> @Model.AdoptionReason</p>
+    <p><strong>Status:</strong> @Model.Status</p>
+    <p><strong>Application Date:</strong> @Model.ApplicationDate.ToShortDateString()</p>
+</div>
+
+<div class="mt-4">
+    <a href="@Url.Action("Adopt", "PetAdoption")" class="btn btn-secondary">Back</a>
+    <a href="@Url.Action("CancelAdoption", "PetAdoption", new { id = Model.Adoption_Id })" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this adoption application?');">Cancel</a>
+</div>

@@ -1,0 +1,464 @@
+﻿@using PetCare_system.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Welcome Back!";
+    Layout = null; // No layout for full control
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - PetCare System</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+    <style>
+        /* Root colors */
+        :root {
+            --primary-color: #4b6cb7;
+            --secondary-color: #182848;
+            --accent-color: #ff6b6b;
+            --light-color: #f8f9fc;
+            --dark-color: #5a5c69;
+            --text-color: #858796;
+            --border-color: #d1d3e2;
+            --shadow-color: rgba(58, 59, 69, 0.15);
+        }
+
+        /* Basic body & layout */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8f9fc 0%, #e3e6f0 100%);
+        }
+
+        .full-page-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left side with illustration */
+        .illustration-side {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            color: white;
+            flex-direction: column;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .illustration-side img {
+            max-width: 300px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+        }
+
+        .illustration-side h2 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .illustration-side p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* Right side with login form */
+        .form-side {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem;
+            background: white;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.1);
+            padding: 3rem;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .form-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .form-header p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+
+        /* Form inputs */
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .form-control {
+            padding: 1rem 1rem 1rem 3rem;
+            font-size: 1.1rem;
+            border-radius: 0.5rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(75,108,183,0.25);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color);
+            font-size: 1.25rem;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-color);
+            font-size: 1.25rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Submit button */
+        .btn-login {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 0.5rem;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
+
+        .btn-login:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Register link */
+        .register-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .register-link a {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Success message */
+        #successMessage {
+            display: none;
+            margin-bottom: 1rem;
+        }
+
+        /* Captcha modal styles */
+        .animal-img {
+            max-width: 150px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+        }
+
+        .arrow-btn {
+            border: none;
+            background: transparent;
+            font-size: 2.5rem;
+            margin: 0 10px;
+            cursor: pointer;
+            color: var(--primary-color);
+            transition: color 0.3s;
+            user-select: none;
+        }
+
+        .arrow-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .arrow-btn.selected {
+            color: var(--accent-color);
+        }
+
+        .captcha-prompt {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @@media (max-width: 992px) {
+            .full-page-container {
+                flex-direction: column;
+            }
+
+            .illustration-side {
+                padding: 2rem;
+                max-height: 300px;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .login-card {
+                padding: 2rem;
+            }
+
+            .form-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="full-page-container">
+        <!-- Illustration Side -->
+        <div class="illustration-side">
+            <img src="https://cdn-icons-png.flaticon.com/512/1076/1076984.png" alt="Pet Care" />
+            <h2>PetCare System</h2>
+            <p>Your pet's health is our priority</p>
+        </div>
+
+        <!-- Form Side -->
+        <div class="form-side">
+            <div class="login-card">
+                <div id="successMessage" class="alert alert-success text-center">
+                    <i class="fas fa-check-circle"></i> Welcome back! You have logged in successfully.
+                </div>
+
+                <div class="form-header">
+                    <img src="https://cdn-icons-png.flaticon.com/512/194/194279.png" alt="Logo" />
+                    <h2>Welcome Back!</h2>
+                    <p>Sign in to continue to PetCare</p>
+                </div>
+
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "loginForm", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                    <!-- Email Input -->
+                    <div class="form-group position-relative">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email Address", autocomplete = "email" })
+                        <i class="fas fa-envelope input-icon"></i>
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="form-group position-relative">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password", id = "password", autocomplete = "current-password" })
+                        <i class="fas fa-lock input-icon"></i>
+                        <i class="fas fa-eye password-toggle" id="togglePassword" title="Show/Hide password"></i>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger small" })
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="form-group form-check mb-4">
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input", id = "RememberMe" })
+                        @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label" })
+                    </div>
+
+                    <!-- Login Button -->
+                    <button id="btnLogin" type="button" class="btn btn-login" disabled>
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                }
+                <div class="register-link mt-3">
+                    Don't have an account? @Html.ActionLink("Register here", "Register")
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Captcha Modal -->
+    <div class="modal fade" id="captchaModal" tabindex="-1" aria-labelledby="captchaModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-3">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="captchaModalLabel">Please verify you are human</h5>
+                    <button type="button" class="btn-close" id="closeCaptchaModal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="captcha-prompt">Select the arrow pointing to the direction the animal is facing</div>
+                    <div id="animalContainer"></div>
+                    <div id="arrowOptions" class="d-flex justify-content-center"></div>
+                    <button id="captchaConfirm" type="button" class="btn btn-primary mt-3" disabled>Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        (() => {
+            const loginForm = document.getElementById("loginForm");
+            const btnLogin = document.getElementById("btnLogin");
+            const successMessage = document.getElementById("successMessage");
+            const captchaModal = new bootstrap.Modal(document.getElementById('captchaModal'));
+            const animalContainer = document.getElementById("animalContainer");
+            const arrowOptions = document.getElementById("arrowOptions");
+            const captchaConfirm = document.getElementById("captchaConfirm");
+            const closeCaptchaModal = document.getElementById("closeCaptchaModal");
+            const togglePassword = document.getElementById("togglePassword");
+            const passwordInput = document.getElementById("password");
+
+            let userSelectedDirection = null;
+            let correctDirection = null;
+
+            // Animals with different images
+            const animals = [
+                { name: "Dog", url: "https://cdn-icons-png.flaticon.com/512/616/616408.png" },
+                { name: "Cat", url: "https://cdn-icons-png.flaticon.com/512/616/616433.png" },
+                { name: "Rabbit", url: "https://cdn-icons-png.flaticon.com/512/616/616490.png" },
+                { name: "Bird", url: "https://cdn-icons-png.flaticon.com/512/616/616430.png" },
+                { name: "Turtle", url: "https://cdn-icons-png.flaticon.com/512/616/616467.png" },
+                { name: "Horse", url: "https://cdn-icons-png.flaticon.com/512/616/616456.png" },
+                { name: "Crocodile", url: "https://cdn-icons-png.flaticon.com/512/616/616456.png" }
+            ];
+
+            // Directions and their rotation degrees
+            const directions = [
+                { name: "Up", angle: 0 },
+                { name: "Right", angle: 90 },
+                { name: "Down", angle: 180 },
+                { name: "Left", angle: 270 }
+            ];
+
+            // Password toggle
+            togglePassword.addEventListener("click", () => {
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    togglePassword.classList.replace("fa-eye", "fa-eye-slash");
+                } else {
+                    passwordInput.type = "password";
+                    togglePassword.classList.replace("fa-eye-slash", "fa-eye");
+                }
+            });
+
+            // Setup puzzle function
+            function setupPuzzle() {
+                animalContainer.innerHTML = "";
+                arrowOptions.innerHTML = "";
+                captchaConfirm.disabled = true;
+                userSelectedDirection = null;
+
+                // Randomly select animal and direction
+                const animalIndex = Math.floor(Math.random() * animals.length);
+                const animal = animals[animalIndex];
+                correctDirection = directions[Math.floor(Math.random() * directions.length)];
+
+                // Show animal rotated
+                const img = document.createElement("img");
+                img.src = animal.url;
+                img.alt = animal.name;
+                img.className = "animal-img";
+                img.style.transform = `rotate(${correctDirection.angle}deg)`;
+                animalContainer.appendChild(img);
+
+                // Create arrow buttons for all directions
+                directions.forEach(dir => {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "arrow-btn";
+                    btn.title = dir.name;
+                    btn.innerHTML = `<i class="fas fa-arrow-up"></i>`;
+                    btn.style.transform = `rotate(${dir.angle}deg)`;
+                    btn.setAttribute("data-direction", dir.name);
+
+                    btn.addEventListener("click", () => {
+                        // Remove selection from others
+                        document.querySelectorAll(".arrow-btn").forEach(b => b.classList.remove("selected"));
+                        btn.classList.add("selected");
+                        userSelectedDirection = dir.name;
+                        captchaConfirm.disabled = false;
+                    });
+
+                    arrowOptions.appendChild(btn);
+                });
+            }
+
+            // When login button clicked -> show captcha modal
+            btnLogin.addEventListener("click", () => {
+                setupPuzzle();
+                captchaModal.show();
+            });
+
+            // When confirm captcha clicked -> check answer
+            captchaConfirm.addEventListener("click", () => {
+                if (userSelectedDirection === correctDirection.name) {
+                    captchaModal.hide();
+                    successMessage.style.display = "block";
+                    // Submit form after short delay to show message nicely
+                    setTimeout(() => loginForm.submit(), 1000);
+                } else {
+                    alert("Oops! That's not the right direction. Please try again.");
+                    setupPuzzle();
+                }
+            });
+
+            // Allow closing modal manually - optional reset puzzle if you want
+            closeCaptchaModal.addEventListener("click", () => {
+                captchaModal.hide();
+            });
+
+            // Enable login button if inputs are valid (simple check)
+            function validateInputs() {
+                const emailVal = loginForm.Email.value.trim();
+                const passVal = loginForm.Password.value.trim();
+                btnLogin.disabled = !(emailVal && passVal);
+            }
+
+            loginForm.Email.addEventListener("input", validateInputs);
+            loginForm.Password.addEventListener("input", validateInputs);
+
+            // Initial disable login button
+            btnLogin.disabled = true;
+
+        })();
+    </script>
+</body>
+</html>

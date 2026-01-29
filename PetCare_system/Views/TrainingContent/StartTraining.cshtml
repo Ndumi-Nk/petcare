@@ -1,0 +1,494 @@
+﻿@model PetCare_system.Models.TrainingSessionViewModel
+
+@{
+    ViewBag.Title = "Training: " + Model.Module.Title;
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3>@Model.Module.Title</h3>
+            <p>@Model.Module.Description</p>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- Video Section -->
+                    <div class="mb-4">
+                        <h4>Training Videos</h4>
+                        <div class="list-group mb-3">
+                            @foreach (var video in Model.Videos)
+                            {
+                                var isWatched = Model.Progress.VideosWatched > Model.Videos.IndexOf(video);
+                                <a href="#" class="list-group-item list-group-item-action video-item d-flex justify-content-between align-items-center @(isWatched ? "list-group-item-success" : "")"
+                                   data-videoid="@video.Id"
+                                   data-url="@video.VideoUrl"
+                                   data-type="video/mp4">
+                                    <div>
+                                        <i class="fas @(isWatched ? "fa-check-circle text-success" : "fa-play-circle text-primary") me-2"></i>
+                                        <span>@video.Title</span>
+                                    </div>
+                                    <span class="badge bg-secondary rounded-pill">@video.DurationMinutes min</span>
+                                </a>
+                            }
+                        </div>
+
+                        <div class="ratio ratio-16x9 mb-3 position-relative" id="videoContainer">
+                            <video id="trainingVideo" controls class="w-100" playsinline>
+                                Your browser doesn't support HTML5 video.
+                            </video>
+                            <div id="videoPlayOverlay" class="video-play-overlay d-none">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Section -->
+                    <div id="quizSection" class="mb-4 @(Model.Progress.VideosWatched >= Model.Videos.Count ? "" : "d-none")">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0">Module Quiz</h4>
+                            @if (Model.Progress.VideosWatched >= Model.Videos.Count)
+                            {
+                                <span class="badge bg-success">Ready to Attempt</span>
+                            }
+                        </div>
+
+                        @if (Model.QuizQuestions != null && Model.QuizQuestions.Count > 0)
+                        {
+                            <div class="quiz-instructions alert alert-info mb-4">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Answer all questions to complete the module. You need at least 70% to pass.
+                            </div>
+
+                            using (Html.BeginForm("SubmitQuiz", "TrainingContent", FormMethod.Post, new { id = "quizForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="PetId" value="@Model.PetId" />
+                                <input type="hidden" name="ModuleId" value="@Model.Module.Id" />
+
+                                <div class="quiz-questions">
+                                    @for (int i = 0; i < Model.QuizQuestions.Count; i++)
+                                    {
+                                        <div class="card mb-3 question-card" data-questionid="@Model.QuizQuestions[i].Id">
+                                            <div class="card-body">
+                                                <h5 class="card-title question-text">@(i+1). @Model.QuizQuestions[i].QuestionText</h5>
+                                                @if (!string.IsNullOrEmpty(Model.QuizQuestions[i].Explanation))
+                                                {
+                                                    <p class="text-muted small mb-2">@Model.QuizQuestions[i].Explanation</p>
+                                                }
+                                                <input type="hidden" name="Answers[@i].QuestionId" value="@Model.QuizQuestions[i].Id" />
+
+                                                <div class="options-container list-group">
+                                                    @foreach (var option in Model.QuizQuestions[i].Options)
+                                                    {
+                                                        <div class="list-group-item option-item">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input option-input"
+                                                                       type="radio"
+                                                                       name="Answers[@i].SelectedOptionId"
+                                                                       id="option-@option.Id"
+                                                                       value="@option.Id"
+                                                                       required>
+                                                                <label class="form-check-label w-100 option-label" for="option-@option.Id">
+                                                                    @option.OptionText
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                                <div class="quiz-actions text-center mt-4">
+                                    <button type="submit" class="btn btn-primary btn-lg submit-quiz">
+                                        <i class="fas fa-paper-plane me-2"></i> Submit Quiz
+                                    </button>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning no-quiz-warning">
+                                <i class="fas fa-exclamation-circle me-2"></i>
+                                No quiz questions available for this module.
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <!-- Progress Section -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">Progress</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="progress mb-3" style="height: 25px;">
+                                <div class="progress-bar" role="progressbar"
+                                     style="width: @Model.Progress.Progress%; background-color: @(Model.Progress.VideosWatched >= Model.Videos.Count ? "#28a745" : "#17a2b8")">
+                                    @Model.Progress.Progress%
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Videos watched:</span>
+                                <span><strong>@Model.Progress.VideosWatched/@Model.Videos.Count</strong></span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Quiz attempts:</span>
+                                <span><strong>@Model.Progress.QuizAttempts</strong></span>
+                            </div>
+
+                            @if (Model.Progress.VideosWatched >= Model.Videos.Count)
+                            {
+                                <div class="alert alert-success mt-3 mb-0">
+                                    <i class="fas fa-check-circle"></i> You can now attempt the quiz!
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info mt-3 mb-0">
+                                    <i class="fas fa-info-circle"></i> Watch all videos to unlock the quiz
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="card">
+                        <div class="card-header bg-light">
+                            <h5 class="mb-0">Quick Actions</h5>
+                      
+                            <a href="@Url.Action("PetProgress", "TrainingContent", new { petId = Model.PetId })"
+                               class="list-group-item list-group-item-action">
+                                <i class="fas fa-chart-line me-2"></i> View Progress
+                            </a>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Video player functionality
+            const videoPlayer = document.getElementById('trainingVideo');
+            const videoOverlay = document.getElementById('videoPlayOverlay');
+            let currentVideoId = 0;
+            const trackedVideos = new Set();
+            const totalVideos = @Model.Videos.Count;
+
+            // Initialize video items
+            $('.video-item').click(function(e) {
+                e.preventDefault();
+                currentVideoId = $(this).data('videoid');
+                loadVideo($(this).data('url'), $(this).data('type'));
+                $(this).addClass('active').siblings().removeClass('active');
+            });
+
+            function loadVideo(url, type) {
+                videoPlayer.pause();
+                videoPlayer.innerHTML = '';
+                const source = document.createElement('source');
+                source.src = url;
+                source.type = type;
+                videoPlayer.appendChild(source);
+                videoPlayer.load();
+                $(videoOverlay).removeClass('d-none');
+            }
+
+            // Video playback controls
+            $(videoOverlay).click(function() {
+                videoPlayer.play().catch(showCustomPlayButton);
+            });
+
+            videoPlayer.addEventListener('play', () => $(videoOverlay).addClass('d-none'));
+            videoPlayer.addEventListener('ended', handleVideoEnded);
+            videoPlayer.addEventListener('timeupdate', handleVideoProgress);
+
+            function handleVideoEnded() {
+                if (currentVideoId && !trackedVideos.has(currentVideoId)) {
+                    trackVideoWatched(currentVideoId);
+                }
+            }
+
+            function handleVideoProgress() {
+                if (currentVideoId && !trackedVideos.has(currentVideoId) &&
+                    videoPlayer.duration > 0 &&
+                    (videoPlayer.currentTime / videoPlayer.duration) > 0.9) {
+                    trackVideoWatched(currentVideoId);
+                }
+            }
+
+            function trackVideoWatched(videoId) {
+                trackedVideos.add(videoId);
+                const $item = $(`.video-item[data-videoid="${videoId}"]`);
+                $item.html('<i class="fas fa-spinner fa-spin me-2"></i> Saving...');
+
+                $.post('@Url.Action("RecordVideoWatched", "TrainingContent")', {
+                    videoId: videoId,
+                    petId: @Model.PetId,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                })
+                .done(function(response) {
+                    if (response.success) {
+                        updateProgress(response);
+                        $item.html(`<i class="fas fa-check-circle text-success me-2"></i>${$item.find('span').text()}`)
+                             .addClass('list-group-item-success');
+
+                        if (response.videosWatched >= totalVideos) {
+                            showQuizSection();
+                        }
+                    }
+                })
+                .fail(showError);
+            }
+
+            function updateProgress(data) {
+                $('.progress-bar')
+                    .css('width', data.progress + '%')
+                    .text(data.progress + '%')
+                    .css('background-color', data.videosWatched >= totalVideos ? '#28a745' : '#17a2b8');
+                $('.videos-watched-count').text(data.videosWatched);
+            }
+
+            function showQuizSection() {
+                $('#quizSection').removeClass('d-none');
+                $('html, body').animate({
+                    scrollTop: $('#quizSection').offset().top - 20
+                }, 500);
+
+                $('<div class="alert alert-success alert-dismissible fade show mt-3">' +
+                  '<i class="fas fa-check-circle"></i> Quiz unlocked! Scroll down to attempt.' +
+                  '<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>')
+                  .insertBefore('#quizSection')
+                  .delay(3000)
+                  .fadeOut();
+            }
+
+            // Quiz submission handling
+            $('#quizForm').submit(function(e) {
+                e.preventDefault();
+                const $form = $(this);
+                const $submitBtn = $form.find('.submit-quiz');
+
+                // Validate all questions answered
+                const unanswered = $('.question-card').filter(function() {
+                    return $(this).find('input[type="radio"]:checked').length === 0;
+                });
+
+                if (unanswered.length > 0) {
+                    unanswered.addClass('border-danger');
+                    unanswered.find('.question-text').addClass('text-danger');
+                    $('html, body').animate({
+                        scrollTop: unanswered.first().offset().top - 100
+                    }, 500);
+                    return;
+                }
+
+                $submitBtn.prop('disabled', true)
+                    .html('<span class="spinner-border spinner-border-sm me-2"></span> Submitting...');
+
+                $.ajax({
+                    url: '@Url.Action("SubmitQuiz", "TrainingContent")',
+                    type: 'POST',
+                    data: $form.serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            showQuizResult(response);
+                        } else {
+                            showError(response.message || 'Quiz submission failed');
+                        }
+                    },
+                    error: function(xhr) {
+                        const errorMsg = xhr.responseJSON?.message ||
+                                       'Status: ' + xhr.status + ' - ' + xhr.statusText;
+                        showError('Submission error: ' + errorMsg);
+                    },
+                    complete: function() {
+                        $submitBtn.prop('disabled', false)
+                            .html('<i class="fas fa-paper-plane me-2"></i> Submit Quiz');
+                    }
+                });
+            });
+
+            function showQuizResult(data) {
+                // Clear previous highlights
+                $('.question-card').removeClass('border-success border-danger');
+                $('.option-label').removeClass('text-success fw-bold');
+
+                // Highlight correct/incorrect answers
+                data.results.forEach(result => {
+                    const $question = $(`.question-card[data-questionid="${result.questionId}"]`);
+
+                    // Highlight correct answer in green
+                    $question.find(`input[value="${result.correctOptionId}"]`)
+                             .next('label')
+                             .addClass('text-success fw-bold');
+
+                    // Highlight user's answer if incorrect in red
+                    const userAnswer = $question.find('input[type="radio"]:checked').val();
+                    if (!result.isCorrect && userAnswer) {
+                        $question.find(`input[value="${userAnswer}"]`)
+                                 .next('label')
+                                 .addClass('text-danger fw-bold');
+                    }
+
+                    // Show explanation if available
+                    if (result.explanation) {
+                        $question.find('.card-body').append(
+                            `<div class="alert alert-info mt-3 explanation">${result.explanation}</div>`
+                        );
+                    }
+                });
+
+                // Show result alert
+                const alertClass = data.score >= 50 ? 'alert-success' : 'alert-danger';
+                const iconClass = data.score >= 50 ? 'fa-check-circle' : 'fa-exclamation-circle';
+                const resultMessage = data.score >= 50
+                    ? `Congratulations! You passed with ${data.score}%`
+                    : `You scored ${data.score}%. Try again to pass (minimum 50%)`;
+
+                $('<div class="alert ' + alertClass + ' alert-dismissible fade show mt-3">' +
+                  '<i class="fas ' + iconClass + ' me-2"></i>' +
+                  resultMessage + '<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>')
+                  .insertBefore('#quizSection');
+
+                // Update progress if completed
+                if (data.isCompleted) {
+                    $('.progress-bar').css('background-color', '#28a745');
+                    $('.quiz-actions').append(
+                        '<a href="@Url.Action("Certificate", "Training", new { moduleId = Model.Module.Id, petId = Model.PetId })"' +
+                        ' class="btn btn-success mt-3"><i class="fas fa-certificate me-2"></i>View Certificate</a>'
+                    );
+                }
+            }
+
+            function showError(message) {
+                $('<div class="alert alert-danger alert-dismissible fade show mt-3">' +
+                  '<i class="fas fa-exclamation-circle me-2"></i>' + message +
+                  '<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>')
+                  .insertBefore('#quizSection');
+            }
+
+            function showCustomPlayButton() {
+                const $btn = $('<button class="btn btn-primary btn-lg video-play-btn">' +
+                              '<i class="fas fa-play me-2"></i>Play Video</button>')
+                              .css({
+                                  position: 'absolute',
+                                  top: '50%',
+                                  left: '50%',
+                                  transform: 'translate(-50%, -50%)',
+                                  zIndex: 20
+                              })
+                              .click(function() {
+                                  videoPlayer.play()
+                                      .then(() => $(this).remove())
+                                      .catch(() => showError('Playback failed'));
+                              });
+                $('#videoContainer').append($btn);
+            }
+        });
+    </script>
+}
+<style>
+    .video-play-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0,0,0,0.5);
+        cursor: pointer;
+        z-index: 10;
+    }
+
+        .video-play-overlay i {
+            font-size: 4rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .video-play-overlay:hover i {
+            transform: scale(1.1);
+        }
+
+    .question-card {
+        transition: all 0.3s;
+    }
+
+        .question-card.border-success {
+            border-left: 4px solid #28a745;
+        }
+
+        .question-card.border-danger {
+            border-left: 4px solid #dc3545;
+        }
+
+    .option-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .option-input:checked + .option-label {
+        font-weight: bold;
+        color: #0d6efd;
+    }
+
+    .explanation {
+        font-size: 0.9rem;
+        padding: 0.75rem;
+    }
+</style>
+}
+<style>
+    .video-play-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0,0,0,0.5);
+        cursor: pointer;
+        z-index: 10;
+    }
+
+        .video-play-overlay i {
+            font-size: 4rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .video-play-overlay:hover i {
+            transform: scale(1.1);
+        }
+
+    .question-card {
+        transition: all 0.3s;
+    }
+
+        .question-card.unanswered {
+            border-left: 4px solid #dc3545;
+        }
+
+    .option-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .option-input:checked + .option-label {
+        font-weight: bold;
+        color: #0d6efd;
+    }
+</style>

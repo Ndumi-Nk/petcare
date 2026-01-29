@@ -1,0 +1,190 @@
+﻿@model IEnumerable<PetCare_system.Models.Pet_Boarding>
+
+@{
+    ViewBag.Title = "Pet Boarding Bookings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Bootstrap & Font Awesome -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .booking-card .card-body p {
+        margin-bottom: 0.5rem;
+    }
+
+    .badge.confirmed {
+        background-color: #28a745;
+    }
+
+    .badge.pending {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+    .badge.cancelled {
+        background-color: #dc3545;
+    }
+
+    .card-header {
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    .booking-card .card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .booking-card.recent .card {
+        border-left: 5px solid #198754;
+    }
+
+    .btn-group .btn {
+        font-size: 0.85rem;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+        margin-bottom: 20px;
+    }
+
+    .alert {
+        font-weight: bold;
+    }
+
+    .search-box {
+        max-width: 500px;
+        margin: 0 auto 30px auto;
+    }
+</style>
+
+<div class="container mt-5 mb-5">
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success text-center">@TempData["Message"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger text-center">@TempData["Error"]</div>
+    }
+
+    <h2 class="text-center section-title">
+        <i class="fas fa-paw"></i> Pet Boarding Bookings
+    </h2>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="Search by pet, owner, breed, status..." />
+    </div>
+
+    <div class="row" id="bookingCards">
+        @foreach (var booking in Model)
+        {
+            var isRecent = (DateTime.Now - booking.BookingDate).TotalDays <= 7;
+            <div class="col-md-6 col-lg-4 mb-4 booking-card @(isRecent ? "recent" : "")" data-booking-date="@booking.BookingDate.ToString("yyyy-MM-ddTHH:mm:ss")">
+                <div class="card h-100">
+                    <div class="card-header bg-primary text-white">
+                        @booking.PetName (@booking.PetType)
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Owner:</strong> @booking.OwnerName</p>
+                        <p><strong>Breed:</strong> @booking.PetBreed</p>
+                        <p><strong>Package:</strong> @booking.Package</p>
+                        <p><strong>Price:</strong> @booking.PackagePrice.ToString("C")</p>
+                        <p><strong>Check-In:</strong> @booking.CheckInDate.ToString("dd MMM yyyy")</p>
+                        <p><strong>Check-Out:</strong> @booking.CheckOutDate.ToString("dd MMM yyyy")</p>
+                        <p><strong>Booked:</strong> @booking.BookingDate.ToString("dd MMM yyyy")</p>
+                        <p>
+                            <strong>Status:</strong>
+                            <span class="badge @(booking.Check_Status == "Confirmed" ? "confirmed" : booking.Check_Status == "Pending" ? "pending" : "cancelled")">
+                                @booking.Check_Status
+                            </span>
+                        </p>
+                        <p><strong>Agreement:</strong> @(booking.Agreement ? "Yes" : "No")</p>
+                        @if (!string.IsNullOrEmpty(booking.SpecialNeeds))
+                        {
+                            <p><strong>Special Needs:</strong> @booking.SpecialNeeds</p>
+                        }
+                    </div>
+                    <div class="card-footer text-center">
+                        <div class="btn-group">
+                            
+                            Cancel <button class="btn btn-sm btn-warning" title="Cancel" data-bs-toggle="modal" data-bs-target="#cancelModal-@booking.board_Id">
+                                <i class="fas fa-ban"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cancel Modal -->
+                <div class="modal fade" id="cancelModal-@booking.board_Id" tabindex="-1" aria-labelledby="cancelModalLabel-@booking.board_Id" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header bg-warning">
+                                <h5 class="modal-title" id="cancelModalLabel-@booking.board_Id">Cancel Booking</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to cancel the reservation for <strong>@booking.PetName</strong>?</p>
+                                <p><small class="text-muted">This action cannot be undone.</small></p>
+
+                                <!-- Additional conditions -->
+                                <p><strong>Important:</strong></p>
+                                <ul>
+                                    <li>No refunds will be issued upon cancellation.</li>
+                                    <li>Cancellations must be made at least 24 hours before the check-in date.</li>
+                                    <li>If the check-in date is within 24 hours, cancellation is not allowed.</li>
+                                    <li>Please contact support for any exceptions.</li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                @using (Html.BeginForm("Cancel", "Pet_Boarding", new { id = booking.board_Id }, FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger">Yes, Cancel</button>
+                                }
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Go Back</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        
+
+                <!-- Bootstrap JS Bundle -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+                <!-- JavaScript: Sort and Search -->
+                <script>
+                    window.addEventListener("DOMContentLoaded", () => {
+                        const container = document.getElementById("bookingCards");
+                        const cards = Array.from(container.getElementsByClassName("booking-card"));
+
+                        // Sort by booking date (descending)
+                        cards.sort((a, b) => {
+                            const dateA = new Date(a.getAttribute("data-booking-date"));
+                            const dateB = new Date(b.getAttribute("data-booking-date"));
+                            return dateB - dateA;
+                        });
+
+                        cards.forEach(card => container.appendChild(card));
+
+                        // Live search
+                        const searchInput = document.getElementById("searchInput");
+                        searchInput.addEventListener("input", function () {
+                            const value = this.value.toLowerCase();
+                            cards.forEach(card => {
+                                const content = card.innerText.toLowerCase();
+                                card.style.display = content.includes(value) ? "" : "none";
+                            });
+                        });
+                    });
+                </script>
+        }

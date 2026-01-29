@@ -1,0 +1,199 @@
+﻿@model PetCare_system.Models.TrainerDashboardViewModel
+
+@{
+    ViewBag.Title = "Trainer Dashboard";
+    var currentDate = DateTime.Now.ToString("dddd, dd MMMM yyyy"); // Correct readable date format
+}
+
+<div class="container-fluid">
+    <!-- Welcome Header -->
+    <div class="row mb-4">
+        <div class="col-md-12 text-center">
+            <h2 class="mb-1">Welcome, <span class="text-primary">@Model.TrainerName</span></h2>
+            <p class="text-muted mb-0">
+                <i class="fa fa-calendar-alt"></i> Today is @currentDate
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Today's Sessions -->
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="fa fa-clock"></i> Today's Training Sessions</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.TodaySessions.Any())
+                    {
+                        <div class="list-group">
+                            @foreach (var session in Model.TodaySessions)
+                            {
+                                <div class="list-group-item list-group-item-action">
+                                    <div class="d-flex w-100 justify-content-between align-items-center">
+                                        <h5 class="mb-1">@session.Pet.Name - @session.TrainingType</h5>
+                                        <span class="badge @(session.Status == "In Progress" ? "badge-primary" : "badge-secondary")">
+                                            @session.Status
+                                        </span>
+                                    </div>
+                                    <p class="mb-1 text-muted">
+                                        <i class="fa fa-clock"></i>
+                                        @session.StartTime.ToString(@"hh\:mm") - @session.EndTime.ToString(@"hh\:mm")
+                                    </p>
+                                    <div class="d-flex justify-content-end mt-2">
+                                        @if (session.CheckInTime == null)
+                                        {
+                                            @Html.ActionLink("Check In", "CheckIn", new { id = session.Id },
+                                                new { @class = "btn btn-sm btn-outline-primary mr-2" })
+                                        }
+                                        else if (session.CheckOutTime == null)
+                                        {
+                                            @Html.ActionLink("Update Progress", "UpdateProgress", new { petId = session.PetId },
+                                                new { @class = "btn btn-sm btn-info mr-2" })
+                                            @Html.ActionLink("Check Out", "CheckOut", new { id = session.Id },
+                                                new { @class = "btn btn-sm btn-outline-success" })
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info text-center">
+                            No training sessions scheduled for today.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Upcoming Sessions & Recent Progress -->
+        <div class="col-md-6">
+            <!-- Upcoming Sessions -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="fa fa-calendar"></i> Upcoming Sessions</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.UpcomingSessions.Any())
+                    {
+                        <div class="list-group">
+                            @foreach (var session in Model.UpcomingSessions)
+                            {
+                                <div class="list-group-item">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">@session.Pet.Name</h5>
+                                        <small class="text-muted">@session.SessionDate.ToString("dddd, dd MMM yyyy")</small>
+                                    </div>
+                                    <p class="mb-1">@session.TrainingType</p>
+                                    <small class="text-muted">
+                                        <i class="fa fa-clock"></i>
+                                        @session.StartTime.ToString(@"hh\:mm") - @session.EndTime.ToString(@"hh\:mm")
+                                    </small>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info text-center">
+                            No upcoming training sessions.
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Recent Progress Updates -->
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="fa fa-chart-bar"></i> Recent Progress Updates</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.RecentProgressUpdates.Any())
+                    {
+                        <!-- Chart -->
+                        <canvas id="progressChart" height="200"></canvas>
+                        <hr />
+
+                        <!-- List with Buttons -->
+                        <div class="list-group">
+                            @foreach (var progress in Model.RecentProgressUpdates)
+                            {
+                                <div class="list-group-item">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1">@progress.Pet.Name</h5>
+                                        <small class="text-muted">@progress.LastTrainingDate</small>
+                                    </div>
+                                    <div class="progress mb-2" style="height: 20px;">
+                                        <div class="progress-bar bg-success" role="progressbar"
+                                             style="width: @progress.ProgressPercentage%"
+                                             aria-valuenow="@progress.ProgressPercentage"
+                                             aria-valuemin="0"
+                                             aria-valuemax="100">
+                                            @progress.ProgressPercentage%
+                                        </div>
+                                    </div>
+                                    <p class="mb-1 text-truncate">@progress.Notes</p>
+                                    @Html.ActionLink("View Details", "PetProgressDetails", new { petId = progress.PetId },
+                                        new { @class = "btn btn-sm btn-outline-secondary" })
+                                </div>
+                            }
+                        </div>
+
+                        <!-- Chart.js Script -->
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <script>
+    var ctx = document.getElementById('progressChart').getContext('2d');
+    var progressData = {
+        labels: [
+            @Html.Raw(string.Join(",", Model.RecentProgressUpdates.Select(p => "\"" + p.Pet.Name + "\"")))
+        ],
+        datasets: [{
+            label: 'Training Progress (%)',
+            data: [
+                @Html.Raw(string.Join(",", Model.RecentProgressUpdates.Select(p => p.ProgressPercentage)))
+            ],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(54, 162, 235, 0.6)',
+                'rgba(255, 206, 86, 0.6)',
+                'rgba(75, 192, 192, 0.6)',
+                'rgba(153, 102, 255, 0.6)',
+                'rgba(255, 159, 64, 0.6)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    var progressChart = new Chart(ctx, {
+        type: 'bar',
+        data: progressData,
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true, max: 100 } }
+        }
+    });
+                        </script>
+
+                    }
+                    else
+                    {
+                        <div class="alert alert-info text-center">
+                            No recent progress updates.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

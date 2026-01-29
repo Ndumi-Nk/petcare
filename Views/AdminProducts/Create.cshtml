@@ -1,0 +1,361 @@
+﻿@model PetCare_system.Models.Product
+
+@{
+    ViewBag.Title = "Create Product";
+}
+
+<div class="product-form-container">
+    <div class="form-header">
+        <h2>Create New Product</h2>
+        <p>Fill in the details below to add a new product to your inventory</p>
+    </div>
+
+    @using (Html.BeginForm("Create", "AdminProducts", FormMethod.Post, new { enctype = "multipart/form-data", @class = "product-form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "validation-summary" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-input", placeholder = "Enter product name" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description)
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-input textarea", placeholder = "Enter product description", rows = "4" })
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                @Html.LabelFor(m => m.Price)
+                <div class="input-with-icon">
+                    <span class="input-icon">R</span>
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-input", type = "number", step = "0.01", placeholder = "0.00" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Quantity)
+                @Html.TextBoxFor(m => m.Quantity, new { @class = "form-input", type = "number", min = "0", placeholder = "0" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="file-upload-label">
+                <span>Product Image</span>
+                <div class="file-upload-box">
+                    <input type="file" name="Image" accept="image/*" id="productImage" />
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload or drag and drop</p>
+                        <small>PNG, JPG up to 5MB</small>
+                    </div>
+                    <div class="image-preview" id="imagePreview"></div>
+                </div>
+            </label>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-plus-circle"></i> Create Product
+            </button>
+        </div>
+    }
+</div>
+
+<style>
+    /* Base Styles */
+    :root {
+        --primary: #4a6bff;
+        --primary-light: #6d8aff;
+        --text: #2d3748;
+        --text-light: #718096;
+        --border: #e2e8f0;
+        --border-focus: #a0aec0;
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --error: #e53e3e;
+        --success: #38a169;
+    }
+
+    body {
+        background-color: var(--bg);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text);
+        line-height: 1.6;
+        padding: 20px;
+    }
+
+    /* Form Container */
+    .product-form-container {
+        max-width: 700px;
+        margin: 0 auto;
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+    }
+
+    /* Form Header */
+    .form-header {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+        .form-header h2 {
+            color: var(--text);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+    /* Form Elements */
+    .product-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+        .form-group label {
+            font-weight: 500;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+    .form-input {
+        padding: 12px 15px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+        background-color: var(--card-bg);
+        color: var(--text);
+    }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 107, 255, 0.1);
+        }
+
+    .textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    /* Form Row */
+    .form-row {
+        display: flex;
+        gap: 20px;
+    }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+    /* Input with Icon */
+    .input-with-icon {
+        position: relative;
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-light);
+    }
+
+    .input-with-icon .form-input {
+        padding-left: 30px;
+    }
+
+    /* File Upload */
+    .file-upload-label {
+        display: block;
+        cursor: pointer;
+    }
+
+    .file-upload-box {
+        border: 2px dashed var(--border);
+        border-radius: 8px;
+        padding: 25px;
+        text-align: center;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .file-upload-box:hover {
+            border-color: var(--primary-light);
+        }
+
+        .file-upload-box input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    .upload-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .upload-content i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .upload-content p {
+            margin: 0;
+            color: var(--text);
+        }
+
+        .upload-content small {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+    .image-preview {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: none;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+    }
+
+        .submit-btn:hover {
+            background-color: var(--primary-light);
+        }
+
+        .submit-btn i {
+            font-size: 1.1rem;
+        }
+
+    /* Validation */
+    .validation-summary {
+        color: var(--error);
+        background-color: rgba(229, 62, 62, 0.05);
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        border-left: 3px solid var(--error);
+        font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .form-row {
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .product-form-container {
+            padding: 20px;
+        }
+    }
+</style>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            // Image preview functionality
+            $('#productImage').change(function () {
+                const file = this.files[0];
+                const preview = $('#imagePreview');
+
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        preview.css('background-image', 'url(' + e.target.result + ')');
+                        preview.show();
+                        $('.upload-content').hide();
+                    }
+
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.css('background-image', '');
+                    preview.hide();
+                    $('.upload-content').show();
+                }
+            });
+
+            // Drag and drop functionality
+            const fileUploadBox = $('.file-upload-box')[0];
+
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                fileUploadBox.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                fileUploadBox.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                fileUploadBox.addEventListener(eventName, unhighlight, false);
+            });
+
+            function highlight() {
+                $(fileUploadBox).css('border-color', 'var(--primary)');
+            }
+
+            function unhighlight() {
+                $(fileUploadBox).css('border-color', 'var(--border)');
+            }
+
+            fileUploadBox.addEventListener('drop', handleDrop, false);
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+                $('#productImage')[0].files = files;
+                $('#productImage').trigger('change');
+            }
+        });
+    </script>
+}

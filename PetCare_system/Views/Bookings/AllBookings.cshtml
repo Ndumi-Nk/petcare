@@ -1,0 +1,163 @@
+﻿@model PetCare_system.Models.AllBookingsViewModel
+@{
+    ViewBag.Title = "All Bookings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2 class="my-4">All Bookings</h2>
+
+    <!-- Vet Consultations Section -->
+    @if (Model.VetConsultations.Any())
+    {
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3>Vet Consultations</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pet</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var consult in Model.VetConsultations)
+                            {
+                                <tr>
+                                    <td>@consult.PetName</td>
+                                    <td>@consult.Consult_Date.ToString("dd MMM yyyy")</td>
+                                    <td>@consult.Consult_Time.ToString("hh:mm tt")</td>
+                                    <td>@consult.ConsultationType</td>
+                                    <td>
+                                        <span class="badge @(consult.PaymentStatus ? "bg-success" : "bg-warning")">
+                                            @(consult.PaymentStatus ? "Paid" : "Pending")
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("BookingSummary", new { id = consult.Consult_Id, type = "vet" })"
+                                           class="btn btn-sm btn-info">
+                                            Details
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Pet Boardings Section -->
+    @if (Model.PetBoardings.Any())
+    {
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h3>Pet Boardings</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pet</th>
+                                <th>Check-In</th>
+                                <th>Check-Out</th>
+                                <th>Package</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var board in Model.PetBoardings)
+                            {
+                                <tr>
+                                    <td>@board.PetName</td>
+                                    <td>@board.CheckInDate.ToString("dd MMM yyyy")</td>
+                                    <td>@board.CheckOutDate.ToString("dd MMM yyyy")</td>
+                                    <td>@board.Package</td>
+                                    <td>R @board.PackagePrice</td>
+                                    <td>
+                                        <span class="badge @(board.Status == "Approved" ? "bg-success" : "bg-warning")">
+                                            @board.Status
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Details" ,"Pet_Boarding", new { id = board.board_Id, type = "boarding" })"
+                                           class="btn btn-sm btn-info">
+                                            Details
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+
+    <!-- Pet Adoptions Section -->
+    @if (Model.PetAdoptions.Any())
+    {
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h3>Pet Adoptions</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Pet</th>
+                                <th>Type</th>
+                                <th>Applicant</th>
+                                <th>Applied On</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var adopt in Model.PetAdoptions)
+                            {
+                                <tr>
+                                    <td>@adopt.PetName</td>
+                                    <td>@adopt.PetType</td>
+                                    <td>@adopt.AdopterFullName</td>
+                                    <td>@adopt.ApplicationDate.ToString("dd MMM yyyy")</td>
+                                    <td>
+                                        <span class="badge @(adopt.Status == "Approved" ? "bg-success" :
+                                              adopt.Status == "Rejected" ? "bg-danger" : "bg-warning")">
+                                            @adopt.Status
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="@Url.Action("Details" ,"PetAdoption", new { id = adopt.Adoption_Id, type = "adoption" })"
+                                           class="btn btn-sm btn-info">
+                                            Details
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+
+    @if (!Model.VetConsultations.Any() && !Model.PetBoardings.Any() && !Model.PetAdoptions.Any())
+    {
+        <div class="alert alert-info">
+            No bookings found in the system.
+        </div>
+    }
+</div>

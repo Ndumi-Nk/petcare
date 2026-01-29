@@ -1,0 +1,1323 @@
+﻿@model PetCare_system.Models.Pet_Adoption
+
+@{
+    ViewBag.Title = "Adoption Application";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Pet Adoption | Find Your Perfect Companion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        :root {
+            --primary-color: #e74c3c;
+            --primary-light: #fdecea;
+            --secondary-color: #3498db;
+            --dark-color: #2c3e50;
+            --dark-light: #34495e;
+            --light-color: #ecf0f1;
+            --accent-color: #f39c12;
+            --success-color: #2ecc71;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, .display-font {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.9) 0%, rgba(52, 73, 94, 0.9) 100%), url('https://images.unsplash.com/photo-1534361960057-19889db9621e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 150px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero-section::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100px;
+                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%23f8f9fa"></path><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%23f8f9fa"></path><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f8f9fa"></path></svg>');
+                background-size: cover;
+                background-repeat: no-repeat;
+                z-index: 1;
+            }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+            .btn-primary::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 100%;
+                background-color: rgba(255,255,255,0.2);
+                transition: all 0.3s ease;
+                z-index: -1;
+            }
+
+            .btn-primary:hover::before {
+                width: 100%;
+            }
+
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+            }
+
+        /* Video Section */
+        .video-section {
+            padding: 100px 0;
+            background-color: white;
+            position: relative;
+        }
+
+        .section-title {
+            color: var(--dark-color);
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            font-size: 2.5rem;
+        }
+
+            .section-title::after {
+                content: '';
+                display: block;
+                width: 80px;
+                height: 4px;
+                background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+                margin: 20px auto;
+                border-radius: 2px;
+            }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+            transition: all 0.5s ease;
+            background-color: #000;
+        }
+
+            .video-container:hover {
+                transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1.02);
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            }
+
+            .video-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+        .video-description {
+            max-width: 700px;
+            margin: 30px auto 0;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--dark-light);
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 100px 0;
+            background-color: var(--light-color);
+            position: relative;
+        }
+
+        .benefit-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            height: 100%;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .benefit-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            }
+
+            .benefit-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            }
+
+        .benefit-icon {
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover .benefit-icon {
+            transform: scale(1.1);
+        }
+
+        .benefit-title {
+            color: var(--dark-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .benefit-text {
+            color: var(--dark-light);
+            font-size: 1rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--dark-color) 0%, var(--dark-light) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Next Button Section */
+        .next-section {
+            text-align: center;
+            padding: 80px 0;
+            background-color: white;
+            position: relative;
+        }
+
+        .next-btn {
+            font-size: 1.2rem;
+            padding: 18px 50px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.2);
+        }
+
+            .next-btn:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(231, 76, 60, 0.3);
+            }
+
+            .next-btn i {
+                margin-left: 10px;
+                transition: transform 0.3s ease;
+            }
+
+            .next-btn:hover i {
+                transform: translateX(8px);
+            }
+
+        /* Adoption Form Section */
+        #adoption-form {
+            padding: 100px 0;
+            background-color: var(--primary-light);
+        }
+
+        .adoption-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 50px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .adoption-container::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 8px;
+                background: linear-gradient(90deg, var(--primary-color), var(--accent-color)));
+            }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+            .form-header h2 {
+                color: var(--dark-color);
+                font-weight: 700;
+                margin-bottom: 15px;
+            }
+
+            .form-header p {
+                color: var(--dark-light);
+                max-width: 700px;
+                margin: 0 auto;
+            }
+
+        .form-section {
+            background: rgba(231, 76, 60, 0.05);
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .section-header h4 {
+            color: var(--dark-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+            .section-header h4 i {
+                margin-right: 10px;
+                color: var(--primary-color);
+            }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 6px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+
+            .form-control:focus, .form-select:focus {
+                border-color: var(--primary-color);
+                box-shadow: 0 0 0 0.25rem rgba(231, 76, 60, 0.25);
+            }
+
+        .input-group-text {
+            background-color: var(--primary-light);
+            border-color: #ddd;
+            color: var(--primary-color);
+        }
+
+        .terms-agreement {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(46, 204, 113, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid var(--success-color);
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        /* Handover Method Cards */
+        .handover-method-container {
+            margin-bottom: 30px;
+        }
+
+        .handover-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            background-color: white;
+        }
+
+            .handover-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .handover-card.active {
+                border-color: var(--primary-color);
+                background-color: rgba(231, 76, 60, 0.05);
+            }
+
+            .handover-card i {
+                font-size: 2rem;
+                color: var(--primary-color);
+                margin-bottom: 10px;
+            }
+
+        /* Map Section */
+        #map-container {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #map {
+            height: 400px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+        .location-info {
+            background-color: var(--primary-light);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #c0392b 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .cta-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Q50,80 0,100 Z" fill="rgba(255,255,255,0.05)"></path></svg>');
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+                opacity: 0.2;
+            }
+
+        .cta-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .cta-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            opacity: 0.9;
+        }
+
+        .btn-light {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-light:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+            }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+            .footer-logo i {
+                color: var(--primary-color);
+                margin-right: 10px;
+            }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+            .footer-links a {
+                color: white;
+                margin: 0 15px;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+                .footer-links a:hover {
+                    color: var(--primary-color);
+                }
+
+        .social-icons {
+            margin-bottom: 30px;
+        }
+
+            .social-icons a {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                background-color: rgba(255,255,255,0.1);
+                color: white;
+                border-radius: 50%;
+                margin: 0 8px;
+                transition: all 0.3s ease;
+            }
+
+                .social-icons a:hover {
+                    background-color: var(--primary-color);
+                    transform: translateY(-3px);
+                }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* Responsive Adjustments */
+        @@media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .hero-section {
+                padding: 100px 0;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .benefit-card {
+                padding: 30px 20px;
+            }
+
+            .adoption-container {
+                padding: 30px;
+            }
+        }
+
+        @@media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .btn-primary, .btn-light, .next-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title animate">Find Your Perfect Pet Companion</h1>
+            <p class="hero-subtitle animate delay-1">Discover the joy of pet adoption and give a loving home to an animal in need. Our carefully curated adoption process ensures perfect matches that last a lifetime.</p>
+            <a href="#adoption-form" class="btn btn-primary btn-lg animate delay-2" id="hero-cta">
+                <i class="fas fa-heart"></i> Start Your Adoption Journey
+            </a>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="container">
+            <h2 class="section-title animate">Our Adoption Process</h2>
+            <div class="row justify-content-center animate delay-1">
+                <div class="col-lg-10">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/9sJUDx7iEJw" title="Pet Adoption Process" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p class="video-description animate delay-2">
+                        Watch our comprehensive guide to pet adoption. Learn about our careful matching process, meet some of our adorable residents,
+                        and see how we ensure every adoption is successful and rewarding for both pets and their new families.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="section-title animate">Why Choose Our Adoption Program?</h2>
+            <div class="row animate delay-1">
+                <div class="col-md-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3 class="benefit-title">Comprehensive Health Care</h3>
+                        <p class="benefit-text">All our pets receive complete veterinary care including vaccinations, spay/neuter services, and thorough health screenings before adoption.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <h3 class="benefit-title">Personalized Matching</h3>
+                        <p class="benefit-text">Our expert staff works closely with you to understand your lifestyle and match you with the perfect pet for your family and living situation.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h3 class="benefit-title">Lifetime Support</h3>
+                        <p class="benefit-text">We provide ongoing support, training resources, and advice to ensure a smooth transition and happy life together with your new companion.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6">
+                    <div class="stat-item animate">
+                        <div class="stat-number" data-count="2500">0</div>
+                        <div class="stat-label">Pets Adopted</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item animate delay-1">
+                        <div class="stat-number" data-count="98">0</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item animate delay-2">
+                        <div class="stat-number" data-count="15">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item animate delay-3">
+                        <div class="stat-number" data-count="500">0</div>
+                        <div class="stat-label">Volunteers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Next Button Section -->
+    <section class="next-section">
+        <div class="container">
+            <h3 class="mb-4 animate">Ready to meet your new best friend?</h3>
+            <p class="mb-5 animate delay-1">Begin your adoption journey today with our simple and secure application process.</p>
+            <div class="d-flex gap-2">
+                <a href="#adoption-form" class="btn btn-primary next-btn animate delay-2" id="showFormBtn">
+                    Begin Application <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="@Url.Action("UploadOCR", "PetAdoption")" class="btn btn-success next-btn animate delay-2">
+                    Scan To Submit <i class="fas fa-qrcode"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Adoption Form Section -->
+    <section id="adoption-form" class="py-5">
+        <div class="container">
+            <div class="adoption-container">
+                <div class="form-header">
+                    <h2><i class="fa fa-paw"></i> Adoption Application</h2>
+                    <p>Please complete this form to begin the adoption process. We'll contact you within 48 hours to discuss next steps.</p>
+                </div>
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h4><i class="fas fa-paw"></i> Select Your Pet</h4>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Id, "Pet", new { @class = "form-label" })
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-paw"></i></span>
+                                @Html.DropDownList("Id", null, "-- Select Pet --", new { @class = "form-select" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger small" })
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-header">
+                            <h4><i class="fas fa-home"></i> Adoption Details</h4>
+                        </div>
+
+                        <!-- Handover Method Cards -->
+                        <div class="form-group handover-method-container">
+                            <label class="form-label">Pet Handover Method</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="handover-card" data-method="Pickup">
+                                        <div class="text-center">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <h5>Shelter Pickup</h5>
+                                            <p>We'll Fetch  the pet from your location</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="handover-card" data-method="Dropoff">
+                                        <div class="text-center">
+                                            <i class="fas fa-home"></i>
+                                            <h5>Facility Dropoff</h5>
+                                            <p>You'll bring pet to our shelter</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.HiddenFor(model => model.PickupOrDropoff, new { id = "handoverMethod" })
+                        </div>
+
+                        <!-- Map Container -->
+                        <div id="map-container">
+                            <label class="form-label">Select Pickup Location</label>
+                            @Html.HiddenFor(model => model.PickupLocation, new { id = "pickupLocationInput" })
+                            <div class="alert alert-info location-info">
+                                <i class="fas fa-info-circle"></i>
+                                <span id="location-text">Drag the marker to select your exact pickup location</span>
+                            </div>
+                            <div id="map"></div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ExperienceLevel, new { @class = "form-label" })
+                            @Html.DropDownListFor(model => model.ExperienceLevel, (SelectList)ViewBag.ExperienceLevels, "Select your experience level", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ExperienceLevel, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.HomeDescription, new { @class = "form-label" })
+                            @Html.TextAreaFor(m => m.HomeDescription, new
+                            {
+                                @class = "form-control",
+                                rows = "5",
+                                placeholder = "Describe your home environment...",
+                                data_val = "true",
+                                id = "HomeDescription"
+                            })
+                            <button type="button" class="btn btn-outline-secondary mt-2" onclick="startSpeechRecognition('HomeDescription', 'statusHome')">🎤 Speak</button>
+                            <small id="statusHome" class="form-text text-muted"></small>
+                            @Html.ValidationMessageFor(m => m.HomeDescription, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.AdoptionReason, new { @class = "form-label" })
+                            @Html.TextAreaFor(m => m.AdoptionReason, new
+                            {
+                                @class = "form-control",
+                                rows = "5",
+                                placeholder = "Explain your adoption reasons...",
+                                data_val = "true",
+                                id = "AdoptionReason"
+                            })
+                            <button type="button" class="btn btn-outline-secondary mt-2" onclick="startSpeechRecognition('AdoptionReason', 'statusAdoption')">🎤 Speak</button>
+                            <small id="statusAdoption" class="form-text text-muted"></small>
+                            @Html.ValidationMessageFor(m => m.AdoptionReason, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="terms-agreement">
+                            <div class="form-check">
+                                @Html.CheckBoxFor(model => model.HasAgreedToTerms, new { @class = "form-check-input", id = "termsCheck" })
+                                <label class="form-check-label" for="termsCheck">
+                                    I understand that completing this application does not guarantee adoption and that all information provided is truthful. I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a>.
+                                </label>
+                                @Html.ValidationMessageFor(model => model.HasAgreedToTerms, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fa fa-paper-plane"></i> Submit Application
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Have Questions About Adoption?</h2>
+            <p class="cta-subtitle">Our adoption specialists are available to guide you through the process and help you find your perfect match.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="tel:+1234567890" class="btn btn-light btn-lg">
+                    <i class="fas fa-phone-alt"></i> Call Us
+                </a>
+                <a href="mailto:adoptions@example.com" class="btn btn-light btn-lg">
+                    <i class="fas fa-envelope"></i> Email Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <i class="fas fa-paw"></i> PetAdopt
+            </div>
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Our Pets</a>
+                <a href="#">Adoption Process</a>
+                <a href="#">Success Stories</a>
+                <a href="#">Volunteer</a>
+                <a href="#">Donate</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 PetAdopt. All rights reserved. | <a href="#" style="color: white;">Privacy Policy</a> | <a href="#" style="color: white;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Terms Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adoption Terms and Conditions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Adoption Agreement</h6>
+                    <p>By submitting this application, you agree to provide accurate information and understand that:</p>
+                    <ul>
+                        <li>Submission of this application does not guarantee adoption approval</li>
+                        <li>All information provided will be verified</li>
+                        <li>A home visit may be required before approval</li>
+                        <li>Adoption fees apply upon approval</li>
+                        <li>All adoptions are at the discretion of our adoption committee</li>
+                    </ul>
+                    <h6 class="mt-4">Post-Adoption Requirements</h6>
+                    <ul>
+                        <li>You agree to provide proper care, nutrition, and veterinary attention</li>
+                        <li>The pet will be kept as an indoor family companion</li>
+                        <li>You will not declaw cats or crop ears/dock tails of dogs</li>
+                        <li>If unable to keep the pet, you will return it to our organization</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="@Url.Action("AllBookings", "Bookings")" class="btn btn-info">View All bookings</a>
+
+    @section Scripts {
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+
+        <script>
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Animate stats counting - Updated with better visibility check
+            function animateStats() {
+                const statNumbers = document.querySelectorAll('.stat-number');
+                statNumbers.forEach(stat => {
+                    const target = parseInt(stat.getAttribute('data-count'));
+                    const suffix = stat.textContent.includes('%') ? '%' : '';
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+
+                    // Reset to 0 before animating
+                    stat.textContent = '0' + suffix;
+
+                    const updateStat = () => {
+                        current += step;
+                        if (current < target) {
+                            stat.textContent = Math.floor(current) + suffix;
+                            requestAnimationFrame(updateStat);
+                        } else {
+                            stat.textContent = target + suffix;
+                        }
+                    };
+
+                    updateStat();
+                });
+            }
+
+            // Intersection Observer for animations - Updated with better threshold
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+
+                        // Specifically check for stats section
+                        if (entry.target.classList.contains('stats-section')) {
+                            // Wait a bit to ensure the element is fully visible
+                            setTimeout(animateStats, 300);
+                        }
+                    }
+                });
+            }, { threshold: 0.5 }); // Increased threshold to 50% visibility
+
+            // Observe all animate elements
+            document.querySelectorAll('.animate').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Handover method selection
+            document.querySelectorAll('.handover-card').forEach(card => {
+                card.addEventListener('click', function () {
+                    document.querySelectorAll('.handover-card').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById('handoverMethod').value = this.getAttribute('data-method');
+
+                    // Show map if pickup is selected
+                    if (this.getAttribute('data-method') === 'Pickup') {
+                        document.getElementById('map-container').style.display = 'block';
+                        document.querySelector('.location-info').style.display = 'block';
+                        initMap();
+                    } else {
+                        document.getElementById('map-container').style.display = 'none';
+                        document.querySelector('.location-info').style.display = 'none';
+                    }
+                });
+            });
+
+            // Initialize map for pickup location - Updated for Durban
+            let map, marker;
+            function initMap() {
+                if (document.getElementById('map')) {
+                    // Check if map is already initialized
+                    if (map) return;
+
+                    // Durban, South Africa coordinates
+                    const defaultLat = -29.8587;
+                    const defaultLng = 31.0218;
+
+                    map = L.map('map').setView([defaultLat, defaultLng], 13);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+
+                    // Add marker
+                    marker = L.marker([defaultLat, defaultLng], {
+                        draggable: true
+                    }).addTo(map);
+
+                    // Update location input when marker is dragged
+                    marker.on('dragend', function (e) {
+                        const position = marker.getLatLng();
+                        document.getElementById('pickupLocationInput').value = `${position.lat},${position.lng}`;
+                        document.getElementById('location-text').textContent = `Selected location: Latitude ${position.lat.toFixed(4)}, Longitude ${position.lng.toFixed(4)}`;
+                    });
+
+                    // Set initial value
+                    document.getElementById('pickupLocationInput').value = `${defaultLat},${defaultLng}`;
+                    document.getElementById('location-text').textContent = `Drag the marker to select your exact pickup location. Current: Latitude ${defaultLat}, Longitude ${defaultLng}`;
+
+                    // Add click event to map to move marker
+                    map.on('click', function (e) {
+                        marker.setLatLng(e.latlng);
+                        const position = marker.getLatLng();
+                        document.getElementById('pickupLocationInput').value = `${position.lat},${position.lng}`;
+                        document.getElementById('location-text').textContent = `Selected location: Latitude ${position.lat.toFixed(4)}, Longitude ${position.lng.toFixed(4)}`;
+                    });
+                }
+            }
+
+
+            // Form validation
+            document.querySelector('form').addEventListener('submit', function (e) {
+                const termsChecked = document.getElementById('termsCheck').checked;
+                if (!termsChecked) {
+                    e.preventDefault();
+                    alert('Please agree to the terms and conditions before submitting.');
+                    document.getElementById('termsCheck').focus();
+                }
+
+                // Additional validation can be added here
+            });
+
+            // Initialize tooltips
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Show form section when button is clicked (for mobile)
+            document.getElementById('showFormBtn').addEventListener('click', function () {
+                if (window.innerWidth < 768) {
+                    document.getElementById('adoption-form').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+
+            // Initialize map when the page loads if pickup is selected
+            document.addEventListener('DOMContentLoaded', function () {
+                const activeMethod = document.querySelector('.handover-card.active');
+                if (activeMethod && activeMethod.getAttribute('data-method') === 'Pickup') {
+                    initMap();
+                }
+            });
+            // Animate stats counting - Improved version
+            function animateStats() {
+                const statNumbers = document.querySelectorAll('.stat-number');
+
+                // Options for the Intersection Observer
+                const options = {
+                    threshold: 0.5,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                // Create an observer for each stat number
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const stat = entry.target;
+                            const target = parseInt(stat.getAttribute('data-count'));
+                            const suffix = stat.textContent.includes('%') ? '%' : '';
+                            const duration = 2000; // Animation duration in ms
+                            const startTime = performance.now();
+
+                            // Animation function
+                            const animate = (currentTime) => {
+                                const elapsedTime = currentTime - startTime;
+                                const progress = Math.min(elapsedTime / duration, 1);
+                                const value = Math.floor(progress * target);
+
+                                stat.textContent = value + suffix;
+
+                                if (progress < 1) {
+                                    requestAnimationFrame(animate);
+                                }
+                            };
+
+                            requestAnimationFrame(animate);
+                            observer.unobserve(stat); // Stop observing once animated
+                        }
+                    });
+                }, options);
+
+                // Observe each stat number
+                statNumbers.forEach(stat => {
+                    stat.textContent = '0' + (stat.textContent.includes('%') ? '%' : ''); // Reset to 0
+                    observer.observe(stat);
+                });
+            }
+
+            // Call this function when the stats section comes into view
+            const statsSection = document.querySelector('.stats-section');
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateStats();
+                        statsObserver.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            if (statsSection) {
+                statsObserver.observe(statsSection);
+            }
+            document.addEventListener('DOMContentLoaded', function () {
+                // Update validation when handover method is selected
+                document.querySelectorAll('.handover-card').forEach(card => {
+                    card.addEventListener('click', function () {
+                        document.getElementById('handoverMethod').value = this.getAttribute('data-method');
+                        // Clear any existing validation message
+                        document.querySelector('[data-valmsg-for="PickupOrDropoff"]').textContent = '';
+                    });
+                });
+
+                // Real-time validation for dropdowns
+                document.querySelectorAll('select').forEach(select => {
+                    select.addEventListener('change', function () {
+                        if (this.value) {
+                            const errorElement = document.querySelector(`[data-valmsg-for="${this.name}"]`);
+                            if (errorElement) errorElement.textContent = '';
+                        }
+                    });
+                });
+
+                // Form submission handler
+                document.querySelector('form').addEventListener('submit', function (e) {
+                    let isValid = true;
+
+                    // Validate dropdowns
+                    document.querySelectorAll('select[required]').forEach(select => {
+                        if (!select.value) {
+                            isValid = false;
+                            const errorElement = document.querySelector(`[data-valmsg-for="${select.name}"]`);
+                            if (errorElement) errorElement.textContent = 'This field is required';
+                        }
+                    });
+
+                    // Validate handover method
+                    if (!document.getElementById('handoverMethod').value) {
+                        isValid = false;
+                        alert('Please select a handover method');
+                    }
+
+                    // Validate checkbox
+                    if (!document.getElementById('termsCheck').checked) {
+                        isValid = false;
+                        document.querySelector('[data-valmsg-for="HasAgreedToTerms"]').textContent = 'You must agree to the terms';
+                    }
+
+                    if (!isValid) {
+                        e.preventDefault();
+                        // Scroll to first error
+                        const firstError = document.querySelector('.text-danger');
+                        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+                // Enable jQuery validation (if using jQuery)
+                $(document).ready(function () {
+                    // Clear validation on input
+                    $('textarea').on('input', function () {
+                        $(this).removeClass('input-validation-error');
+                        $('span[data-valmsg-for="' + $(this).attr('name') + '"]').text('');
+                    });
+
+                    // Alternative pure JavaScript version
+                    document.querySelectorAll('textarea').forEach(textarea => {
+                        textarea.addEventListener('input', function () {
+                            this.classList.remove('input-validation-error');
+                            const errorSpan = document.querySelector(`[data-valmsg-for="${this.name}"]`);
+                            if (errorSpan) errorSpan.textContent = '';
+
+                            // Force re-validation
+                            $(this).valid(); // If using jQuery validation
+                        });
+                    });
+                });
+
+                // If using jQuery Validation, initialize it properly
+                if ($.validator) {
+                    $('form').validate({
+                        onkeyup: function (element) {
+                            $(element).valid();
+                        },
+                        errorPlacement: function (error, element) {
+                            error.appendTo(element.closest('.form-group'));
+                        }
+                    });
+                    // Clear validation messages when typing
+                    $(document).ready(function () {
+                        $('textarea').on('input', function () {
+                            $(this).removeClass('input-validation-error');
+                            $('span[data-valmsg-for="' + $(this).attr('name') + '"]').text('');
+                        });
+                    });
+
+                }
+
+            });
+            //------------------------------------------------------------------------------------------------------
+            function startSpeechRecognition(textAreaId, statusId) {
+                const textarea = document.getElementById(textAreaId);
+                const status = document.getElementById(statusId);
+
+                if (!('webkitSpeechRecognition' in window)) {
+                    status.textContent = "⚠️ Your browser doesn't support voice recognition. Use Google Chrome.";
+                    return;
+                }
+
+                const recognition = new webkitSpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+
+                recognition.onstart = () => {
+                    status.textContent = "🎙️ Listening...";
+                };
+
+                recognition.onend = () => {
+                    status.textContent = "✅ Finished listening.";
+                };
+
+                recognition.onerror = (event) => {
+                    status.textContent = "❌ Error: " + event.error;
+                };
+
+                recognition.onresult = (event) => {
+                    const result = event.results[0][0].transcript;
+                    textarea.value += (textarea.value ? " " : "") + result;
+                };
+
+                recognition.start();
+            }
+        </script>
+    </body>
+</html>
+
+    }

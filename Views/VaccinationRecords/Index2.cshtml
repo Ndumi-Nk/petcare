@@ -1,0 +1,772 @@
+﻿@model IEnumerable<PetCare_system.Models.VaccinationRecord>
+@using System.Globalization
+@{
+    ViewBag.Title = "Vaccination Records";
+    var role = (ViewBag.Role as string) ?? "Client"; // "Admin", "Doctor", "Driver", "Client"
+}
+
+@Html.AntiForgeryToken()
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+<style>
+    :root {
+        --soft: #f7f9fc;
+        --ink: #222;
+        --muted: #6b7280;
+        --brand: #4f46e5;
+        --ok: #16a34a;
+        --warn: #f59e0b;
+        --bad: #ef4444;
+    }
+
+    body {
+        background: var(--soft);
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg,#eef2ff,#f5f3ff);
+        border-bottom: 1px solid #e5e7eb
+    }
+
+    .hero-content {
+        padding: 2rem 1rem;
+        text-align: center
+    }
+
+    .kpis {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(4,minmax(0,1fr));
+        margin: 1rem auto;
+        max-width: 1200px
+    }
+
+    .kpi {
+        background: #fff;
+        border-radius: 14px;
+        padding: 1rem 1.25rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,.06)
+    }
+
+        .kpi h2 {
+            margin: 0;
+            font-size: 1.75rem
+        }
+
+        .kpi small {
+            color: var(--muted)
+        }
+
+    .toolbar {
+        max-width: 1200px;
+        margin: 0 auto 1rem;
+        display: flex;
+        gap: .75rem;
+        flex-wrap: wrap;
+        align-items: center
+    }
+
+        .toolbar input, .toolbar select {
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: .6rem .8rem;
+            background: #fff
+        }
+
+        .toolbar .btn {
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            background: #fff;
+            padding: .55rem .9rem;
+            cursor: pointer
+        }
+
+            .toolbar .btn.primary {
+                background: var(--brand);
+                color: white;
+                border: none
+            }
+
+    .service-card {
+        background: #fff;
+        border-radius: 14px;
+        padding: 1rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,.06)
+    }
+
+    .card {
+        border: 0;
+        border-radius: 14px
+    }
+
+    .card-header {
+        border-radius: 14px 14px 0 0
+    }
+
+    .table-sm td, .table-sm th {
+        padding: .5rem .6rem;
+        vertical-align: middle
+    }
+
+    .flash-red {
+        animation: flash 1s infinite
+    }
+
+    @@keyframes flash {
+        0% {
+            background: #ff6b6b
+        }
+
+        50% {
+            background: #ff0000
+        }
+
+        100% {
+            background: #ff6b6b
+        }
+    }
+    /* Kanban */
+    .kanban {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 1rem;
+        max-width: 1200px;
+        margin: 2rem auto
+    }
+
+    .column {
+        background: #fff;
+        border-radius: 14px;
+        padding: .75rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,.06)
+    }
+
+        .column h4 {
+            margin: .25rem .25rem .75rem
+        }
+
+    .cardlet {
+        border: 1px dashed #e5e7eb;
+        border-radius: 12px;
+        padding: .5rem .6rem;
+        background: #fafafa;
+        margin: .5rem 0;
+        cursor: grab
+    }
+
+        .cardlet.over {
+            outline: 2px solid var(--brand)
+        }
+
+    .sev-low {
+        border-left: 6px solid var(--ok)
+    }
+
+    .sev-med {
+        border-left: 6px solid var(--warn)
+    }
+
+    .sev-high {
+        border-left: 6px solid var(--bad)
+    }
+    /* Calendar heatmap */
+    .heatmap {
+        display: grid;
+        grid-template-columns: repeat(7,1fr);
+        gap: 4px;
+        max-width: 700px;
+        margin: 1rem auto
+    }
+
+        .heatmap div {
+            aspect-ratio: 1/1;
+            border-radius: 6px;
+            background: #e5e7eb;
+            font-size: .7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+    .h1 {
+        background: #d1fae5
+    }
+
+    .h2 {
+        background: #a7f3d0
+    }
+
+    .h3 {
+        background: #6ee7b7
+    }
+
+    .h4 {
+        background: #34d399
+    }
+
+    .h5 {
+        background: #10b981
+    }
+    /* Modals */
+    .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 50
+    }
+
+    .modal {
+        background: #fff;
+        border-radius: 14px;
+        max-width: 720px;
+        width: 95vw;
+        padding: 1rem
+    }
+
+    .modal-backdrop.show {
+        display: flex
+    }
+
+    .badge {
+        font-size: .75rem;
+        padding: .35rem .5rem;
+        border-radius: 999px
+    }
+</style>
+
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="display-5">Vaccination Records</h1>
+        <p class="lead">Deep insights, extreme controls, and power tools for vets & admins.</p>
+        <p class="lead">If anything is incorrect, contact Pet Care and we’ll update the medical record.</p>
+    </div>
+</div>
+
+<!-- KPI tiles -->
+@{
+    var total = Model.Count();
+    var overdue = Model.Count(x => x.IsOverdue);
+    var complete = Model.Count(x => x.IsComplete);
+    var dueSoon = Model.Count(x => x.NextDueDate.HasValue && (x.NextDueDate.Value - DateTime.Today).TotalDays >= 0 && (x.NextDueDate.Value - DateTime.Today).TotalDays <= 14);
+    var uniquePets = Model.Select(x => x.Pet?.Name).Where(x => !string.IsNullOrEmpty(x)).Distinct().Count();
+}
+<div class="kpis">
+    <div class="kpi"><small>Total Records</small><h2>@total</h2></div>
+    <div class="kpi"><small>Overdue</small><h2 style="color:var(--bad)">@overdue</h2></div>
+    <div class="kpi"><small>Due in 14 days</small><h2 style="color:var(--warn)">@dueSoon</h2></div>
+    <div class="kpi"><small>Completion Rate</small><h2>@(total==0? "0%": ((int)Math.Round((double)complete*100/total)) + "%")</h2></div>
+</div>
+
+<!-- Toolbar -->
+<div class="toolbar">
+    <input id="q" placeholder="Search vaccine / notes / pet..." />
+    <select id="typeFilter">
+        <option value="">All types</option>
+        @foreach (var t in Model.Select(m => m.VaccineType).Where(x => !string.IsNullOrEmpty(x)).Distinct())
+        {
+            <option>@t</option>
+}
+    </select>
+    <select id="petFilter">
+        <option value="">All pets</option>
+        @foreach (var p in Model.Select(m => m.Pet?.Name).Where(x => !string.IsNullOrEmpty(x)).Distinct())
+        {
+            <option>@p</option>
+}
+    </select>
+    <select id="statusFilter">
+        <option value="">Any status</option>
+        <option value="overdue">Overdue</option>
+        <option value="dueSoon">Due soon (≤14d)</option>
+        <option value="complete">Complete</option>
+        <option value="incomplete">Incomplete</option>
+    </select>
+    <button class="btn" id="resetFilters">Reset</button>
+    <button class="btn" id="bulkSelectToggle">Bulk select</button>
+    <button class="btn primary" id="bulkMarkComplete">Mark Complete</button>
+    <button class="btn" id="exportCsv">Export CSV</button>
+    <button class="btn" id="downloadPdf">Download PDF</button>
+    <button class="btn" id="saveLayout">Save Layout</button>
+    <span style="margin-left:auto;color:var(--muted)">Shortcuts: <kbd>/</kbd> search • <kbd>V</kbd> voice • <kbd>U</kbd> undo • <kbd>R</kbd> redo</span>
+</div>
+
+<!-- Top analytics -->
+<div class="container mt-3 mb-4">
+    <div class="row g-3">
+        <div class="col-md-4"><div class="service-card"><h5 class="mb-3">Overdue vs Up-to-Date</h5><canvas id="overdueChart" height="240"></canvas></div></div>
+        <div class="col-md-4"><div class="service-card"><h5 class="mb-3">Completion</h5><canvas id="completeChart" height="240"></canvas></div></div>
+        <div class="col-md-4"><div class="service-card"><h5 class="mb-3">Monthly Trend</h5><canvas id="trendChart" height="240"></canvas></div></div>
+    </div>
+</div>
+
+<!-- Role-aware quick panel -->
+@if (role == "Admin" || role == "Doctor")
+{
+    <div class="container mb-4">
+        <div class="service-card">
+            <h5 class="mb-2">Alerts (Admin/Doctor)</h5>
+            <ul style="margin:0;padding-left:1.1rem">
+                <li>@overdue overdue doses require immediate action.</li>
+                <li>@dueSoon doses are due within the next 14 days.</li>
+                <li>Most common vaccine: @Model.GroupBy(x => x.VaccineName).OrderByDescending(g => g.Count()).FirstOrDefault()?.Key ?? "—"</li>
+            </ul>
+        </div>
+    </div>
+}
+
+<!-- Calendar heatmap: next 35 days due -->
+<div class="service-card" style="max-width:1200px;margin:0 auto 1rem">
+    <h5 class="mb-2">Due-Date Heatmap (next 5 weeks)</h5>
+    <div id="heatmap" class="heatmap"></div>
+</div>
+
+<!-- Kanban board -->
+<div class="kanban" id="kanban">
+    <div class="column" data-col="overdue"><h4>Overdue</h4><div class="drop"></div></div>
+    <div class="column" data-col="dueSoon"><h4>Due ≤14 days</h4><div class="drop"></div></div>
+    <div class="column" data-col="complete"><h4>Complete</h4><div class="drop"></div></div>
+</div>
+
+<div class="text-center mb-3">
+    <p>
+        <strong>Voice Tip:</strong> Press <code>V</code> and say things like:
+        <em>“show overdue”, “filter type rabies”, “export csv”, “create reminder for Max”</em>
+    </p>
+</div>
+
+<!-- GROUPED TABLES -->
+<div class="container" id="tablesRoot">
+    <form id="vaccinationForm">
+        @Html.AntiForgeryToken()
+        @foreach (var petGroup in Model.GroupBy(m => m.Pet.Name))
+        {
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header bg-primary text-white d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">🐾 @petGroup.Key</h4>
+                    <div>
+                        <button class="btn btn-sm btn-light" onclick="downloadIcsForPet('@petGroup.Key')">Add .ics Reminders</button>
+                        <button class="btn btn-sm btn-outline-light" onclick="speakPetSummary('@petGroup.Key')">🔊 Read Summary</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm table-hover data-table" data-pet="@petGroup.Key">
+                        <thead class="table-light">
+                            <tr>
+                                <th><input type="checkbox" class="bulk-select-all d-none" /></th>
+                                <th>Vaccine Name</th>
+                                <th>Type</th>
+                                <th>Date Given</th>
+                                <th>Next Due</th>
+                                <th>Overdue</th>
+                                <th>Days Until Next</th>
+                                <th>Complete</th>
+                                <th>Month Given</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in petGroup)
+                            {
+                                var sevClass = item.IsOverdue ? "sev-high" :
+                                               (item.NextDueDate.HasValue && (item.NextDueDate.Value - DateTime.Today).TotalDays <= 14 && (item.NextDueDate.Value - DateTime.Today).TotalDays >= 0) ? "sev-med" :
+                                               item.IsComplete ? "sev-low" : "";
+                                <tr data-id="@item.VaccinationId" class="@((item.IsOverdue ? "table-danger" : "")) @sevClass">
+                                    <td><input type="checkbox" class="bulk d-none" /></td>
+                                    <td class="editable" data-field="VaccineName">@item.VaccineName</td>
+                                    <td class="editable" data-field="VaccineType">@item.VaccineType</td>
+                                    <td class="editable" data-field="DateGiven">@item.DateGiven.ToShortDateString()</td>
+                                    <td class="editable" data-field="NextDueDate">@item.NextDueDate?.ToShortDateString()</td>
+                                    <td>@(item.IsOverdue ? Html.Raw("<span class='badge bg-danger'>Yes</span>") : Html.Raw("<span class='badge bg-success'>No</span>"))</td>
+                                    <td>@item.DaysUntilNextDose</td>
+                                    <td class="editable" data-field="IsComplete">@(item.IsComplete ? "✅" : "❌")</td>
+                                    <td class="editable" data-field="MonthGiven">@item.MonthGiven</td>
+                                    <td class="editable" data-field="Notes">@item.Notes</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="rowReminder(this)">.ics</button>
+                                        <button class="btn btn-sm btn-outline-secondary" onclick="rowPdf(this)">PDF</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        }
+    </form>
+</div>
+
+<!-- Quick modal for batch note -->
+<div class="modal-backdrop" id="modal">
+    <div class="modal">
+        <h5 id="modalTitle">Batch Update</h5>
+        <p>Append a note to all selected rows:</p>
+        <textarea id="batchNote" class="form-control" rows="3" placeholder="e.g., Parent confirmed vaccination card."></textarea>
+        <div class="mt-3 d-flex gap-2">
+            <button class="btn btn-primary" id="applyBatch">Apply & Save</button>
+            <button class="btn btn-light" onclick="hideModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+/* ---------- Data snapshot for analytics ---------- */
+const records = @Html.Raw(
+    Newtonsoft.Json.JsonConvert.SerializeObject(
+        Model.Select(m => new {
+            id = m.VaccinationId,
+            pet = m.Pet?.Name ?? "",
+            name = m.VaccineName,
+            type = m.VaccineType,
+            dateGiven = m.DateGiven.ToString("yyyy-MM-dd"),
+            nextDue = m.NextDueDate.HasValue ? m.NextDueDate.Value.ToString("yyyy-MM-dd") : null,
+            overdue = m.IsOverdue,
+            complete = m.IsComplete,
+            days = m.DaysUntilNextDose,
+            notes = m.Notes ?? ""
+        })
+    )
+);
+
+/* ---------- Charts ---------- */
+const overdueCount = records.filter(r=>r.overdue).length;
+const upToDateCount = records.length - overdueCount;
+const completeCount = records.filter(r=>r.complete).length;
+const incompleteCount = records.length - completeCount;
+
+new Chart(document.getElementById('overdueChart'),{
+  type:'doughnut',
+  data:{ labels:['Overdue','Up-to-Date'], datasets:[{ data:[overdueCount, upToDateCount] }]},
+  options:{ plugins:{ legend:{ position:'bottom' } }}
+});
+new Chart(document.getElementById('completeChart'),{
+  type:'bar',
+  data:{ labels:['Complete','Incomplete'], datasets:[{ label:'Completion', data:[completeCount, incompleteCount] }]},
+  options:{ plugins:{ legend:{ display:false } }, scales:{ y:{ beginAtZero:true, ticks:{ precision:0 }}}}
+});
+// Monthly trend by DateGiven
+const byMonth = {};
+records.forEach(r=>{
+  const k = (r.dateGiven||"").slice(0,7);
+  if(!k) return;
+  byMonth[k] = (byMonth[k]||0)+1;
+});
+const months = Object.keys(byMonth).sort();
+new Chart(document.getElementById('trendChart'),{
+  type:'line',
+  data:{ labels:months, datasets:[{ label:'Doses per month', data: months.map(m=>byMonth[m]), tension:.3, fill:false }]},
+  options:{ scales:{ x:{ ticks:{ autoSkip:true }}, y:{ beginAtZero:true, ticks:{ precision:0 }}}}
+});
+
+/* ---------- Heatmap (next 35 days) ---------- */
+(function buildHeatmap(){
+  const root = document.getElementById('heatmap');
+  const today = new Date(); today.setHours(0,0,0,0);
+  for(let i=0;i<35;i++){
+    const d = new Date(today); d.setDate(d.getDate()+i);
+    const key = d.toISOString().slice(0,10);
+    const count = records.filter(r=>r.nextDue===key).length;
+    const cell = document.createElement('div');
+    if(count>0){ cell.className='h'+Math.min(5,count); cell.title = key + ' • ' + count + ' due'; }
+    cell.textContent = d.getDate();
+    root.appendChild(cell);
+  }
+})();
+
+/* ---------- Kanban board ---------- */
+const drops = document.querySelectorAll('.kanban .drop');
+const mapCol = {
+  overdue: r => r.overdue,
+  dueSoon: r => !r.overdue && r.nextDue && ( (new Date(r.nextDue)-new Date())/(1000*60*60*24) <= 14 ) && (new Date(r.nextDue)>=new Date(new Date().toDateString())),
+  complete: r => r.complete
+};
+Object.entries(mapCol).forEach(([col,fn])=>{
+  const box = document.querySelector(`.column[data-col="${col}"] .drop`);
+  records.filter(fn).forEach(r=>{
+    const el = document.createElement('div');
+    el.className = 'cardlet ' + (r.overdue?'sev-high': r.complete?'sev-low':'sev-med');
+    el.draggable = true;
+    el.dataset.id = r.id;
+    el.innerHTML = `<strong>${r.pet}</strong> • ${r.name}<br><small>${r.nextDue??'—'}</small>`;
+    el.addEventListener('dragstart',e=> e.dataTransfer.setData('text/plain', r.id));
+    box.appendChild(el);
+  });
+});
+drops.forEach(d=>{
+  d.addEventListener('dragover', e=>{ e.preventDefault(); d.classList.add('over'); });
+  d.addEventListener('dragleave', ()=> d.classList.remove('over'));
+  d.addEventListener('drop', async e=>{
+    e.preventDefault(); d.classList.remove('over');
+    const id = +e.dataTransfer.getData('text/plain');
+    const col = d.closest('.column').dataset.col;
+    // Optimistic UI: move the cardlet
+    const el = document.querySelector(`.cardlet[data-id="${id}"]`);
+    d.appendChild(el);
+    // Persist: infer field update
+    const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+    let payload;
+    if(col==='complete') payload = { Id:id, Field:'IsComplete', Value:'true' };
+    if(col==='overdue')  payload = { Id:id, Field:'NextDueDate', Value: new Date(Date.now()-86400000).toLocaleDateString() };
+    if(col==='dueSoon')  payload = { Id:id, Field:'NextDueDate', Value: new Date(Date.now()+7*86400000).toLocaleDateString() };
+    await fetch('/VaccinationRecords/UpdateField',{ method:'POST', headers:{'Content-Type':'application/json','RequestVerificationToken':token}, body:JSON.stringify(payload) }).catch(()=>{});
+  });
+});
+
+/* ---------- Filtering, search, bulk, export ---------- */
+const q = document.getElementById('q');
+const typeFilter = document.getElementById('typeFilter');
+const petFilter = document.getElementById('petFilter');
+const statusFilter = document.getElementById('statusFilter');
+const resetFilters = document.getElementById('resetFilters');
+const bulkToggle = document.getElementById('bulkSelectToggle');
+const bulkAll = document.querySelectorAll('.bulk-select-all');
+const bulkBoxes = document.querySelectorAll('.bulk');
+const bulkMarkComplete = document.getElementById('bulkMarkComplete');
+
+function applyFilters(){
+  localStorage.setItem('vacc_filters', JSON.stringify({q:q.value,type:typeFilter.value,pet:petFilter.value,status:statusFilter.value}));
+  document.querySelectorAll('#tablesRoot tbody tr').forEach(row=>{
+    const tds = row.querySelectorAll('td');
+    const pet = row.closest('table').dataset.pet.toLowerCase();
+    const vname = tds[1].textContent.toLowerCase();
+    const vtype = tds[2].textContent.toLowerCase();
+    const nextDue = tds[4].textContent.toLowerCase();
+    const complete = tds[7].textContent.includes('✅');
+    const overdue = tds[5].textContent.toLowerCase().includes('yes');
+    const text = (pet + ' ' + vname + ' ' + vtype + ' ' + tds[9].textContent).toLowerCase();
+
+    let ok = true;
+    if(q.value.trim()) ok = ok && text.includes(q.value.trim().toLowerCase());
+    if(typeFilter.value) ok = ok && vtype === typeFilter.value.toLowerCase();
+    if(petFilter.value) ok = ok && pet === petFilter.value.toLowerCase();
+    if(statusFilter.value==='complete') ok = ok && complete;
+    if(statusFilter.value==='incomplete') ok = ok && !complete;
+    if(statusFilter.value==='overdue') ok = ok && overdue;
+    if(statusFilter.value==='dueSoon'){
+        const nd = nextDue ? new Date(tds[4].textContent) : null;
+        const diff = nd ? Math.round((nd - new Date())/86400000) : 9999;
+        ok = ok && diff>=0 && diff<=14 && !overdue;
+    }
+    row.style.display = ok ? '' : 'none';
+  });
+}
+[q,typeFilter,petFilter,statusFilter].forEach(el=> el.addEventListener('input', applyFilters));
+resetFilters.addEventListener('click', ()=>{
+  q.value=''; typeFilter.value=''; petFilter.value=''; statusFilter.value=''; applyFilters();
+});
+(function restoreFilters(){
+  const s = localStorage.getItem('vacc_filters'); if(!s) return;
+  try{ const o = JSON.parse(s); q.value=o.q||''; typeFilter.value=o.type||''; petFilter.value=o.pet||''; statusFilter.value=o.status||''; applyFilters(); }catch{}
+})();
+
+document.addEventListener('keydown', e=>{
+  if(e.key==='/'){ e.preventDefault(); q.focus(); }
+});
+
+/* Bulk selection */
+bulkToggle.addEventListener('click', ()=>{
+  document.querySelectorAll('.bulk,.bulk-select-all').forEach(x=> x.classList.toggle('d-none'));
+});
+bulkAll.forEach(chk=>{
+  chk.addEventListener('change', ()=> {
+    const table = chk.closest('table');
+    table.querySelectorAll('.bulk').forEach(b=> b.checked = chk.checked);
+  });
+});
+bulkMarkComplete.addEventListener('click', async ()=>{
+  const ids = Array.from(document.querySelectorAll('.bulk:checked')).map(b=> +b.closest('tr').dataset.id);
+  if(!ids.length) return alert('Select rows first (Bulk select).');
+  showModal();
+  document.getElementById('applyBatch').onclick = async () =>{
+      const note = document.getElementById('batchNote').value || '';
+      const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+      // optimistic UI
+      ids.forEach(id=>{
+        const row = document.querySelector(`tr[data-id="${id}"]`);
+        row.querySelector('td[data-field="IsComplete"]').textContent='✅';
+        if(note){ const cell = row.querySelector('td[data-field="Notes"]'); cell.textContent = (cell.textContent+' | '+note).trim(); }
+      });
+      hideModal();
+      // persist (if your backend has this endpoint)
+      try {
+        await fetch('/VaccinationRecords/BatchUpdate',{ method:'POST', headers:{'Content-Type':'application/json','RequestVerificationToken':token}, body: JSON.stringify({ ids, set:{ IsComplete:true }, appendNote:note }) });
+      } catch {}
+  };
+});
+
+/* Export CSV */
+document.getElementById('exportCsv').addEventListener('click', ()=>{
+  const rows = [['Pet','Vaccine','Type','DateGiven','NextDue','Overdue','DaysUntilNext','Complete','MonthGiven','Notes']];
+  document.querySelectorAll('#tablesRoot tbody tr').forEach(r=>{
+    if(r.style.display==='none') return;
+    const t = r.querySelectorAll('td');
+    rows.push([
+      r.closest('table').dataset.pet,
+      t[1].innerText, t[2].innerText, t[3].innerText, t[4].innerText,
+      t[5].innerText.replace(/\s+/g,' '), t[6].innerText, t[7].innerText, t[8].innerText, t[9].innerText
+    ]);
+  });
+  const csv = rows.map(a=>a.map(x=>`"${(x||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob([csv],{type:'text/csv'});
+  const a = Object.assign(document.createElement('a'),{ href:URL.createObjectURL(blob), download:'VaccinationRecords.csv' }); a.click();
+});
+
+/* PDF export (simple textual) */
+document.getElementById('downloadPdf').addEventListener('click', ()=>{
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  let y = 10;
+  doc.setFontSize(14); doc.text('Vaccination Records (filtered)', 10, y); y+=8;
+  doc.setFontSize(10);
+  document.querySelectorAll('#tablesRoot .card').forEach(card=>{
+    const pet = card.querySelector('table').dataset.pet; doc.text(`Pet: ${pet}`, 10, y); y+=6;
+    card.querySelectorAll('tbody tr').forEach(r=>{
+      if(r.style.display==='none') return;
+      const t=r.querySelectorAll('td');
+      const line=`- ${t[1].innerText} (${t[2].innerText}) | Given: ${t[3].innerText} | Next: ${t[4].innerText} | ${t[5].innerText} | ${t[7].innerText}`;
+      doc.text(line.substring(0,110), 12, y); y+=5; if(y>280){ doc.addPage(); y=10; }
+    });
+    y+=4;
+  });
+  doc.save('VaccinationRecords.pdf');
+});
+
+/* Row actions */
+function rowReminder(btn){
+  const row = btn.closest('tr'); const pet = row.closest('table').dataset.pet;
+  const t=row.querySelectorAll('td');
+  const name=t[1].innerText; const due=t[4].innerText;
+  createIcs(`${pet} - ${name} vaccine due`, due, `Reminder for ${pet}'s ${name} vaccine`);
+}
+function rowPdf(btn){
+  const row=btn.closest('tr'); const id=row.dataset.id;
+  const { jsPDF } = window.jspdf; const doc = new jsPDF();
+  doc.setFontSize(14); doc.text('Vaccination Record', 10, 10);
+  const t=row.querySelectorAll('td'); let y=22;
+  const labels=['Vaccine','Type','Date Given','Next Due','Overdue','Days','Complete','Month','Notes'];
+  [1,2,3,4,5,6,7,8,9].forEach((idx,i)=>{ doc.text(`${labels[i]}: ${t[idx].innerText}`, 10, y); y+=8; });
+  doc.save(`VaccRecord_${id}.pdf`);
+}
+
+/* .ics helpers */
+function pad(n){ return n<10?'0'+n:n; }
+function toIcsDate(d){ return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T090000Z'; }
+function createIcs(title, dateStr, desc){
+  const d = new Date(dateStr); if(isNaN(+d)){ alert('No valid due date'); return; }
+  const start = toIcsDate(d); const end = toIcsDate(new Date(d.getTime()+60*60*1000));
+  const ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//PetCare//Vaccination//EN','BEGIN:VEVENT',
+    'UID:'+Math.random().toString(36).slice(2),
+    'DTSTAMP:'+toIcsDate(new Date()), 'DTSTART:'+start, 'DTEND:'+end,
+    'SUMMARY:'+title, 'DESCRIPTION:'+desc, 'END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics],{type:'text/calendar'}); const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='reminder.ics'; a.click();
+}
+function downloadIcsForPet(pet){
+  document.querySelectorAll(`table[data-pet="${CSS.escape(pet)}"] tbody tr`).forEach(r=>{
+    const t=r.querySelectorAll('td'); if(!t[4].innerText) return;
+    createIcs(`${pet} - ${t[1].innerText} due`, t[4].innerText, 'Auto-generated reminder');
+  });
+}
+
+/* ---------- Speech recognition (extended) ---------- */
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+if (SpeechRecognition) {
+  const rec = new SpeechRecognition(); rec.continuous=false; rec.lang='en-US';
+  document.addEventListener('keydown', e=>{ if(e.key.toLowerCase()==='v') rec.start(); });
+  rec.onresult = e=>{
+    const s = e.results[0][0].transcript.toLowerCase();
+    if(s.includes('show overdue')) { statusFilter.value='overdue'; applyFilters(); }
+    else if(s.startsWith('filter type ')){ typeFilter.value = s.replace('filter type ',''); applyFilters(); }
+    else if(s.startsWith('filter pet ')){ petFilter.value = s.replace('filter pet ',''); applyFilters(); }
+    else if(s.includes('export csv')) document.getElementById('exportCsv').click();
+    else if(s.startsWith('create reminder for ')){ const pet = s.replace('create reminder for ',''); downloadIcsForPet(cap(pet)); }
+  };
+}
+function cap(x){ return x.charAt(0).toUpperCase()+x.slice(1); }
+
+/* ---------- Inline editing with undo/redo ---------- */
+const undoStack=[], redoStack=[];
+document.addEventListener('keydown', e=>{
+  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='z'){ e.preventDefault(); undo(); }
+  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='y'){ e.preventDefault(); redo(); }
+  if(e.key.toLowerCase()==='u'){ undo(); } if(e.key.toLowerCase()==='r'){ redo(); }
+});
+document.querySelectorAll("td.editable").forEach(cell => {
+  cell.ondblclick = function() {
+    if(cell.querySelector("input")) return;
+    const oldValue = cell.textContent.trim();
+    const input = document.createElement("input"); input.value = oldValue; input.className = "form-control form-control-sm";
+    cell.textContent = ""; cell.appendChild(input); input.focus();
+    input.onblur = () => finishEdit(cell, input.value, oldValue);
+    input.onkeydown = e => { if(e.key==="Enter") input.blur(); if(e.key==="Escape"){ cell.textContent = oldValue; } };
+  };
+});
+function finishEdit(cell, newValue, oldValue) {
+  const row = cell.closest("tr"); const VaccinationId = row.getAttribute("data-id"); const field = cell.getAttribute("data-field");
+  cell.textContent = newValue;
+  if(newValue===oldValue) return;
+  const token = document.querySelector('input[name="__RequestVerificationToken"]').value || "";
+  // push undo
+  undoStack.push({cell, field, id:VaccinationId, from:oldValue, to:newValue});
+  redoStack.length=0;
+  fetch("/VaccinationRecords/UpdateField", {
+    method: "POST",
+    headers: { "Content-Type":"application/json", "RequestVerificationToken": token },
+    body: JSON.stringify({ Id: parseInt(VaccinationId), Field: field, Value: newValue })
+  }).then(res => res.text()).then(text => {
+    if (!/success/i.test(text)) {
+      cell.classList.add("flash-red"); setTimeout(()=>cell.classList.remove("flash-red"), 2000);
+      alert("Update failed: " + text);
+    }
+  }).catch(err => alert("Error: " + err.message));
+}
+function undo(){
+  const last = undoStack.pop(); if(!last) return;
+  const {cell, field, id, from, to} = last; const cur = cell.textContent; cell.textContent = from;
+  redoStack.push(last);
+  const token = document.querySelector('input[name="__RequestVerificationToken"]').value || "";
+  fetch("/VaccinationRecords/UpdateField",{ method:"POST", headers:{ "Content-Type":"application/json","RequestVerificationToken":token }, body: JSON.stringify({ Id:+id, Field: field, Value: from }) }).catch(()=>{ cell.textContent = cur; });
+}
+function redo(){
+  const last = redoStack.pop(); if(!last) return;
+  const {cell, field, id, from, to} = last; const cur = cell.textContent; cell.textContent = to;
+  undoStack.push(last);
+  const token = document.querySelector('input[name="__RequestVerificationToken"]').value || "";
+  fetch("/VaccinationRecords/UpdateField",{ method:"POST", headers:{ "Content-Type":"application/json","RequestVerificationToken":token }, body: JSON.stringify({ Id:+id, Field: field, Value: to }) }).catch(()=>{ cell.textContent = cur; });
+}
+
+/* ---------- Text-to-speech summaries ---------- */
+function speakPetSummary(pet){
+  const rows = document.querySelectorAll(`table[data-pet="${CSS.escape(pet)}"] tbody tr`);
+  const overdue = Array.from(rows).filter(r=> r.querySelector('td:nth-child(6)').innerText.toLowerCase().includes('yes')).length;
+  const voice = window.speechSynthesis;
+  if(!voice) return;
+  const msg = new SpeechSynthesisUtterance(`${pet}: ${rows.length} records. ${overdue} overdue. Please check due dates.`);
+  voice.speak(msg);
+}
+
+/* ---------- Modal helpers ---------- */
+function showModal(){ document.getElementById('modal').classList.add('show'); }
+function hideModal(){ document.getElementById('modal').classList.remove('show'); }
+
+/* ---------- Persist layout pref (bulk on/off) ---------- */
+document.getElementById('saveLayout').addEventListener('click', ()=>{
+  const bulkOn = !document.querySelector('.bulk').classList.contains('d-none');
+  localStorage.setItem('vacc_layout_bulk', bulkOn?'1':'0'); alert('Layout saved.');
+});
+(function restoreLayout(){
+  if(localStorage.getItem('vacc_layout_bulk')==='1'){ document.querySelectorAll('.bulk,.bulk-select-all').forEach(x=> x.classList.remove('d-none')); }
+})();
+    </script>
+}

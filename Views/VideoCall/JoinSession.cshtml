@@ -1,0 +1,138 @@
+﻿@model PetCare_system.Models.VideoCallViewModel
+@{
+    ViewBag.Title = "Video Call Session";
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Training Session with @Model.OtherParticipantName</h2>
+            <div class="video-container mb-3">
+                <!-- Video elements will be dynamically added by your WebRTC/Agora/etc. implementation -->
+                <div id="local-video" style="width: 100%; height: 400px; background-color: #f0f0f0; border: 1px solid #ddd; display: @(Model.IsTrainer ? "block" : "none")">
+                    @if (Model.IsTrainer)
+                    {
+                        <p class="text-center mt-5">Your camera will appear here when you start the call</p>
+                    }
+                </div>
+                <div id="remote-video" style="width: 100%; height: 400px; background-color: #e0e0e0; border: 1px solid #ddd;">
+                    @if (!Model.IsTrainer)
+                    {
+                        <p class="text-center mt-5">Waiting for trainer to start the call...</p>
+                    }
+                    else
+                    {
+                        <p class="text-center mt-5">Remote participant will appear here</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Session Details</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Pet:</strong> @Model.Session.Pet.Name</p>
+                    <p><strong>Start Time:</strong> @Model.SessionStartTime.ToString("f")</p>
+                    <p><strong>Duration:</strong> <span id="session-timer">00:00:00</span></p>
+                    <p><strong>Status:</strong> <span class="badge bg-primary">In Progress</span></p>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                @if (Model.IsTrainer)
+                {
+                    <button id="start-call-btn" class="btn btn-primary btn-lg w-100 mb-2">
+                        <i class="fas fa-video"></i> Start Video Call
+                    </button>
+                }
+                else
+                {
+                    <div id="incoming-call-alert" class="alert alert-info">
+                        <h5><i class="fas fa-phone-volume"></i> Incoming Call</h5>
+                        <p>Trainer is calling...</p>
+                        <div class="d-flex justify-content-between mt-2">
+                            <button id="accept-call-btn" class="btn btn-success">
+                                <i class="fas fa-phone-alt"></i> Accept
+                            </button>
+                            <button id="reject-call-btn" class="btn btn-danger">
+                                <i class="fas fa-phone-slash"></i> Reject
+                            </button>
+                        </div>
+                    </div>
+                }
+
+                <button id="end-call-btn" class="btn btn-danger btn-lg w-100" style="display: none;">
+                    <i class="fas fa-phone-slash"></i> End Session
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            var sessionId = @Model.SessionId;
+            var isTrainer = @Json.Encode(Model.IsTrainer);
+            var startTime = new Date();
+
+            // Update timer every second
+            setInterval(function() {
+                var now = new Date();
+                var diff = now - startTime;
+                var hours = Math.floor(diff / 3600000);
+                var minutes = Math.floor((diff % 3600000) / 60000);
+                var seconds = Math.floor((diff % 60000) / 1000);
+
+                $('#session-timer').text(
+                    (hours < 10 ? "0" : "") + hours + ":" +
+                    (minutes < 10 ? "0" : "") + minutes + ":" +
+                    (seconds < 10 ? "0" : "") + seconds
+                );
+            }, 1000);
+
+            // Trainer starts the call
+            $('#start-call-btn').click(function() {
+                // Here you would implement your WebRTC/Agora/etc. call initiation
+                console.log("Call started by trainer");
+                $(this).hide();
+                $('#end-call-btn').show();
+                $('#remote-video p').hide();
+                $('#local-video p').hide();
+
+                // In a real implementation, you would signal the owner to receive the call
+            });
+
+            // Owner accepts the call
+            $('#accept-call-btn').click(function() {
+                console.log("Call accepted by owner");
+                $('#incoming-call-alert').hide();
+                $('#end-call-btn').show();
+                $('#remote-video p').hide();
+
+                // In a real implementation, you would establish the connection
+            });
+
+            // Owner rejects the call
+            $('#reject-call-btn').click(function() {
+                if (confirm("Are you sure you want to reject this call?")) {
+                    window.location.href = '@Url.Action("Dashboard", "Trainings")';
+                }
+            });
+
+            // End session button (for both trainer and owner)
+            $('#end-call-btn').click(function() {
+                if (confirm("Are you sure you want to end this session?")) {
+                    $.post('@Url.Action("EndSession", "VideoCall")', { sessionId: sessionId }, function() {
+                        window.location.href = '@Url.Action("Dashboard", "Trainings")';
+                    });
+                }
+            });
+
+            // In a real implementation, you would add WebRTC/Agora/etc. initialization here
+        });
+    </script>
+}

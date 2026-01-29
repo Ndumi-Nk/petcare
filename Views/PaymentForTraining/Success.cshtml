@@ -1,0 +1,38 @@
+﻿@model PetCare_system.Models.PaymentForTraining
+
+@{
+    ViewBag.Title = "Payment Successful";
+}
+
+<div class="container text-center mt-5">
+    <h2 class="text-success">🎉 Payment Successful!</h2>
+    <p class="lead">Thank you for your payment.</p>
+
+    <div class="card shadow p-4 mt-4" style="max-width: 600px; margin: auto;">
+        <h4 class="mb-3">Payment Details</h4>
+        <dl class="row">
+            <dt class="col-sm-4">Training Type</dt>
+            <dd class="col-sm-8">@Model.TrainingSession.TrainingType</dd>
+
+            <dt class="col-sm-4">Pet Name</dt>
+            <dd class="col-sm-8">@Model.PetName</dd>
+
+            <dt class="col-sm-4">Amount Paid</dt>
+            <dd class="col-sm-8">@Model.Amount.ToString("C")</dd>
+
+            <dt class="col-sm-4">Payment Date</dt>
+            <dd class="col-sm-8">@Model.PaymentDate.ToString("f")</dd>
+
+            <dt class="col-sm-4">Method</dt>
+            <dd class="col-sm-8">@Model.PaymentMethod</dd>
+
+            <dt class="col-sm-4">Transaction ID</dt>
+            <dd class="col-sm-8">@Model.TransactionId</dd>
+        </dl>
+    </div>
+
+    <div class="mt-4">
+        @Html.ActionLink("Back to Payments", "Index", "PaymentForTraining", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back To DashBoard", "Index", "Home", null, new { @class = "btn btn-secondary" })
+    </div>
+</div>

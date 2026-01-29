@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PetCare_system.Models.WatchedVideo>
+
+@{
+    ViewBag.Title = "Watched Videos";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            <i class="bi bi-collection-play"></i> @ViewBag.Title
+            <small class="text-muted">@ViewBag.PetName</small>
+        </h2>
+        <a href="@Url.Action("PetProgress", new { petId = ViewBag.PetId })" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Progress
+        </a>
+    </div>
+
+    <div class="list-group">
+        @foreach (var watched in Model)
+        {
+            <div class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <div>
+                        <h5 class="mb-1">@watched.Video.Title</h5>
+                        <p class="mb-1">@watched.Video.Description</p>
+                        <small class="text-muted">
+                            <i class="bi bi-clock"></i> @watched.Video.DurationMinutes min
+                        </small>
+                    </div>
+                    <div>
+                        <small class="text-muted">Watched on @watched.WatchedDate.ToString("g")</small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,1637 @@
+﻿@model PetCare_system.Models.Pet_Boarding
+
+@{
+    ViewBag.Title = "Premium Pet Boarding";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 sidebar">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Home")"><i class="fas fa-home"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="@Url.Action("Index", "Pet_Boarding")"><i class="fas fa-calendar-check"></i> My Bookings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "Pet")"><i class="fas fa-paw"></i> My Pets</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-9 main-content">
+            <div class="hero-section mb-5">
+                <img src="https://images.unsplash.com/photo-1696875135742-c3044510c9e2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aGFwcHklMjBwZXRzJTIwYm9hcmRpbmclMjBpbWFnZXxlbnwwfHwwfHx8MA%3D%3D"
+                     class="img-fluid rounded-lg"
+                     alt="Happy Pets">
+                <div class="hero-text">
+                    <h1>Premium Boarding Experience</h1>
+                    <p>Where pets enjoy vacation as much as you do!</p>
+                </div>
+            </div>
+
+            <div class="booking-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-calendar-plus"></i> New Boarding Reservation</h2>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Pet_Boarding", "Pet_Boarding", FormMethod.Post, new { id = "boardingForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.PetName)
+                        @Html.HiddenFor(m => m.PetType)
+                        @Html.HiddenFor(m => m.PetBreed)
+                        @Html.HiddenFor(m => m.UserId)
+
+                        <!-- Step 1: Owner Information -->
+                        <div class="form-step active" data-step="1">
+                            <h3 class="step-title">Owner Information</h3>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.OwnerName)
+                                @Html.TextBoxFor(m => m.OwnerName, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Email)
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Phone)
+                                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-next">Next <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Pet Information -->
+                        <div class="form-step" data-step="2">
+                            <h3 class="step-title">Pet Information</h3>
+                            <div class="form-group">
+                                <label>Select Your Pet</label>
+                                @Html.HiddenFor(m => m.SelectedPetId, new { @id = "SelectedPetId" })
+
+                                @if (ViewBag.Pets != null && ((IEnumerable<PetCare_system.Models.Pet>)ViewBag.Pets).Any())
+                                {
+                                    <div class="pet-selection-cards">
+                                        @foreach (var pet in (IEnumerable<PetCare_system.Models.Pet>)ViewBag.Pets)
+                                        {
+                                            <div class="pet-card" data-pet-id="@pet.Id">
+                                                <div class="pet-avatar">
+                                                    <img src="@(string.IsNullOrEmpty(pet.PicturePath) ? "/Content/images/default-pet.jpg" : Url.Content(pet.PicturePath))" alt="@pet.Name">
+                                                </div>
+                                                <div class="pet-info">
+                                                    <h4>@pet.Name</h4>
+                                                    <p><i class="fas fa-paw"></i> @pet.Type</p>
+                                                    <p><i class="fas fa-dna"></i> @pet.Breed</p>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="no-pets-message">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <p>You don't have any pets registered yet.</p>
+                                        <a href="@Url.Action("Create", "Pet")" class="btn btn-primary">
+                                            <i class="fas fa-plus"></i> Add a Pet
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+
+                            <div id="selectedPetDetails" class="pet-details-card" style="display:none;">
+                                <div class="pet-avatar">
+                                    <img id="selectedPetImage" src="" alt="Selected Pet">
+                                </div>
+                                <div class="pet-info">
+                                    <h4 id="selectedPetName">Pet Name</h4>
+                                    <p><i class="fas fa-paw"></i> <span id="selectedPetType">Type</span></p>
+                                    <p><i class="fas fa-dna"></i> <span id="selectedPetBreed">Breed</span></p>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-prev"><i class="fas fa-arrow-left"></i> Back</button>
+                                <button type="button" class="btn btn-next">Next <i class="fas fa-arrow-right"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Booking Details with Calendar -->
+                        <div class="form-step" data-step="3">
+                            <h3 class="step-title">Booking Details</h3>
+
+                            <!-- Calendar Section -->
+                            <div class="calendar-container mb-4">
+                                <div class="calendar-header">
+                                    <button type="button" class="btn btn-calendar-nav" id="prevMonth">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </button>
+                                    <h4 id="currentMonthYear">Month Year</h4>
+                                    <button type="button" class="btn btn-calendar-nav" id="nextMonth">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <div class="calendar-grid" id="calendarGrid">
+                                    <!-- Calendar will be generated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <!-- Date Selection Summary -->
+                            <div class="date-selection-summary mb-4">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label"><i class="fas fa-sign-in-alt"></i> Check-In Date</label>
+                                            @Html.TextBoxFor(m => m.CheckInDate, "{0:yyyy-MM-dd}", new
+                                            {
+                                                @class = "form-control",
+                                                id = "CheckInDate",
+                                                type = "hidden",
+                                                required = "required"
+                                            })
+                                            <div class="selected-date-display" id="checkInDisplay">Not selected</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label"><i class="fas fa-sign-out-alt"></i> Check-Out Date</label>
+                                            @Html.TextBoxFor(m => m.CheckOutDate, "{0:yyyy-MM-dd}", new
+                                            {
+                                                @class = "form-control",
+                                                id = "CheckOutDate",
+                                                type = "hidden",
+                                                required = "required"
+                                            })
+                                            <div class="selected-date-display" id="checkOutDisplay">Not selected</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Package</label>
+                                @Html.HiddenFor(m => m.Package, new { @id = "Package" })
+                                <div class="package-options">
+                                    <div class="package-card" data-package="Standard" data-price="350">
+                                        <div class="package-header">
+                                            <h4><i class="fas fa-home"></i> Standard Care</h4>
+                                            <span class="price">R350/night</span>
+                                        </div>
+                                        <div class="package-features">
+                                            <ul>
+                                                <li><i class="fas fa-bed"></i> Basic accommodation</li>
+                                                <li><i class="fas fa-utensils"></i> 2 meals per day</li>
+                                                <li><i class="fas fa-walking"></i> 1 daily walk</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="package-card" data-package="Deluxe" data-price="500">
+                                        <div class="package-header">
+                                            <h4>Deluxe Care</h4>
+                                            <span class="price">R500/night</span>
+                                        </div>
+                                        <div class="package-features">
+                                            <ul>
+                                                <li><i class="fas fa-check"></i> Premium accommodation</li>
+                                                <li><i class="fas fa-check"></i> 3 meals per day</li>
+                                                <li><i class="fas fa-check"></i> 2 daily walks</li>
+                                                <li><i class="fas fa-check"></i> Daily brushing</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="package-card" data-package="Executive" data-price="750">
+                                        <div class="package-header">
+                                            <h4>Executive Suite</h4>
+                                            <span class="price">R750/night</span>
+                                        </div>
+                                        <div class="package-features">
+                                            <ul>
+                                                <li><i class="fas fa-check"></i> Luxury private suite</li>
+                                                <li><i class="fas fa-check"></i> Gourmet meals</li>
+                                                <li><i class="fas fa-check"></i> 3 daily walks</li>
+                                                <li><i class="fas fa-check"></i> Spa treatments</li>
+                                                <li><i class="fas fa-check"></i> Webcam access</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.Package)
+                            </div>
+
+                            <div class="form-group">
+                                <label for="specialNeeds">Special Needs/Instructions</label>
+                                @Html.TextAreaFor(m => m.SpecialNeeds, new { @class = "form-control", @id = "specialNeeds", @rows = "3" })
+
+                                <!-- Voice input button and status -->
+                                <button type="button" id="speakBtn" class="btn btn-outline-secondary mt-2">🎤 Speak</button>
+                                <small id="speechStatus" class="form-text text-muted"></small>
+                            </div>
+
+
+                            <div class="form-group form-check">
+                                @Html.CheckBoxFor(m => m.Agreement, new { @class = "form-check-input", required = "required" })
+                                @Html.LabelFor(m => m.Agreement, new { @class = "form-check-label" })
+                                @Html.ValidationMessageFor(m => m.Agreement)
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-prev"><i class="fas fa-arrow-left"></i> Back</button>
+                                <button type="submit" class="btn btn-submit"><i class="fas fa-check"></i> Confirm Booking</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="summary-card">
+                <h3><i class="fas fa-receipt"></i> Booking Summary</h3>
+                <div class="summary-content" id="bookingSummary">
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-alt"></i>
+                        <p>Your booking details will appear here</p>
+                    </div>
+                </div>
+                <div class="total-section">
+                    <h4>Estimated Total:</h4>
+                    <div class="total-amount" id="totalAmount">R0.00</div>
+                </div>
+            </div>
+
+            <div class="video-tour-card mt-4">
+                <div class="card-header">
+                    <h3><i class="fas fa-video"></i> Our Boarding Facility Tour</h3>
+                </div>
+                <div class="card-body p-0">
+                    <div class="video-container ratio ratio-16x9">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/XcUMmqexeSw"
+                                allowfullscreen
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+                        </iframe>
+                    </div>
+                    <div class="video-description p-4">
+                        <p class="lead">Take a virtual tour of our premium pet boarding facilities. See where your pet will stay, play, and relax while you're away.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Facility Gallery -->
+            <div class="facility-gallery mt-5">
+                <h3 class="mb-4"><i class="fas fa-camera"></i> Our Facilities</h3>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="gallery-card">
+                            <img src="https://images.unsplash.com/photo-1583512603806-077998240c7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                 class="img-fluid"
+                                 alt="Luxury Suites">
+                            <div class="gallery-caption">Luxury Sleeping Quarters</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="gallery-card">
+                            <img src="https://images.unsplash.com/photo-1554692918-08fa0fdc9db3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                 class="img-fluid"
+                                 alt="Play Area">
+                            <div class="gallery-caption">Indoor Play Area</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="gallery-card">
+                            <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                 class="img-fluid"
+                                 alt="Grooming">
+                            <div class="gallery-caption">Grooming Station</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            // Calendar functionality
+            let currentDate = new Date();
+            let checkInDate = null;
+            let checkOutDate = null;
+
+            // Helper function to get local date string
+            function toLocalDateString(date) {
+                const yyyy = String(date.getFullYear());
+                const mm = String(date.getMonth() + 1).padStart(2, '0');
+                const dd = String(date.getDate()).padStart(2, '0');
+                return `${yyyy}-${mm}-${dd}`;
+            }
+
+            // Initialize calendar
+            function renderCalendar() {
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"];
+
+                // Set month/year header
+                $('#currentMonthYear').text(`${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`);
+
+                // Get first day of month and total days in month
+                const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+                const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+
+                // Get today's date for comparison (local timezone)
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                // Generate calendar grid
+                let calendarHtml = '<div class="calendar-weekdays">';
+
+                // Weekday headers
+                const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+                weekdays.forEach(day => {
+                    calendarHtml += `<div class="calendar-weekday">${day}</div>`;
+                });
+
+                calendarHtml += '</div><div class="calendar-days">';
+
+                // Add empty cells for days before the first day of the month
+                for (let i = 0; i < firstDay; i++) {
+                    calendarHtml += '<div class="calendar-day empty"></div>';
+                }
+
+                // Add days of the month
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+                    date.setHours(0, 0, 0, 0); // Set to local midnight
+                    const dateString = toLocalDateString(date);
+                    const isPast = date < today;
+                    const isSelected = (checkInDate && dateString === checkInDate) || (checkOutDate && dateString === checkOutDate);
+                    const isInRange = checkInDate && checkOutDate &&
+                        date >= new Date(checkInDate) &&
+                        date <= new Date(checkOutDate);
+
+                    let dayClass = "calendar-day";
+                    if (isPast) dayClass += " past";
+                    if (isSelected) dayClass += " selected";
+                    if (isInRange) dayClass += " in-range";
+
+                    calendarHtml += `
+                                <div class="${dayClass}" data-date="${dateString}">
+                                    ${day}
+                                    ${isSelected ? '<div class="selection-indicator"></div>' : ''}
+                                </div>
+                            `;
+                }
+
+                calendarHtml += '</div>';
+                $('#calendarGrid').html(calendarHtml);
+
+                // Add click handlers to days
+                $('.calendar-day:not(.past)').click(function () {
+                    const dateStr = $(this).data('date');
+                    // Parse date in local timezone
+                    const [year, month, day] = dateStr.split('-');
+                    const date = new Date(year, month - 1, day);
+                    date.setHours(0, 0, 0, 0);
+
+                    // If no check-in date or both dates are selected, start new selection
+                    if (!checkInDate || (checkInDate && checkOutDate)) {
+                        checkInDate = toLocalDateString(date);
+                        checkOutDate = null;
+                        $('#CheckInDate').val(checkInDate);
+                        $('#CheckOutDate').val('');
+                        $('#checkInDisplay').text(formatDisplayDate(date));
+                        $('#checkOutDisplay').text('Not selected');
+                    }
+                    // If check-in is selected but check-out isn't
+                    else if (checkInDate && !checkOutDate) {
+                        // Can't select check-out before check-in
+                        if (date < new Date(checkInDate)) {
+                            alert("Check-out date must be after check-in date");
+                            return;
+                        }
+
+                        checkOutDate = toLocalDateString(date);
+                        $('#CheckOutDate').val(checkOutDate);
+                        $('#checkOutDisplay').text(formatDisplayDate(date));
+                    }
+
+                    // Update calendar display
+                    renderCalendar();
+                    updateSummary();
+                });
+            }
+
+            // Format date for display (e.g., "Mon, Jan 15, 2023")
+            function formatDisplayDate(date) {
+                const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
+                return date.toLocaleDateString('en-US', options);
+            }
+
+            // Navigation between months
+            $('#prevMonth').click(function () {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                renderCalendar();
+            });
+
+            $('#nextMonth').click(function () {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                renderCalendar();
+            });
+
+            // Initialize calendar
+            renderCalendar();
+
+
+            // Rest of your existing code
+            let currentStep = 1;
+            const totalSteps = $(".form-step").length;
+
+            function showStep(step) {
+                $(".form-step").removeClass("active");
+                $(`.form-step[data-step="${step}"]`).addClass("active");
+            }
+
+            // Navigation between steps
+            $(".btn-next").click(function () {
+                if (validateStep(currentStep)) {
+                    currentStep++;
+                    showStep(currentStep);
+                    updateSummary();
+                }
+            });
+
+            $(".btn-prev").click(function () {
+                currentStep--;
+                showStep(currentStep);
+            });
+
+            // Pet selection
+            $(".pet-card").click(function () {
+                $(".pet-card").removeClass("selected");
+                $(this).addClass("selected");
+
+                const petId = $(this).data("pet-id");
+                $("#SelectedPetId").val(petId);
+
+                // Update hidden fields
+                $("#PetName").val($(this).find("h4").text());
+                $("#PetType").val($(this).find("p:eq(0)").text().replace(" ", "").trim());
+                $("#PetBreed").val($(this).find("p:eq(1)").text().replace(" ", "").trim());
+
+                // Update preview
+                $("#selectedPetImage").attr("src", $(this).find("img").attr("src"));
+                $("#selectedPetName").text($(this).find("h4").text());
+                $("#selectedPetType").text($(this).find("p:eq(0)").text().trim());
+                $("#selectedPetBreed").text($(this).find("p:eq(1)").text().trim());
+                $("#selectedPetDetails").show();
+
+                updateSummary();
+            });
+
+            // Package selection
+            $(".package-card").click(function () {
+                $(".package-card").removeClass("selected");
+                $(this).addClass("selected");
+                $("#Package").val($(this).data("package"));
+                updateSummary();
+            });
+
+            function validateStep(step) {
+                let isValid = true;
+
+                if (step === 1) {
+                    // Owner info is pre-filled and readonly
+                    return true;
+                }
+
+                if (step === 2) {
+                    if (!$(".pet-card").hasClass("selected")) {
+                        alert("Please select a pet");
+                        isValid = false;
+                    }
+                }
+
+                if (step === 3) {
+                    if (!$("#CheckInDate").val()) {
+                        alert("Please select a check-in date");
+                        isValid = false;
+                    }
+
+                    if (!$("#CheckOutDate").val()) {
+                        alert("Please select a check-out date");
+                        isValid = false;
+                    }
+
+                    if (!$(".package-card").hasClass("selected")) {
+                        alert("Please select a package");
+                        isValid = false;
+                    }
+                }
+
+                return isValid;
+            }
+
+            function updateSummary() {
+                const petName = $("#PetName").val() || $("#selectedPetName").text();
+                const petType = $("#PetType").val() || $("#selectedPetType").text();
+                const petBreed = $("#PetBreed").val() || $("#selectedPetBreed").text();
+                const checkIn = $("#CheckInDate").val();
+                const checkOut = $("#CheckOutDate").val();
+                const packageName = $("#Package").val();
+                const packagePrice = packageName === "Standard" ? 350 :
+                    packageName === "Deluxe" ? 500 :
+                        packageName === "Executive" ? 750 : 0;
+
+                let nights = 0;
+                if (checkIn && checkOut) {
+                    const inDate = new Date(checkIn);
+                    const outDate = new Date(checkOut);
+                    nights = Math.floor((outDate - inDate) / (1000 * 60 * 60 * 24));
+                    if (nights < 0) nights = 0;
+                }
+
+                const total = nights * packagePrice;
+
+                if (petName && checkIn && checkOut && packageName) {
+                    $("#bookingSummary").html(`
+                                        <div class="booking-details">
+                                            <div class="detail-item">
+                                                <div class="detail-label">Pet</div>
+                                                <div class="detail-value">${petName} (${petType}, ${petBreed})</div>
+                                            </div>
+                                            <div class="detail-item">
+                                                <div class="detail-label">Check-In</div>
+                                                <div class="detail-value">${formatDisplayDate(new Date(checkIn))}</div>
+                                            </div>
+                                            <div class="detail-item">
+                                                <div class="detail-label">Check-Out</div>
+                                                <div class="detail-value">${formatDisplayDate(new Date(checkOut))}</div>
+                                            </div>
+                                            <div class="detail-item">
+                                                <div class="detail-label">Nights</div>
+                                                <div class="detail-value">${nights}</div>
+                                            </div>
+                                            <div class="detail-item">
+                                                <div class="detail-label">Package</div>
+                                                <div class="detail-value">${packageName} (R${packagePrice}/night)</div>
+                                            </div>
+                                        </div>
+                                    `);
+                    $("#totalAmount").text(`R${total.toFixed(2)}`);
+                }
+            }
+        });
+
+        const speakBtn = document.getElementById("speakBtn");
+        const specialNeedsTextArea = document.getElementById("specialNeeds");
+        const statusText = document.getElementById("speechStatus");
+
+        if (!('webkitSpeechRecognition' in window)) {
+            statusText.textContent = "⚠️ Your browser doesn't support voice recognition. Use Google Chrome.";
+            speakBtn.disabled = true;
+        } else {
+            const recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            let finalTranscript = '';
+
+            recognition.onstart = () => {
+                statusText.textContent = "🎙️ Listening...";
+                finalTranscript = ''; // Reset between recognitions
+            };
+
+            recognition.onend = () => {
+                statusText.textContent = "✅ Finished listening.";
+                // Append only finalized text
+                if (finalTranscript.trim()) {
+                    specialNeedsTextArea.value += (specialNeedsTextArea.value ? " " : "") + finalTranscript.trim();
+                }
+            };
+
+            recognition.onerror = (event) => {
+                statusText.textContent = "❌ Error: " + event.error;
+            };
+
+            recognition.onresult = function (event) {
+                finalTranscript = ''; // Reset in case onresult fires again unexpectedly
+
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    }
+                }
+            };
+
+            speakBtn.onclick = () => {
+                recognition.start();
+            };
+        }
+    </script>
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<style>
+
+
+    /* Calendar Styles */
+    .calendar-container {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-calendar-nav {
+        background: var(--primary);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+    }
+
+        .btn-calendar-nav:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+
+    .calendar-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .calendar-weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .calendar-days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+    }
+
+    .calendar-day {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s;
+    }
+
+        .calendar-day:hover:not(.past) {
+            background: var(--primary-light);
+        }
+
+        .calendar-day.past {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.selected {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .calendar-day.in-range {
+            background: rgba(67, 97, 238, 0.1);
+        }
+
+    .selection-indicator {
+        position: absolute;
+        bottom: 2px;
+        width: 6px;
+        height: 6px;
+        background: white;
+        border-radius: 50%;
+    }
+
+    .calendar-day.empty {
+        background: transparent;
+        cursor: default;
+    }
+
+    /* Date Selection Display */
+    .selected-date-display {
+        padding: 0.75rem 1rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        background: #f8f9fa;
+        font-weight: 500;
+    }
+
+    :root {
+        --primary: #4361ee;
+        --primary-light: #e0e7ff;
+        --secondary: #3f37c9;
+        --success: #4cc9f0;
+        --danger: #f72585;
+        --warning: #ffbe0b;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --gray: #6c757d;
+        --white: #ffffff;
+        --sidebar-bg: #2b2d42;
+        --sidebar-text: #adb5bd;
+        --sidebar-active: #4361ee;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f5f7fb;
+        color: var(--dark);
+    }
+
+    .dashboard-header {
+        background: var(--white);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        padding: 1rem 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .dashboard-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--primary);
+    }
+
+        .dashboard-header h1 i {
+            margin-right: 10px;
+        }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+    }
+
+    .profile-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+        object-fit: cover;
+    }
+
+    .sidebar {
+        background: var(--sidebar-bg);
+        color: var(--sidebar-text);
+        min-height: calc(100vh - 80px);
+        padding: 2rem 1rem;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+
+        .sidebar .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar .nav-link {
+            color: var(--sidebar-text);
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+            .sidebar .nav-link:hover {
+                background: rgba(255,255,255,0.1);
+                color: var(--white);
+            }
+
+            .sidebar .nav-link.active {
+                background: var(--sidebar-active);
+                color: var(--white);
+                font-weight: 500;
+            }
+
+            .sidebar .nav-link i {
+                margin-right: 10px;
+                width: 20px;
+                text-align: center;
+            }
+
+    .main-content {
+        padding: 2rem;
+    }
+
+    .booking-card {
+        background: var(--white);
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        margin-bottom: 2rem;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background: var(--primary);
+        color: var(--white);
+        padding: 1.5rem 2rem;
+    }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+            .card-header h2 i {
+                margin-right: 10px;
+            }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .form-step {
+        display: none;
+        animation: fadeIn 0.5s ease-out;
+    }
+
+        .form-step.active {
+            display: block;
+        }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .step-title {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        font-weight: 600;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+        .step-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+    .pet-details-card {
+        background: var(--light);
+        border-radius: 10px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+
+    .pet-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 1.5rem;
+        border: 3px solid var(--white);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+        .pet-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .pet-info h4 {
+        margin: 0 0 0.25rem;
+        color: var(--dark);
+        font-weight: 600;
+    }
+
+    .pet-info p {
+        margin: 0;
+        color: var(--gray);
+        font-size: 0.9rem;
+    }
+
+    .package-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    .package-card {
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        position: relative;
+    }
+
+        .package-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .package-card.selected {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+    .package-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+        .package-header h4 {
+            margin: 0;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+    .price {
+        font-weight: 600;
+        color: var(--primary);
+        font-size: 1.1rem;
+    }
+
+    .package-features ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .package-features li {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--gray);
+    }
+
+    .package-features i {
+        color: var(--primary);
+        margin-right: 8px;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #eee;
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.3s;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .btn i {
+            margin-right: 8px;
+        }
+
+    .btn-prev {
+        background: var(--light);
+        color: var(--gray);
+    }
+
+        .btn-prev:hover {
+            background: #e9ecef;
+        }
+
+    .btn-next, .btn-submit {
+        background: var(--primary);
+        color: var(--white);
+    }
+
+        .btn-next:hover, .btn-submit:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+    .summary-card {
+        background: var(--white);
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+        .summary-card h3 {
+            margin-top: 0;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+            .summary-card h3 i {
+                margin-right: 10px;
+            }
+
+    .summary-content {
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .empty-state {
+        text-align: center;
+        color: var(--gray);
+    }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #e0e0e0;
+        }
+
+    .booking-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .detail-item {
+        margin-bottom: 1rem;
+    }
+
+    .detail-label {
+        font-size: 0.8rem;
+        color: var(--gray);
+        margin-bottom: 0.25rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .detail-value {
+        font-weight: 500;
+        color: var(--dark);
+    }
+
+    .total-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #eee;
+    }
+
+        .total-section h4 {
+            margin: 0;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+    .total-amount {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+    }
+
+    .select2-container .select2-selection--single {
+        height: auto;
+        padding: 0.75rem 1rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 100%;
+        right: 10px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 1.5;
+        padding: 0;
+    }
+    /* Responsive adjustments */
+    @@media (max-width: 992px) {
+        .sidebar {
+            min-height: auto;
+            margin-bottom: 2rem;
+        }
+
+        .package-options {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .dashboard-header {
+            padding: 1rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .pet-details-card {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .pet-avatar {
+            margin-right: 0;
+            margin-bottom: 1rem;
+        }
+
+        .booking-details {
+            grid-template-columns: 1fr;
+        }
+
+        .pet-selection-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .pet-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+            .pet-card:hover {
+                border-color: var(--primary);
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .pet-card.selected {
+                border-color: var(--primary);
+                background: rgba(67, 97, 238, 0.05);
+            }
+
+            .pet-card .pet-avatar {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                overflow: hidden;
+                margin: 0 auto 1rem;
+                border: 3px solid var(--white);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+                .pet-card .pet-avatar img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+            .pet-card .pet-info h4 {
+                margin: 0 0 0.5rem;
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: var(--dark);
+            }
+
+            .pet-card .pet-info p {
+                margin: 0.25rem 0;
+                font-size: 0.9rem;
+                color: var(--gray);
+            }
+
+            .pet-card .pet-info i {
+                margin-right: 5px;
+                color: var(--primary);
+            }
+
+        .no-pets-message {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+
+            .no-pets-message i {
+                font-size: 2rem;
+                color: var(--warning);
+                margin-bottom: 1rem;
+            }
+
+            .no-pets-message p {
+                margin-bottom: 1.5rem;
+                color: var(--dark);
+            }
+
+        .pet-details-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+
+            .pet-details-card .pet-avatar {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 1.5rem;
+                border: 3px solid var(--white);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+                .pet-details-card .pet-avatar img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+            .pet-details-card .pet-info h4 {
+                margin: 0 0 0.25rem;
+                color: var(--dark);
+                font-weight: 600;
+            }
+
+            .pet-details-card .pet-info p {
+                margin: 0;
+                color: var(--gray);
+                font-size: 0.9rem;
+            }
+
+            .pet-details-card .pet-info i {
+                margin-right: 5px;
+                color: var(--primary);
+            }
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .pet-selection-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .pet-details-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+                .pet-details-card .pet-avatar {
+                    margin-right: 0;
+                    margin-bottom: 1rem;
+                }
+        }
+        /* Enhanced Success Modal */
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            border-bottom: none;
+            padding: 1.5rem;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            color: #00c853;
+            animation: bounceIn 0.6s ease-out;
+        }
+
+        .confirmation-details {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+            .confirmation-details p {
+                margin-bottom: 0.5rem;
+                font-size: 0.95rem;
+            }
+
+        .modal-footer {
+            border-top: none;
+            padding: 1.5rem;
+            background: #f8f9fa;
+        }
+
+        @@keyframes bounceIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+        /* Enhanced Date Inputs */
+        .date-input-group {
+            position: relative;
+        }
+
+            .date-input-group i {
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--primary);
+                z-index: 1;
+            }
+
+            .date-input-group input {
+                padding-left: 40px;
+            }
+        /* Loading State */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        /* Enhanced Pet Cards */
+        .pet-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+            .pet-card::before {
+                content: "SELECTED";
+                position: absolute;
+                top: -30px;
+                right: -30px;
+                background: var(--primary);
+                color: white;
+                padding: 25px 30px 10px 30px;
+                transform: rotate(45deg);
+                font-size: 0.8rem;
+                font-weight: 600;
+                opacity: 0;
+                transition: all 0.3s ease;
+            }
+
+            .pet-card.selected::before {
+                opacity: 1;
+                top: -15px;
+                right: -15px;
+            }
+        /* Enhanced Progress Indicator */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .step-indicator {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--gray);
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+            .step-indicator.active {
+                background: var(--primary);
+                color: white;
+                transform: scale(1.1);
+            }
+
+        .progress-bar {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 3px;
+            background: #e9ecef;
+            width: 100%;
+            transform: translateY(-50%);
+        }
+
+        .progress-fill {
+            position: absolute;
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        /* Gallery Styles */
+        .gallery-card {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+            .gallery-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .gallery-card img {
+                height: 250px;
+                width: 100%;
+                object-fit: cover;
+                border-radius: 10px;
+            }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(67, 97, 238, 0.9);
+            color: white;
+            padding: 1rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+            .hero-section img {
+                height: 400px;
+                width: 100%;
+                object-fit: cover;
+            }
+
+        .hero-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+        }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            }
+        /* Step Indicator */
+        .step-title::before {
+            content: counter(step);
+            counter-increment: step;
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .form-steps {
+            counter-reset: step;
+        }
+        /* Video Styles */
+        .video-container {
+            border-radius: 10px 10px 0 0; /* Rounded top corners only */
+            overflow: hidden;
+            background: #000;
+        }
+
+            .video-container iframe {
+                width: 100%;
+                height: 500px; /* Fixed large height */
+                border: none;
+            }
+
+        .video-description {
+            background: #f8f9fa;
+            border-radius: 0 0 10px 10px;
+        }
+
+        @@media (max-width: 768px) {
+            .video-container iframe {
+                height: 300px;
+            }
+        }
+    }
+</style>
+
+

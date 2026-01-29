@@ -1,0 +1,174 @@
+﻿@*@model PetCare_system.Models.PaymentProd
+
+@{
+    ViewBag.Title = "Payment Receipt";
+}
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f9fafb;
+        color: #2c3e50;
+        margin: 0;
+        padding: 0;
+    }
+
+    main {
+        max-width: 600px;
+        margin: 60px auto;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 30px 40px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        transition: box-shadow 0.3s ease;
+    }
+
+        main:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+    h2 {
+        color: #28a745;
+        text-align: center;
+        font-weight: 700;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+    }
+
+    p {
+        font-size: 1rem;
+        margin: 8px 0;
+        line-height: 1.5;
+    }
+
+        p strong {
+            color: #34495e;
+            width: 140px;
+            display: inline-block;
+        }
+
+    h3 {
+        color: #34495e;
+        border-bottom: 2px solid #28a745;
+        padding-bottom: 6px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    ul {
+        list-style: disc inside;
+        padding-left: 0;
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: #555;
+    }
+
+        ul li {
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+
+    hr {
+        border: none;
+        border-top: 1px solid #eee;
+        margin: 30px 0;
+    }
+
+    .receipt-item {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: #27ae60;
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        display: inline-block;
+        text-decoration: none;
+        padding: 12px 28px;
+        margin-right: 15px;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 1rem;
+        color: white;
+        background-color: #28a745;
+        box-shadow: 0 5px 12px rgba(40, 167, 69, 0.4);
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        user-select: none;
+    }
+
+        .btn:hover, .btn:focus {
+            background-color: #218838;
+            box-shadow: 0 8px 20px rgba(33, 136, 56, 0.6);
+        }
+
+        .btn i {
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+    .footer-text {
+        text-align: center;
+        font-style: italic;
+        color: #666;
+        font-size: 0.9rem;
+        margin-top: 40px;
+    }
+</style>
+
+<main>
+    <h2>Payment Receipt</h2>
+
+    <p><strong>Payment ID:</strong> @Model.PaymentProdId</p>
+    <p><strong>Card Number:</strong> **** **** **** @Model.CardNumber.Substring(Model.CardNumber.Length - 4)</p>
+    <p>
+        <strong>Delivery Address:</strong>
+        @(string.IsNullOrEmpty(Model.DeliveryAddress) ? "No delivery" : Model.DeliveryAddress)
+    </p>
+
+    @if (Model.IsDelivery)
+    {
+        <p style="font-style: italic; color: #27ae60;">Your items will be delivered within 7 days.</p>
+    }
+
+    <p><strong>Billing Address:</strong> @Model.BillingAddress</p>
+    <p><strong>Payment Date:</strong> @Model.CreatedAt.ToString("dddd, MMMM dd, yyyy HH:mm")</p>
+    <p><strong>Payment Method:</strong> @Model.PaymentMethod</p>
+
+    <h3>Purchased Products</h3>
+    <ul>
+        @if (!string.IsNullOrEmpty(Model.CartItems))
+        {
+            foreach (var item in Model.CartItems.Split(','))
+            {
+                <li>@item.Trim()</li>
+            }
+        }
+        else
+        {
+            <li>No products purchased</li>
+        }
+    </ul>
+
+    <hr />
+
+    <div class="receipt-item">
+        <span>Total:</span>
+        <span>@Model.Amount.ToString("C", new System.Globalization.CultureInfo("en-ZA"))</span>
+    </div>
+
+    <p class="footer-text">Thank you for your purchase!</p>
+
+    <div>
+        <a href="@Url.Action("Create", "Rating")" class="btn">
+            <i class="fas fa-star"></i> Rate Our App
+        </a>
+        <a href="@Url.Action("Index", "Home")" class="btn">
+            <i class="fas fa-home"></i> Return to Home
+        </a>
+    </div>
+</main>*@

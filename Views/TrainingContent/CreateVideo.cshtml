@@ -1,0 +1,124 @@
+﻿@model PetCare_system.Models.TrainingVideo
+
+@{
+    ViewBag.Title = "Add Training Video";
+    string moduleTitle = ViewBag.ModuleTitle ?? ViewData["ModuleTitle"] as string ?? "Unknown Module";
+    int moduleId = Model.TrainingModuleId;
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3>@ViewBag.Title</h3>
+            <small>Module: @moduleTitle</small>
+        </div>
+
+        @using (Html.BeginForm("CreateVideo", "TrainingContent", FormMethod.Post, new { enctype = "multipart/form-data", id = "videoForm" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.TrainingModuleId)
+
+           
+           <div class="alert alert-danger">
+                    @Html.ValidationSummary()
+                </div>
+            
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Title, new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", required = "required", placeholder = "Enter video title" })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Description, new { @class = "form-label" })
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 3, placeholder = "Enter video description" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.DurationMinutes, new { @class = "form-label" })
+                @Html.TextBoxFor(model => model.DurationMinutes, new { @class = "form-control", type = "number", min = "1", placeholder = "e.g., 15" })
+                @Html.ValidationMessageFor(model => model.DurationMinutes, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="mb-3">
+                @Html.LabelFor(model => model.DifficultyLevel, new { @class = "form-label" })
+                @Html.DropDownListFor(model => model.DifficultyLevel,
+                    Enumerable.Range(1, 5).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }),
+                    new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.DifficultyLevel, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label for="videoUpload">Video File</label>
+                <input type="file" name="videoFile" id="videoUpload" class="form-control" accept=".mp4,.mov,.avi,.webm" />
+                @Html.ValidationMessage("videoFile", new { @class = "text-danger" })
+                <small id="fileFeedback" class="form-text text-muted"></small>
+                <span id="fileError" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a href="@Url.Action("ModuleVideos", new { id = moduleId })" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Cancel
+                </a>
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <i class="fas fa-upload"></i> Upload Video
+                </button>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            const maxSize = 100 * 1024 * 1024; // 100MB default
+            const allowedExtensions = [".mp4", ".mov", ".avi", ".webm"];
+            const maxSizeMB = 100;
+
+            $('#videoUpload').on('change', function () {
+                const fileInput = this;
+                const feedback = $('#fileFeedback');
+                const errorDisplay = $('#fileError');
+
+                errorDisplay.text('');
+                feedback.removeClass('text-danger').addClass('text-muted');
+
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                    const fileExt = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+
+                    if (!allowedExtensions.includes(fileExt)) {
+                        errorDisplay.text(`Invalid file type. Allowed: ${allowedExtensions.join(', ')}`);
+                        fileInput.value = '';
+                        return;
+                    }
+
+                    if (file.size > maxSize) {
+                        errorDisplay.text(`File too large (${fileSizeMB}MB > ${maxSizeMB}MB)`);
+                        fileInput.value = '';
+                        return;
+                    }
+
+                    feedback.html(`<i class="fas fa-check-circle text-success"></i> Selected: <strong>${file.name}</strong> (${fileSizeMB}MB)`);
+                }
+            });
+
+            $('#videoForm').submit(function (e) {
+                const submitBtn = $('#submitBtn');
+                const fileInput = $('#videoUpload');
+
+                if (fileInput[0].files.length === 0) {
+                    $('#fileError').text('Please select a video file');
+                    return false;
+                }
+
+                submitBtn.prop('disabled', true)
+                    .html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Uploading...');
+                return true;
+            });
+        });
+    </script>
+}

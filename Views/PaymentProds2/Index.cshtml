@@ -1,0 +1,109 @@
+﻿@model PetCare_system.Models.PaymentProd
+
+@{
+    ViewBag.Title = "Payment";
+}
+
+<h2 class="text-center mb-4">Complete Your Payment</h2>
+
+@using (Html.BeginForm("ProcessPayment", "PaymentProds2", FormMethod.Post, new { @class = "payment-form shadow p-4 rounded bg-light" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            @Html.LabelFor(m => m.BillingAddress, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.BillingAddress, new { @class = "form-control", placeholder = "Enter Billing Address" })
+            @Html.ValidationMessageFor(m => m.BillingAddress, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-6 mb-3">
+            @Html.LabelFor(m => m.CardNumber, new { @class = "form-label" })
+            <div class="input-group">
+                <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
+                @Html.TextBoxFor(m => m.CardNumber, new { @class = "form-control", placeholder = "Enter Card Number" })
+            </div>
+            @Html.ValidationMessageFor(m => m.CardNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            @Html.LabelFor(m => m.ExpiryDate, new { @class = "form-label" })
+            <div class="input-group">
+                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                @Html.TextBoxFor(m => m.ExpiryDate, new { @class = "form-control", placeholder = "MM/YY" })
+            </div>
+            @Html.ValidationMessageFor(m => m.ExpiryDate, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4 mb-3">
+            @Html.LabelFor(m => m.CVV, new { @class = "form-label" })
+            <div class="input-group">
+                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                @Html.TextBoxFor(m => m.CVV, new { @class = "form-control", placeholder = "CVV" })
+            </div>
+            @Html.ValidationMessageFor(m => m.CVV, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4 mb-3">
+            @Html.LabelFor(m => m.PaymentMethod, new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.PaymentMethod, new SelectList(new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Visa", Value = "Visa" },
+                new SelectListItem { Text = "Mastercard", Value = "Mastercard" },
+                new SelectListItem { Text = "American Express", Value = "American Express" }
+            }, "Value", "Text"), "Select Payment Method", new { @class = "form-select" })
+            @Html.ValidationMessageFor(m => m.PaymentMethod, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <h3 class="mt-4">Products to Purchase</h3>
+    <ul class="list-group mb-3">
+        @if (!string.IsNullOrEmpty(Model.CartItems))
+        {
+            foreach (var item in Model.CartItems.Split(','))
+            {
+                <li class="list-group-item">@item</li>
+            }
+        }
+    </ul>
+
+    <div class="form-group mb-3">
+        <strong>Total Amount:R </strong>
+        @Html.DisplayFor(m => m.Amount)
+        @Html.HiddenFor(m => m.CreatedAt)
+        @Html.ValidationMessageFor(m => m.ExpiryDate, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-check mb-3">
+        @Html.CheckBox("IsDelivery", new { @class = "form-check-input", id = "isDelivery" })
+        @Html.Label("IsDelivery", "Require Delivery?", new { @class = "form-check-label" })
+    </div>
+
+    <!-- Delivery Address Section -->
+    <div id="deliveryAddressSection" class="mb-3" style="display:none;">
+        @Html.LabelFor(m => m.DeliveryAddress, new { @class = "form-label" })
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.DeliveryAddress, new { @class = "form-control", placeholder = "Enter Delivery Address" })
+            @Html.ValidationMessageFor(m => m.DeliveryAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-success btn-lg w-100">Pay Now</button>
+    </div>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+}
+
+<!-- Script to toggle delivery address visibility -->
+<script>
+    document.getElementById("isDelivery").addEventListener("change", function () {
+        var deliverySection = document.getElementById("deliveryAddressSection");
+        deliverySection.style.display = this.checked ? "block" : "none";
+    });
+</script>
+
+<!-- Optional: Include Bootstrap icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">

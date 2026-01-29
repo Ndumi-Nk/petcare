@@ -1,0 +1,773 @@
+﻿@model PetCare_system.Models.DashboardViewModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var petProgress = Model.Pets.FirstOrDefault(p => p.Id == Model.PetId)?.Progress;
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    :root {
+        --primary: #4E8C87;
+        --secondary: #6B8E8A;
+        --accent: #94C9C3;
+        --light: #D4E6E3;
+        --dark: #2C5E5A;
+        --white: #ffffff;
+        --dark-text: #333333;
+        --success: #7AB860;
+        --warning: #F0A830;
+        --info: #3A7CA5;
+        --live: #E74C3C;
+    }
+
+    .dashboard-header {
+        background: linear-gradient(135deg, var(--primary), var(--dark));
+        color: var(--white);
+        padding: 25px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .stat-card {
+        border-radius: 15px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+        border: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        color: var(--white);
+    }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .stat-card .panel-heading {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            padding: 15px;
+        }
+
+        .stat-card .panel-footer {
+            background: rgba(255,255,255,0.1);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            padding: 10px 15px;
+            color: var(--white);
+            transition: all 0.3s;
+        }
+
+        .stat-card a:hover .panel-footer {
+            background: rgba(255,255,255,0.2);
+        }
+
+    .primary-card .panel-heading {
+        background: var(--primary);
+    }
+
+    .success-card .panel-heading {
+        background: var(--success);
+    }
+
+    .warning-card .panel-heading {
+        background: var(--warning);
+    }
+
+    .info-card .panel-heading {
+        background: var(--info);
+    }
+
+    .live-card .panel-heading {
+        background: var(--live);
+    }
+
+    .stat-icon {
+        font-size: 40px;
+        opacity: 0.9;
+    }
+
+    .huge {
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .panel-default {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .panel-heading {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        padding: 15px;
+        font-weight: 600;
+    }
+
+    .panel-body {
+        padding: 20px;
+    }
+
+    .session-card {
+        border-left: 5px solid var(--primary);
+        margin-bottom: 15px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        background: var(--white);
+    }
+
+        .session-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+    .media-object {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--light);
+    }
+
+    .media-heading {
+        font-weight: 600;
+        color: var(--dark-text);
+    }
+
+    .label {
+        padding: 5px 10px;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    .module-card {
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        background: var(--white);
+    }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+    .module-thumbnail {
+        height: 150px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+
+    .badge-difficulty {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.7);
+        color: var(--white);
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .badge-duration {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(0,0,0,0.7);
+        color: var(--white);
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .progress-sm {
+        height: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        background: #f1f1f1;
+    }
+
+    .progress-bar {
+        border-radius: 5px;
+        background-color: var(--primary);
+    }
+
+    .chart-container {
+        position: relative;
+        height: 200px;
+        margin-bottom: 20px;
+    }
+
+    .no-data {
+        padding: 40px 0;
+        text-align: center;
+    }
+
+        .no-data i {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .no-data h3 {
+            margin-bottom: 20px;
+        }
+
+    .btn-primary {
+        background-color: var(--primary);
+        border-color: var(--primary);
+    }
+
+        .btn-primary:hover {
+            background-color: var(--dark);
+            border-color: var(--dark);
+        }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .clearfix {
+        clear: both;
+    }
+
+    .beginner {
+        background-color: var(--success) !important;
+    }
+
+    .intermediate {
+        background-color: var(--warning) !important;
+    }
+
+    .advanced {
+        background-color: var(--info) !important;
+    }
+
+    .pet-selector {
+        background: rgba(255,255,255,0.2);
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+        .pet-selector label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+
+    .pet-selected {
+        background: rgba(255,255,255,0.2);
+        padding: 10px;
+        border-radius: 8px;
+        font-weight: 500;
+    }
+
+    .btn-live {
+        background-color: var(--live);
+        border-color: var(--live);
+        color: white;
+        margin-left: 10px;
+    }
+
+        .btn-live:hover {
+            background-color: #C0392B;
+            border-color: #C0392B;
+        }
+
+    .live-icon {
+        animation: pulse 1.5s infinite;
+    }
+
+    @@keyframes pulse {
+        0% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+</style>
+
+<div class="container-fluid">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div class="row">
+            <div class="col-md-8">
+                <h1><i class="fas fa-paw"></i> Welcome to Your Training Dashboard</h1>
+                <p>Track your pet's progress and upcoming activities</p>
+            </div>
+            <div class="col-md-4">
+                @if (Model.Pets.Count > 1)
+                {
+                    <div class="pet-selector">
+                        <label>Viewing:</label>
+                        <select id="petSelect" class="form-control">
+                            @foreach (var pet in Model.Pets)
+                            {
+                                <option value="@pet.Id" @(pet.Id == Model.PetId ? "selected" : "")>
+                                    @pet.Name
+                                </option>
+                            }
+                        </select>
+                    </div>
+                }
+                else if (Model.Pets.Count == 1)
+                {
+                    <div class="pet-selected">
+                        <i class="fas fa-paw"></i> Viewing: @Model.Pets.First().Name
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Upcoming Sessions Card -->
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-default stat-card primary-card">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fas fa-calendar-alt stat-icon"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@Model.UpcomingSessions.Count</div>
+                            <div>Upcoming Sessions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <span class="pull-left">View All</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+                </a>
+            </div>
+        </div>
+
+        
+
+        <!-- Recommended Modules Card -->
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-default stat-card info-card">
+                <div class="panel-heading" data-toggle="tooltip"
+                     title="Recommended based on your pet's age and breed">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fas fa-graduation-cap stat-icon"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@Model.RecommendedModules.Count()</div>
+                            <div>Recommended Modules</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+                    <span class="pull-left">View All</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+                </a>
+            </div>
+        </div>
+
+
+
+        <!-- Content Row -->
+        <div class="row">
+            <!-- Upcoming Sessions -->
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: var(--light); color: var(--dark-text);">
+                        <div class="pull-left"><i class="fas fa-calendar-alt"></i> Upcoming Training Sessions</div>
+                        <div class="pull-right">
+                            @Html.ActionLink("Book New", "Book", "Trainings", null, new { @class = "btn btn-primary btn-xs" })
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.UpcomingSessions.Any())
+                        {
+                            foreach (var session in Model.UpcomingSessions)
+                            {
+                                <div class="panel panel-default session-card">
+                                    <div class="panel-body">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <img src="@session.Pet.PicturePath" class="media-object" alt="@session.Pet.Name">
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">@session.Pet.Name - @session.TrainingType</h4>
+                                                <p><i class="far fa-clock"></i> @session.SessionDate.ToString("MMM dd") at @session.StartTime.ToString(@"hh\:mm")</p>
+                                                <p><i class="fas fa-user-tie"></i> @session.Trainer.FullName</p>
+                                                <span class="label label-default">@session.Status</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="no-data">
+                                <i class="far fa-calendar-times" style="color:var(--primary);"></i>
+                                <h3>No Upcoming Sessions</h3>
+                                @Html.ActionLink("Book a Session", "Book", "Trainings", null, new { @class = "btn btn-primary" })
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Chart Section -->
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: var(--accent); color: var(--dark-text);">
+                        <i class="fas fa-chart-pie"></i> Training Progress
+                        <div class="pull-right">
+                            <small>
+                              
+                            </small>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.RecentProgress.Any())
+                        {
+                            <div class="chart-container">
+                                <canvas id="progressChart"></canvas>
+                            </div>
+                            <div class="row text-center mt-3">
+                                <div class="col-md-4">
+                                    <span class="label" style="background:var(--primary);">
+                                        Obedience: @(petProgress?.ObedienceProgress ?? 0)%
+                                    </span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="label" style="background:var(--success);">
+                                        Agility: @(petProgress?.AgilityProgress ?? 0)%
+                                    </span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="label" style="background:var(--info);">
+                                        Behavior: @(petProgress?.BehaviorProgress ?? 0)%
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="text-center mt-2">
+                                <small class="text-muted">
+                                    Last trained: @(petProgress?.LastTrainingDate?.ToString("MMM dd, yyyy") ?? "Never")
+                                </small>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="no-data">
+                                <i class="fas fa-chart-pie" style="color:var(--accent);"></i>
+                                <h3>No Progress Data</h3>
+                                @Html.ActionLink("Start Training", "Modules", "Trainings", null, new { @class = "btn btn-primary" })
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommended Modules -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="background: var(--dark); color: var(--white);">
+                        <i class="fas fa-star"></i> Recommended Training Modules
+                        <div class="pull-right">
+                            <small>Showing @Model.RecommendedModules.Count() best matches</small>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        @if (Model.RecommendedModules.Any())
+                        {
+                            <div class="row">
+                                @foreach (var module in Model.RecommendedModules)
+                                {
+                                    <div class="col-md-4">
+                                        <div class="module-card">
+                                            <div class="module-thumbnail"
+                                                 style="background-image:url('@(string.IsNullOrEmpty(module.ThumbnailUrl) ? "/Content/images/default-module.jpg" : module.ThumbnailUrl)')">
+                                                <span class="badge-difficulty @module.Difficulty.ToLower()">
+                                                    Level @module.DifficultyLevel
+                                                </span>
+                                                <span class="badge-duration">
+                                                    <i class="far fa-clock"></i> @module.DurationMinutes min
+                                                </span>
+                                            </div>
+                                            <div class="panel-body">
+                                                <h4>@module.Title</h4>
+                                                <p class="text-muted">
+                                                    @module.TrainingType
+                                                </p>
+                                                <p>
+                                                    @(module.Description.Length > 100 ?
+                                          module.Description.Substring(0, 100) + "..." :
+                                          module.Description)
+                                                </p>
+                                                <div class="progress progress-sm">
+                                                    <div class="progress-bar" role="progressbar"
+                                                         style="width: 0%;"
+                                                         aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <small class="text-muted">
+                                                    @module.Videos.Count videos | @module.QuizQuestions.Count quizzes
+                                                </small>
+                                            </div>
+                                            <div class="panel-footer text-center">
+                                                <a href="@Url.Action("StartTraining", "TrainingContent", new { moduleId = module.Id, petId = Model.PetId })"
+                                                   class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-play"></i> Start
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="no-data">
+                                <i class="fas fa-book-open" style="color:var(--dark);"></i>
+                                <h3>No Recommended Modules Found</h3>
+                                <p>We couldn't find modules matching your pet's profile</p>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+        <script>
+        // Global variables
+        var progressChart;
+        var progressRefreshInterval;
+        var currentPetId = @Model.PetId;
+
+        $(document).ready(function() {
+            // Initialize UI components
+            initializeTooltips();
+            initializePetSelector();
+            initializeProgressChart();
+            setupModuleCardInteractions();
+            setupPeriodicRefresh();
+
+            // Check if we have a success message to show
+            if ('@TempData["SuccessMessage"]' !== '') {
+                showToast('@TempData["SuccessMessage"]', 'success');
+            }
+        });
+
+        function initializeTooltips() {
+            $('[data-toggle="tooltip"]').tooltip();
+        }
+
+        function initializePetSelector() {
+            $('#petSelect').change(function() {
+                var petId = $(this).val();
+                window.location.href = '@Url.Action("Dashboard", "Trainings")' + '?petId=' + petId;
+            });
+        }
+
+        function initializeProgressChart() {
+            var ctx = document.getElementById('progressChart');
+            if (!ctx) return;
+
+            progressChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: getChartData(),
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutoutPercentage: 70,
+                    legend: { display: false },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                var label = data.labels[tooltipItem.index] || '';
+                                var value = data.datasets[0].data[tooltipItem.index];
+                                return label + ': ' + value + '%';
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Initialize progress bars
+            $('.progress-bar').each(animateProgressBar);
+        }
+
+        function getChartData() {
+            return {
+                labels: ["Obedience", "Agility", "Behavior"],
+                datasets: [{
+                    data: [
+                        @(petProgress?.ObedienceProgress ?? 0),
+                        @(petProgress?.AgilityProgress ?? 0),
+                        @(petProgress?.BehaviorProgress ?? 0)
+                    ],
+                    backgroundColor: [
+                        '#4E8C87',
+                        '#7AB860',
+                        '#3A7CA5'
+                    ],
+                    borderWidth: 0
+                }]
+            };
+        }
+
+        function animateProgressBar() {
+            var $this = $(this);
+            var targetWidth = $this.data('progress') ||
+                             $this.closest('.module-card').index() * 30 + 30;
+
+            $this.animate({
+                width: targetWidth + '%'
+            }, 1000, function() {
+                $this.attr('aria-valuenow', targetWidth);
+                $this.text(targetWidth + '%');
+            });
+        }
+
+        function setupModuleCardInteractions() {
+            $('.module-card').click(function(e) {
+                if (!$(e.target).is('a, input, button')) {
+                    window.location = $(this).find('a.btn-primary').attr('href');
+                }
+            }).css('cursor', 'pointer');
+        }
+
+        function setupPeriodicRefresh() {
+            // Clear any existing interval
+            if (progressRefreshInterval) {
+                clearInterval(progressRefreshInterval);
+            }
+
+            // Set up new interval (every 30 seconds)
+            progressRefreshInterval = setInterval(refreshProgressData, 30000);
+
+            // Initial refresh
+            refreshProgressData();
+        }
+
+        function refreshProgressData() {
+            $.ajax({
+                url: '@Url.Action("GetProgressData", "Trainings")',
+                type: 'GET',
+                data: { petId: currentPetId },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.success) {
+                        updateProgressUI(data);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching progress data:', error);
+                }
+            });
+        }
+
+        function updateProgressUI(data) {
+            // Update chart if it exists
+            if (progressChart) {
+                progressChart.data.datasets[0].data = [
+                    data.obedienceProgress,
+                    data.agilityProgress,
+                    data.behaviorProgress
+                ];
+                progressChart.update();
+            }
+
+            // Update all progress indicators
+            $('.progress-percentage').text(data.calculatedProgress + '%');
+            $('.obedience-progress').text(data.obedienceProgress + '%');
+            $('.agility-progress').text(data.agilityProgress + '%');
+            $('.behavior-progress').text(data.behaviorProgress + '%');
+            $('.videos-count').text(data.videosWatched);
+            $('.quizzes-count').text(data.quizzesCompleted);
+
+            // Update last trained date
+            if (data.lastTrainingDate) {
+                $('.last-trained-date').text(data.lastTrainingDate);
+            }
+        }
+
+        function showToast(message, type) {
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                positionClass: 'toast-bottom-right',
+                timeOut: 5000
+            };
+
+            switch (type) {
+                case 'success':
+                    toastr.success(message);
+                    break;
+                case 'error':
+                    toastr.error(message);
+                    break;
+                case 'info':
+                    toastr.info(message);
+                    break;
+                default:
+                    toastr.info(message);
+            }
+        }
+
+        // Function to call after quiz completion
+        function handleQuizCompletion(response) {
+            if (response.success) {
+                // Immediately refresh progress data
+                refreshProgressData();
+
+                // Show success message
+                showToast('Quiz completed! Your progress has been updated.', 'success');
+
+                // Redirect if needed
+                if (response.passed && response.redirectUrl) {
+                    setTimeout(function() {
+                        window.location.href = response.redirectUrl;
+                    }, 1500);
+                }
+            } else {
+                showToast(response.message || 'Error completing quiz', 'error');
+            }
+        }
+
+        // Expose to global scope if needed
+        window.refreshProgressData = refreshProgressData;
+        window.handleQuizCompletion = handleQuizCompletion;
+        </script>
+    
+    }

@@ -1,0 +1,734 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|c:\\users\\user\\music\\petcare_system\\petcare_system\\controllers\\trainingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\trainingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainings\\trainerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\trainerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\controllers\\trainingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\trainingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\models\\petprogress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\petprogress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\controllers\\membershipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\membershipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainings\\updateprogress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\updateprogress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainings\\trainersessions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\trainersessions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainings\\modules.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\modules.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainings\\confirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\confirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainings\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainingcontent\\petprogress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainingcontent\\petprogress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\controllers\\petcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\petcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\controllers\\spacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\spacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainingcontent\\starttraining.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainingcontent\\starttraining.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainingcontent\\completedmodules.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainingcontent\\completedmodules.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\controllers\\trainingcontentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\trainingcontentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainings\\quiz.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\quiz.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainings\\startmodule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\startmodule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\controllers\\videocallcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\videocallcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainers\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainers\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\manage\\verifyphonenumber.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\verifyphonenumber.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\manage\\setpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\setpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\manage\\managelogins.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\managelogins.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\manage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\manage\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\manage\\addphonenumber.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\addphonenumber.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\controllers\\trainerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\trainerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.Trainers.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.AspNetUsers.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\pet\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\pet\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\videocall\\joinsession.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\videocall\\joinsession.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\models\\allbookingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\allbookingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\models\\trainingsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\trainingsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\models\\trainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\trainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\models\\training.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\training.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\models\\videohub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\videohub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\views\\trainings\\book.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\book.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\models\\accountviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\accountviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\models\\submitquizrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\submitquizrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "PetProgress.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\TrainingContent\\PetProgress.cshtml",
+              "RelativeDocumentMoniker": "Views\\TrainingContent\\PetProgress.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\TrainingContent\\PetProgress.cshtml",
+              "RelativeToolTip": "Views\\TrainingContent\\PetProgress.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T23:32:11.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "CompletedModules.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\TrainingContent\\CompletedModules.cshtml",
+              "RelativeDocumentMoniker": "Views\\TrainingContent\\CompletedModules.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\TrainingContent\\CompletedModules.cshtml",
+              "RelativeToolTip": "Views\\TrainingContent\\CompletedModules.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T23:30:56.734Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TrainingsController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\TrainingsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TrainingsController.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\TrainingsController.cs",
+              "RelativeToolTip": "Controllers\\TrainingsController.cs",
+              "ViewState": "AgIAAP8DAAAAzMzMzMwOwAAEAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:05:12.926Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SpaController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\SpaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SpaController.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\SpaController.cs",
+              "RelativeToolTip": "Controllers\\SpaController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T23:37:26.775Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PetController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\PetController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PetController.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\PetController.cs",
+              "RelativeToolTip": "Controllers\\PetController.cs",
+              "ViewState": "AgIAAIQAAAAAmJmZmZnxv4cAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T23:37:29.224Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Confirmation.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\Confirmation.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\Confirmation.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\Confirmation.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\Confirmation.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T23:45:26.814Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TrainingController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\TrainingController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TrainingController.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\TrainingController.cs",
+              "RelativeToolTip": "Controllers\\TrainingController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T23:26:05.46Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "TrainingContentController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\TrainingContentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TrainingContentController.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\TrainingContentController.cs",
+              "RelativeToolTip": "Controllers\\TrainingContentController.cs",
+              "ViewState": "AgIAAIoCAAAAmJmZmRkXwJACAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T23:19:37.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Modules.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\Modules.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\Modules.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\Modules.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\Modules.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T23:45:30.004Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MembershipController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\MembershipController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MembershipController.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\MembershipController.cs",
+              "RelativeToolTip": "Controllers\\MembershipController.cs",
+              "ViewState": "AgIAAJ4AAAAAnJmZmZkBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T00:20:35.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PetProgress.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\PetProgress.cs",
+              "RelativeDocumentMoniker": "Models\\PetProgress.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\PetProgress.cs",
+              "RelativeToolTip": "Models\\PetProgress.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAAAGoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T00:22:57.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "StartTraining.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\TrainingContent\\StartTraining.cshtml",
+              "RelativeDocumentMoniker": "Views\\TrainingContent\\StartTraining.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\TrainingContent\\StartTraining.cshtml",
+              "RelativeToolTip": "Views\\TrainingContent\\StartTraining.cshtml",
+              "ViewState": "AgIAAJgAAAAAmZmZmZkBwKIAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T23:14:31.406Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Quiz.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\Quiz.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\Quiz.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\Quiz.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\Quiz.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T22:48:13.358Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "StartModule.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\StartModule.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\StartModule.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\StartModule.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\StartModule.cshtml",
+              "ViewState": "AgIAACkAAAAAmZmZmZkRwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T22:47:48.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UpdateProgress.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\UpdateProgress.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\UpdateProgress.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\UpdateProgress.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\UpdateProgress.cshtml",
+              "ViewState": "AgIAACUAAAAAAAAAAAAgwEUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T22:47:33.946Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\Dashboard.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\Dashboard.cshtml",
+              "ViewState": "AgIAAAgCAAAAAAAAAAAAANEBAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T22:40:57.315Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TrainerSessions.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\TrainerSessions.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\TrainerSessions.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\TrainerSessions.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\TrainerSessions.cshtml",
+              "ViewState": "AgIAAEMAAADA/////38bwGAAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T03:00:01.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "VerifyPhoneNumber.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\VerifyPhoneNumber.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\VerifyPhoneNumber.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\VerifyPhoneNumber.cshtml",
+              "RelativeToolTip": "Views\\Manage\\VerifyPhoneNumber.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.545Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "SetPassword.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\SetPassword.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\SetPassword.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\SetPassword.cshtml",
+              "RelativeToolTip": "Views\\Manage\\SetPassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.422Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ManageLogins.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\ManageLogins.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\ManageLogins.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\ManageLogins.cshtml",
+              "RelativeToolTip": "Views\\Manage\\ManageLogins.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.33Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\Index.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\Index.cshtml",
+              "RelativeToolTip": "Views\\Manage\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.235Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "ChangePassword.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\ChangePassword.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\ChangePassword.cshtml",
+              "RelativeToolTip": "Views\\Manage\\ChangePassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "AddPhoneNumber.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\AddPhoneNumber.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\AddPhoneNumber.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Manage\\AddPhoneNumber.cshtml",
+              "RelativeToolTip": "Views\\Manage\\AddPhoneNumber.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.003Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainers\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainers\\Index.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainers\\Index.cshtml",
+              "RelativeToolTip": "Views\\Trainers\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:42:43.989Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "dbo.Trainers.sql",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.Trainers.sql",
+              "ToolTip": "ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.Trainers.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-15T02:27:05.218Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "dbo.AspNetUsers.sql",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.AspNetUsers.sql",
+              "ToolTip": "ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.AspNetUsers.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-15T02:26:48.556Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "_LoginPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_LoginPartial.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_LoginPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:11:55.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "TrainersController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\TrainersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TrainersController.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\TrainersController.cs",
+              "RelativeToolTip": "Controllers\\TrainersController.cs",
+              "ViewState": "AgIAAPoAAABAMzMzM7MRwPYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T02:05:13.385Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Pet\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Views\\Pet\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Pet\\Dashboard.cshtml",
+              "RelativeToolTip": "Views\\Pet\\Dashboard.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T01:59:37.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Web.config",
+              "RelativeDocumentMoniker": "Views\\Web.config",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Web.config",
+              "RelativeToolTip": "Views\\Web.config",
+              "ViewState": "AgIAAA8AAACA//////8VwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-08-15T01:51:32.099Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Web.config",
+              "RelativeDocumentMoniker": "Web.config",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Web.config",
+              "RelativeToolTip": "Web.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-08-15T01:49:42.9Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainers\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainers\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainers\\Dashboard.cshtml",
+              "RelativeToolTip": "Views\\Trainers\\Dashboard.cshtml",
+              "ViewState": "AgIAAOYAAAAAaGZmZiYiwPQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T01:35:06.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "JoinSession.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\VideoCall\\JoinSession.cshtml",
+              "RelativeDocumentMoniker": "Views\\VideoCall\\JoinSession.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\VideoCall\\JoinSession.cshtml",
+              "RelativeToolTip": "Views\\VideoCall\\JoinSession.cshtml",
+              "ViewState": "AgIAABQAAACAmZmZmRkXwAAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T01:33:31.5Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "TrainingSession.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\TrainingSession.cs",
+              "RelativeDocumentMoniker": "Models\\TrainingSession.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\TrainingSession.cs",
+              "RelativeToolTip": "Models\\TrainingSession.cs",
+              "ViewState": "AgIAACcAAACAzMzMzIwiwDQAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:26:27.296Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Training.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\Training.cs",
+              "RelativeDocumentMoniker": "Models\\Training.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\Training.cs",
+              "RelativeToolTip": "Models\\Training.cs",
+              "ViewState": "AgIAAAIAAADgZmZmZmbqvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:25:51.845Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "VideoCallController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\VideoCallController.cs",
+              "RelativeDocumentMoniker": "Controllers\\VideoCallController.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\VideoCallController.cs",
+              "RelativeToolTip": "Controllers\\VideoCallController.cs",
+              "ViewState": "AgIAAGoAAACgmZmZmZkRwHAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:17:52.012Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Startup.cs",
+              "RelativeDocumentMoniker": "Startup.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Startup.cs",
+              "RelativeToolTip": "Startup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:13:41.94Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Book.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\Book.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\Book.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\Book.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\Book.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T01:13:36.331Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "AllBookingsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\AllBookingsViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\AllBookingsViewModel.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\AllBookingsViewModel.cs",
+              "RelativeToolTip": "Models\\AllBookingsViewModel.cs",
+              "ViewState": "AgIAACAAAAAAl5mZmZkNwCYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:11:58.667Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "AccountViewModels.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\AccountViewModels.cs",
+              "RelativeDocumentMoniker": "Models\\AccountViewModels.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\AccountViewModels.cs",
+              "RelativeToolTip": "Models\\AccountViewModels.cs",
+              "ViewState": "AgIAABkAAABAMzMzM7MWwC8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:11:17.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAewF8AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:04:19.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "VideoHub.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\VideoHub.cs",
+              "RelativeDocumentMoniker": "Models\\VideoHub.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\VideoHub.cs",
+              "RelativeToolTip": "Models\\VideoHub.cs",
+              "ViewState": "AgIAABgAAACAmZmZmZkGwEsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-03T21:50:28.78Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TrainerDashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\TrainerDashboard.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\TrainerDashboard.cshtml",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Views\\Trainings\\TrainerDashboard.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\TrainerDashboard.cshtml",
+              "ViewState": "AgIAAJYAAAAAAAAAAIAgwMcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-03T20:44:07.854Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Trainer.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\Trainer.cs",
+              "RelativeDocumentMoniker": "Models\\Trainer.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\Trainer.cs",
+              "RelativeToolTip": "Models\\Trainer.cs",
+              "ViewState": "AgIAAEgAAACA/////38RwEkAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-31T20:26:50.853Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "SubmitQuizRequest.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\SubmitQuizRequest.cs",
+              "RelativeDocumentMoniker": "Models\\SubmitQuizRequest.cs",
+              "ToolTip": "C:\\Users\\user\\Music\\PetCare_system\\PetCare_system\\Models\\SubmitQuizRequest.cs",
+              "RelativeToolTip": "Models\\SubmitQuizRequest.cs",
+              "ViewState": "AgIAAAMAAABgZmZmZmYKwBQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T15:46:25.146Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

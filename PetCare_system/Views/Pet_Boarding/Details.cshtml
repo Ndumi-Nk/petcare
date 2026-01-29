@@ -1,0 +1,34 @@
+﻿@model PetCare_system.Models.Pet_Boarding
+
+@{
+    ViewBag.Title = "Boarding Details";
+}
+
+<h2>Boarding Details</h2>
+
+<div>
+    <h4>Pet Info</h4>
+    <p><strong>Pet Name:</strong> @Model.PetName</p>
+    <p><strong>Pet Type:</strong> @Model.PetType</p>
+    <p><strong>Pet Breed:</strong> @(String.IsNullOrEmpty(Model.PetBreed) ? "N/A" : Model.PetBreed)</p>
+
+    <h4>Owner Info</h4>
+    <p><strong>Owner Name:</strong> @Model.OwnerName</p>
+    <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Phone:</strong> @Model.Phone</p>
+
+    <h4>Boarding Details</h4>
+    <p><strong>Package:</strong> @Model.Package</p>
+    <p><strong>Price:</strong> R @Model.PackagePrice</p>
+    <p><strong>Special Needs:</strong> @(String.IsNullOrEmpty(Model.SpecialNeeds) ? "None" : Model.SpecialNeeds)</p>
+    <p><strong>Check-in Date:</strong> @Model.CheckInDate.ToShortDateString()</p>
+    <p><strong>Check-out Date:</strong> @Model.CheckOutDate.ToShortDateString()</p>
+    <p><strong>Booking Date:</strong> @Model.BookingDate.ToShortDateString()</p>
+    <p><strong>Status:</strong> @Model.Status</p>
+    <p><strong>Check Status:</strong> @Model.Check_Status</p>
+</div>
+
+<div class="mt-4">
+    <a href="@Url.Action("AllAdoptions", "PetAdoption")" class="btn btn-secondary">Back</a>
+    <a href="@Url.Action("CancelBooking", "PetAdoption", new { id = Model.board_Id })" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this boarding booking?');">Cancel Booking</a>
+</div>

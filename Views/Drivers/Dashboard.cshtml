@@ -1,0 +1,344 @@
+﻿@model IEnumerable<PetCare_system.Models.DriverDashboardVM>
+
+@{
+    ViewBag.Title = "Driver Dashboard";
+}
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      crossorigin="anonymous" />
+
+<style>
+    /* Main card */
+    .service-card {
+        border-radius: 20px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        padding: 20px;
+        margin-bottom: 15px;
+        background: #e0ebf5;
+        transition: all 0.3s ease;
+    }
+
+        .service-card h2 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.3rem;
+        }
+
+    .info-field {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 5px 0;
+        font-weight: 500;
+        color: #333;
+    }
+
+        .info-field i {
+            color: #4b6cb7;
+            min-width: 20px;
+            text-align: center;
+        }
+
+    .from-to-card {
+        border-radius: 20px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        padding: 15px;
+        margin-bottom: 25px;
+        background: #f2f7fc;
+    }
+
+    .map-field {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0;
+        font-weight: 500;
+        color: #333;
+    }
+
+        .map-field i {
+            color: #4b6cb7;
+            min-width: 20px;
+        }
+
+        .map-field input {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid #ccd6e0;
+        }
+
+    .button-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        border-radius: 25px;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .navigate-btn {
+        background-color: #4b6cb7;
+        color: white;
+    }
+
+        .navigate-btn:hover {
+            background-color: #3a539b;
+        }
+
+    .btn-status {
+        background-color: #ff6b6b;
+        color: white;
+    }
+
+        .btn-status:disabled {
+            background-color: #9aa4af;
+            cursor: not-allowed;
+        }
+
+        .btn-status:hover:not(:disabled) {
+            background-color: #ff5252;
+        }
+
+    .live-track-btn {
+        background-color: #6c757d;
+        color: white;
+    }
+
+        .live-track-btn:hover {
+            background-color: #5a6268;
+        }
+
+    .logout-btn {
+        background-color: #4b6cb7;
+        color: white;
+    }
+
+        .logout-btn:hover {
+            background-color: #3a539b;
+        }
+
+    .voice-btn {
+        background-color: #4b6cb7;
+        color: white;
+    }
+
+        .voice-btn:hover {
+            background-color: #3a539b;
+        }
+
+    .status-bar {
+        display: flex;
+        justify-content: space-around;
+        background-color: #4b6cb7;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 20px;
+        margin: 0 auto 2rem auto;
+        max-width: 1200px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .status-item {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        user-select: none;
+    }
+
+        .status-item i {
+            font-size: 1.3rem;
+            color: #ff6b6b;
+        }
+
+    #map-container {
+        display: none;
+        margin-top: 20px;
+        border-radius: 20px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 500px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    #toggle-map-btn {
+        display: block;
+        margin: 15px auto 30px auto;
+        padding: 10px 18px;
+        border-radius: 25px;
+        border: none;
+        background-color: #4b6cb7;
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+        #toggle-map-btn:hover {
+            background-color: #3a539b;
+        }
+</style>
+
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="floating"><i class="fa-solid fa-truck-moving"></i> Welcome, @ViewBag.DriverName</h1>
+        <p class="lead">Here is your current delivery dashboard.</p>
+    </div>
+</section>
+
+<section class="status-bar" aria-label="Delivery status summary">
+    <div class="status-item"><i class="fa-solid fa-tasks"></i> <span>Total Assigned Jobs: <strong id="total-jobs">0</strong></span></div>
+    <div class="status-item"><i class="fa-solid fa-hourglass-half"></i> <span>Pending Deliveries: <strong id="pending-deliveries">0</strong></span></div>
+    <div class="status-item"><i class="fa-solid fa-circle-check"></i> <span>Accepted Deliveries: <strong id="accepted-deliveries">0</strong></span></div>
+    <div class="status-item"><i class="fa-solid fa-truck-moving"></i> <span>In Transit Deliveries: <strong id="intransit-deliveries">0</strong></span></div>
+    <div class="status-item"><i class="fa-solid fa-check-double"></i> <span>Delivered: <strong id="delivered-deliveries">0</strong></span></div>
+</section>
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="service-card" data-driver-id="@item.Driver.DriverId">
+            <h2><i class="fa-solid fa-user"></i> @item.Driver.DriverType Driver</h2>
+
+            <div class="info-field"><i class="fa-solid fa-dog"></i> Pet: @(string.IsNullOrEmpty(item.PetName) ? "No Pet Assigned" : item.PetName)</div>
+            <div class="info-field"><i class="fa-solid fa-tachometer-alt"></i> Driver Status: <span class="driver-status">@item.Driver.Driverstatus</span></div>
+            <div class="info-field"><i class="fa-solid fa-box-open"></i> Delivery Status: <span class="delivery-status">@item.Driver.DeliveryStatus</span></div>
+            <div class="info-field"><i class="fa-solid fa-car"></i> Vehicle: @item.Driver.CarInfo</div>
+            <div class="info-field"><i class="fa-solid fa-id-card"></i> License: @item.Driver.License</div>
+
+            <div class="button-group">
+                <button class="btn navigate-btn" data-destination="@item.Driver.Destination" data-driver-id="@item.Driver.DriverId">
+                    <i class="fa-solid fa-route"></i> Start Delivery
+                </button>
+                <button class="btn btn-status" data-driver-id="@item.Driver.DriverId" disabled>Confirm Pickup</button>
+                <button class="btn live-track-btn" data-driver-id="@item.Driver.DriverId">
+                    <i class="fa-solid fa-location-crosshairs"></i> Start Live Tracking
+                </button>
+                <button class="btn voice-btn" data-driver-id="@item.Driver.DriverId">
+                    <i class="fa-solid fa-volume-up"></i> Voice Navigation
+                </button>
+                <a href="@Url.Action("Logout","Drivers")" class="btn logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </a>
+            </div>
+        </div>
+
+        <div class="from-to-card" data-driver-id="@item.Driver.DriverId">
+            <div class="map-field">
+                <i class="fa-solid fa-location-dot"></i> <span>From:</span>&nbsp; 26 Waynes Avenue
+            </div>
+            <div class="map-field">
+                <i class="fa-solid fa-flag-checkered"></i> <span>To:</span>
+                <input type="text" class="destination-input" value="@item.Driver.Destination" placeholder="Enter destination" />
+            </div>
+        </div>
+    }
+</div>
+
+<div id="map-container"></div>
+<button id="toggle-map-btn">Hide Map</button>
+
+<!-- Leaflet + Routing -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+<script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.min.js"></script>
+
+<script>
+    var map;
+    var routingControl;
+
+    function initMap() {
+        if (!map) {
+            map = L.map('map-container').setView([-26.2041, 28.0473], 13); // Default to Joburg
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+        }
+    }
+
+    function showMap() {
+        document.getElementById("map-container").style.display = "block";
+        document.getElementById("toggle-map-btn").innerText = "Hide Map";
+        initMap();
+    }
+
+    document.getElementById("toggle-map-btn").addEventListener("click", function () {
+        var container = document.getElementById("map-container");
+        if (container.style.display === "none") {
+            container.style.display = "block";
+            this.innerText = "Hide Map";
+        } else {
+            container.style.display = "none";
+            this.innerText = "Show Map";
+        }
+    });
+
+    function speakDirections(instructions) {
+        var speech = new SpeechSynthesisUtterance();
+        speech.text = instructions.join('. ');
+        speech.lang = 'en-US';
+        speech.rate = 1;
+        window.speechSynthesis.speak(speech);
+    }
+
+    document.querySelectorAll(".navigate-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            var destination = this.getAttribute("data-destination");
+            if (!destination) { alert("No destination set!"); return; }
+
+            showMap();
+
+            fetch("https://nominatim.openstreetmap.org/search?format=json&q=" + encodeURIComponent(destination))
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        var destLat = parseFloat(data[0].lat);
+                        var destLon = parseFloat(data[0].lon);
+
+                        if (routingControl) map.removeControl(routingControl);
+
+                        var start = L.latLng(-26.2041, 28.0473); // Example start
+                        routingControl = L.Routing.control({
+                            waypoints: [start, L.latLng(destLat, destLon)],
+                            routeWhileDragging: true,
+                            show: false,
+                            addWaypoints: false,
+                            draggableWaypoints: false
+                        }).addTo(map);
+
+                        routingControl.on('routesfound', function (e) {
+                            var instructions = [];
+                            var route = e.routes[0];
+                            route.instructions.forEach(inst => instructions.push(inst.text));
+                            speakDirections(instructions);
+                        });
+
+                        map.setView([destLat, destLon], 14);
+                    } else {
+                        alert("Destination not found!");
+                    }
+                });
+        });
+    });
+
+    document.querySelectorAll(".voice-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            if (routingControl && routingControl.getPlan().getWaypoints().length > 1) {
+                var routes = routingControl.getRouter()._routes;
+                if (routes && routes[0] && routes[0].instructions) {
+                    var instructions = routes[0].instructions.map(i => i.text);
+                    speakDirections(instructions);
+                }
+            } else { alert("No route available. Click 'Start Delivery' first."); }
+        });
+    });
+</script>

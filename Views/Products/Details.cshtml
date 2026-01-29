@@ -1,0 +1,326 @@
+﻿@model PetCare_system.Models.Product
+
+@{
+    ViewBag.Title = Model.Name + " | PetCare System";
+}
+
+<style>
+    :root {
+        --primary-color: #4e73df;
+        --primary-hover: #2e59d9;
+        --accent-color: #00cec9;
+        --text-color: #2d3436;
+        --light-text: #636e72;
+        --border-color: #dfe6e9;
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        --hover-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    body {
+        font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-color);
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9f0ff 100%);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    /* Back Button */
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background-color: white;
+        color: var(--primary-color);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: var(--transition);
+        margin-bottom: 30px;
+        box-shadow: var(--shadow);
+    }
+
+        .back-button:hover {
+            background-color: #f1f5ff;
+            transform: translateX(-4px);
+        }
+
+        .back-button::before {
+            content: "←";
+            font-weight: bold;
+        }
+
+    /* Product Container */
+    .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        background-color: white;
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: var(--transition);
+    }
+
+        .product-container:hover {
+            box-shadow: var(--hover-shadow);
+        }
+
+    /* Product Image */
+    .product-image-container {
+        flex: 1;
+        min-width: 300px;
+        max-height: 500px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    }
+
+    .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: transform 0.7s ease;
+    }
+
+    .product-container:hover .product-image {
+        transform: scale(1.05);
+    }
+
+    /* Product Details */
+    .product-details {
+        flex: 1;
+        min-width: 300px;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-name {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: var(--text-color);
+    }
+
+    .product-description {
+        font-size: 16px;
+        color: var(--light-text);
+        margin-bottom: 25px;
+        line-height: 1.7;
+    }
+
+    .product-price {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+    }
+
+    .product-stock {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 16px;
+        color: var(--light-text);
+        margin-bottom: 30px;
+    }
+
+    .in-stock {
+        color: #00b894;
+        font-weight: 600;
+    }
+
+    .out-of-stock {
+        color: #d63031;
+        font-weight: 600;
+    }
+
+    .stock-indicator {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+
+    .in-stock-indicator {
+        background-color: #00b894;
+    }
+
+    .out-of-stock-indicator {
+        background-color: #d63031;
+    }
+
+    /* Quantity Controls */
+    .quantity-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .quantity-btn {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--border-color);
+        background-color: white;
+        font-size: 18px;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .quantity-btn:hover {
+            background-color: #f8f9fa;
+        }
+
+        .quantity-btn:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .quantity-btn:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+    .quantity-input {
+        width: 60px;
+        height: 40px;
+        text-align: center;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        border-left: none;
+        border-right: none;
+        font-size: 16px;
+    }
+
+    /* Add to Cart Button */
+    .btn-add-to-cart {
+        padding: 15px 30px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        box-shadow: 0 4px 12px rgba(78, 115, 223, 0.2);
+    }
+
+        .btn-add-to-cart:hover:not(:disabled) {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(78, 115, 223, 0.3);
+        }
+
+        .btn-add-to-cart:disabled {
+            background-color: #b2b2b2;
+            cursor: not-allowed;
+        }
+
+        .btn-add-to-cart::after {
+            content: "→";
+            transition: transform 0.3s;
+        }
+
+        .btn-add-to-cart:hover:not(:disabled)::after {
+            transform: translateX(3px);
+        }
+
+    /* Responsive Design */
+    @@media (max-width: 768px) {
+        .product-container {
+            flex-direction: column;
+        }
+
+        .product-image-container {
+            max-height: 300px;
+        }
+
+        .product-details {
+            padding: 30px;
+        }
+
+        .product-name {
+            font-size: 26px;
+        }
+    }
+</style>
+
+<div class="container">
+    <a href="@Url.Action("Index", "Products")" class="back-button">Back to Products</a>
+
+    <div class="product-container">
+        <div class="product-image-container">
+            <img src="@Url.Content(string.IsNullOrEmpty(Model.ImageUrl) ? "~/images/default-product-image.jpg" : Model.ImageUrl)"
+                 alt="@Model.Name" class="product-image" />
+        </div>
+
+        <div class="product-details">
+            <h1 class="product-name">@Model.Name</h1>
+            <p class="product-description">@Model.Description</p>
+
+            <div class="product-price">@Model.Price.ToString("C", new System.Globalization.CultureInfo("en-ZA"))</div>
+
+            <div class="product-stock">
+                <span class="stock-indicator @(Model.Quantity > 0 ? "in-stock-indicator" : "out-of-stock-indicator")"></span>
+                <span class="@(Model.Quantity > 0 ? "in-stock" : "out-of-stock")">
+                    @(Model.Quantity > 0 ? $"In Stock ({Model.Quantity} available)" : "Out of Stock")
+                </span>
+            </div>
+
+            <form action="@Url.Action("AddToCart", "Cart")" method="post">
+                <input type="hidden" name="ProductId" value="@Model.ProductId" />
+
+                <div class="quantity-container">
+                    <button type="button" class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+                    <input type="number" id="quantity" name="quantity" min="1" max="@Model.Quantity"
+                           class="quantity-input" value="1" @(Model.Quantity <= 0 ? "disabled" : "") />
+                    <button type="button" class="quantity-btn" onclick="changeQuantity(1)" @(Model.Quantity <= 0 ? "disabled" : "")>+</button>
+                </div>
+
+                <button type="submit" class="btn-add-to-cart" @(Model.Quantity <= 0 ? "disabled" : "")>
+                    @if (Model.Quantity <= 0)
+                    {
+                        <span>Out of Stock</span>
+                    }
+                    else
+                    {
+                        <span>Add to Cart</span>
+                    }
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeQuantity(delta) {
+        const input = document.getElementById("quantity");
+        const currentValue = parseInt(input.value);
+        const maxQuantity = parseInt(input.max);
+        const minQuantity = parseInt(input.min);
+
+        // Adjust the quantity within the allowed limits
+        const newValue = currentValue + delta;
+        if (newValue >= minQuantity && newValue <= maxQuantity) {
+            input.value = newValue;
+        }
+    }
+</script>

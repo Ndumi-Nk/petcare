@@ -1,0 +1,398 @@
+﻿@model PetCare_system.Models.Spar_GroomPayment
+@{
+    ViewBag.Title = "Complete Your Payment";
+    // Get the booking details to show services
+    var booking = ViewBag.BookingDetails as PetCare_system.Models.Spar_Grooming;
+
+    // Add null checks for critical properties
+    var serviceType = booking?.ServiceType.ToString() ?? "Basic Grooming";
+    var basePrice = booking?.BasePrice.ToString("C") ?? "R50.00";
+    var petName = booking?.PetName ?? "Not specified";
+    var petType = booking?.PetType.ToString() ?? "Not specified";
+    var breed = booking?.Breed ?? "Not specified";
+}
+@using System.Globalization
+@{
+    var culture = new CultureInfo("en-ZA"); // South African culture
+}
+
+<div class="payment-container">
+    <div class="payment-header">
+        <h2><i class="fas fa-paw"></i> Complete Your Payment</h2>
+        <p class="text-muted">Booking Reference: #@Model.BookingId</p>
+    </div>
+
+    <div class="row">
+        <!-- Service Summary Column -->
+        <div class="col-md-6">
+            <div class="service-summary-card">
+                <div class="row">
+                    <!-- Service Summary Column -->
+
+                    <h4><i class="fas fa-clipboard-list"></i> Service Summary</h4>
+
+                    <div class="service-item">
+                        <div class="service-name">@serviceType</div>
+                        <div class="service-price">@basePrice</div>
+                    </div>
+
+                    @if (booking != null && booking.AddOnPrice > 0)
+                    {
+                        <div class="addons-section">
+                            <h5>Add-on Services:</h5>
+                            @if (booking.AddOnServices.HasFlag(PetCare_system.Models.AddOnServices.FleaTreatment))
+                            {
+                                <div class="service-item">
+                                    <div class="service-name">Flea Treatment</div>
+                                    <div class="service-price">R25.00</div>
+                                </div>
+                            }
+                            @if (booking.AddOnServices.HasFlag(PetCare_system.Models.AddOnServices.DeShedding))
+                            {
+                                <div class="service-item">
+                                    <div class="service-name">De-shedding</div>
+                                    <div class="service-price">R30.00</div>
+                                </div>
+                            }
+                            @if (booking.AddOnServices.HasFlag(PetCare_system.Models.AddOnServices.TeethCleaning))
+                            {
+                                <div class="service-item">
+                                    <div class="service-name">Teeth Cleaning</div>
+                                    <div class="service-price">R50.00</div>
+                                </div>
+                            }
+                        </div>
+                    }
+
+                    <div class="total-section">
+                        <div class="total-label">Total Amount:</div>
+                        <div class="total-amount">@Model.Amount.ToString("C", culture)</div>
+                    </div>
+
+                    <div class="pet-info">
+                        <h5><i class="fas fa-paw"></i> Pet Information</h5>
+                        <p><strong>Name:</strong> @petName</p>
+                        <p><strong>Type:</strong> @petType</p>
+                        <p><strong>Breed:</strong> @breed</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Payment Form Column -->
+        <div class="col-md-6">
+            <div class="payment-form-card">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(m => m.BookingId)
+                    @Html.HiddenFor(m => m.Amount)
+
+                    <h4><i class="far fa-credit-card"></i> Payment Details</h4>
+
+                  
+
+                    <!-- Card Name -->
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CardName)
+                        @Html.EditorFor(m => m.CardName, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control",
+                                placeholder = "John Smith"
+                            }
+                        })
+                        @Html.ValidationMessageFor(m => m.CardName)
+                    </div>
+
+                    <!-- Card Number -->
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CardNumber)
+                        @Html.EditorFor(m => m.CardNumber, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control",
+                           placeholder = "1234 5678 9012 3456",
+                                  pattern = @"\d*",
+                           title = "Numbers only"
+                       }
+                   })
+                        @Html.ValidationMessageFor(m => m.CardNumber)
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Expiry Date -->
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ExpiryDate)
+                                @Html.EditorFor(m => m.ExpiryDate, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control",
+                                        placeholder = "MM/YY"
+                                    }
+                                })
+                                @Html.ValidationMessageFor(m => m.ExpiryDate)
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- CVV -->
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.CVV)
+                                @Html.EditorFor(m => m.CVV, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control",
+                                        placeholder = "123",
+                                        maxlength = "3"
+                                    }
+                                })
+                                @Html.ValidationMessageFor(m => m.CVV)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="payment-security">
+                        <i class="fas fa-lock"></i> Your payment is securely encrypted
+                    </div>
+
+                    <button type="submit" class="btn btn-pay-now">
+                        <i class="fas fa-check-circle"></i> Complete Payment @basePrice
+                    </button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        
+        .payment-container {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+            .payment-header h2 {
+                color: #6a4c93;
+                font-weight: 600;
+            }
+
+        .service-summary-card, .payment-form-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .service-name {
+            font-weight: 500;
+        }
+
+        .addons-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #ddd;
+        }
+
+        .total-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #6a4c93;
+            font-size: 1.2em;
+        }
+
+        .total-label {
+            font-weight: 600;
+        }
+
+        .total-amount {
+            font-weight: 700;
+            color: #6a4c93;
+        }
+
+        .pet-info {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f8f5ff;
+            border-radius: 5px;
+        }
+
+        .btn-pay-now {
+            background: #6a4c93;
+            color: white;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-top: 20px;
+            border: none;
+            transition: all 0.3s;
+        }
+
+            .btn-pay-now:hover {
+                background: #5a3d83;
+                transform: translateY(-2px);
+            }
+
+        .payment-security {
+            color: #28a745;
+            text-align: center;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        .fa-paw, .fa-clipboard-list, .fa-credit-card {
+            margin-right: 8px;
+            color: #6a4c93;
+        }
+
+        .form-control {
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        /* Add validation styles */
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+
+        .text-danger {
+            color: #dc3545;
+            font-size: 0.875em;
+        }
+
+        /* Improve input formatting */
+        #CardNumber {
+            letter-spacing: 1.5px;
+        }
+
+        #ExpiryDate, #CVV {
+            max-width: 150px;
+        }
+   
+        /* All previous styles plus */
+        #AccountNumber {
+            font-family: monospace;
+            letter-spacing: 1.5px;
+        }
+
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+
+        .validation-summary-errors {
+            color: #dc3545;
+        }
+    </style>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            // Account Number Validation
+            $('#AccountNumber').on('input', function () {
+                this.value = this.value.replace(/\D/g, '');
+                validateAccountNumber();
+            });
+
+            // Card Number Formatting
+            $('#CardNumber').on('input', function () {
+                let val = $(this).val().replace(/\s+/g, '');
+                val = val.match(/.{1,4}/g)?.join(' ') || '';
+                $(this).val(val.substring(0, 19));
+                validateCardNumber();
+            });
+
+            // Expiry Date Formatting
+            $('#ExpiryDate').on('input', function () {
+                let val = $(this).val().replace(/\D/g, '');
+                if (val.length > 2) val = val.substring(0, 2) + '/' + val.substring(2, 4);
+                $(this).val(val.substring(0, 5));
+                validateExpiryDate();
+            });
+
+            // CVV Validation
+            $('#CVV').on('input', function () {
+                $(this).val($(this).val().replace(/\D/g, '').substring(0, 3));
+                validateCVV();
+            });
+
+            // Form Submission
+            $('form').submit(function (e) {
+                const validations = [
+                    validateAccountNumber(),
+                    validateCardNumber(),
+                    validateExpiryDate(),
+                    validateCVV()
+                ];
+
+                if (validations.includes(false)) {
+                    e.preventDefault();
+                    alert('Please correct the highlighted errors');
+                    $('.is-invalid').first().focus();
+                }
+            });
+        });
+
+        function validateAccountNumber() {
+            const val = $('#AccountNumber').val();
+            const isValid = val.length > 0 && /^\d+$/.test(val);
+            $('#AccountNumber').toggleClass('is-invalid', !isValid);
+            return isValid;
+        }
+
+        function validateCardNumber() {
+            const val = $('#CardNumber').val().replace(/\s/g, '');
+            const isValid = /^\d{16}$/.test(val);
+            $('#CardNumber').toggleClass('is-invalid', !isValid);
+            return isValid;
+        }
+
+        function validateExpiryDate() {
+            const [monthStr, yearStr] = $('#ExpiryDate').val().split('/');
+            const month = parseInt(monthStr, 10);
+            const year = parseInt(yearStr, 10);
+            const currentYear = new Date().getFullYear() % 100;
+            const currentMonth = new Date().getMonth() + 1;
+
+            let isValid = false;
+            if (month >= 1 && month <= 12) {
+                isValid = year > currentYear || (year === currentYear && month >= currentMonth);
+            }
+
+            $('#ExpiryDate').toggleClass('is-invalid', !isValid);
+            return isValid;
+        }
+
+        function validateCVV() {
+            const isValid = $('#CVV').val().length === 3;
+            $('#CVV').toggleClass('is-invalid', !isValid);
+            return isValid;
+        }
+    </script>
+}

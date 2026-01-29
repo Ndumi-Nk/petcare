@@ -1,0 +1,116 @@
+﻿@model PetCare_system.Models.TrainingSession
+@{
+    ViewBag.Title = "Booking Confirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container confirmation-container">
+    <div class="confirmation-header">
+        <i class="fas fa-check-circle text-success"></i>
+        <h2>Booking Confirmed!</h2>
+        <p class="text-muted">Your training session has been successfully booked</p>
+    </div>
+
+    <div class="confirmation-details">
+        <div class="detail-item">
+            <span>Confirmation #:</span>
+            <strong>@Model.Id.ToString("D5")</strong>
+        </div>
+        <div class="detail-item">
+            <span>Pet:</span>
+            <strong>@Model.Pet.Name</strong>
+        </div>
+        <div class="detail-item">
+            <span>Training Type:</span>
+            <strong>@Model.TrainingType</strong>
+        </div>
+        <div class="detail-item">
+            <span>Date:</span>
+            <strong>@Model.SessionDate.ToString("dd MMM yyyy")</strong>
+        </div>
+        <div class="detail-item">
+            <span>Time:</span>
+            <strong>@Model.StartTime.ToString(@"hh\:mm") - @Model.EndTime.ToString(@"hh\:mm")</strong>
+        </div>
+        <div class="detail-item">
+            <span>Trainer:</span>
+            <strong>@Model.Trainer.FullName</strong>
+        </div>
+        <div class="detail-item">
+            <span>Status:</span>
+            <strong>@Model.Status</strong>
+        </div>
+        <div class="detail-item total">
+            <span>Total:</span>
+            <strong>R@(Model.Price.ToString("0.00"))</strong>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        @Html.ActionLink("✅ Proceed to Payment",
+                         "Create", "PaymentForTraining",
+                         new { sessionId = Model.Id },
+                         new { @class = "btn btn-success btn-lg" })
+
+        @Html.ActionLink("❌ Cancel",
+                         "Index", "TrainingSessions",
+                         null,
+                         new { @class = "btn btn-danger btn-lg ml-2" })
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .confirmation-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .confirmation-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+            .confirmation-header i {
+                font-size: 60px;
+                margin-bottom: 15px;
+            }
+
+        .confirmation-details {
+            text-align: left;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #dee2e6;
+        }
+
+            .detail-item:last-child {
+                border-bottom: none;
+            }
+
+            .detail-item.total {
+                font-size: 1.2em;
+                font-weight: bold;
+                color: #FF9AA2;
+                margin-top: 10px;
+            }
+
+        .confirmation-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+    </style>
+}

@@ -1,0 +1,111 @@
+﻿@model PetCare_system.Models.TrainingModule
+@{
+    ViewBag.Title = "Quiz: " + Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .quiz-container {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .question-container {
+        margin-bottom: 20px;
+        padding: 15px;
+        border-radius: 8px;
+        background: #f8f9fa;
+    }
+
+    .question-text {
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .option-item {
+        margin-bottom: 10px;
+    }
+
+    .option-label {
+        display: block;
+        padding: 10px 15px;
+        border-radius: 5px;
+        background: #fff;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+        .option-label:hover {
+            background: #f1f1f1;
+        }
+
+    .option-input:checked + .option-label {
+        background: #e3f2fd;
+        border-color: #0d6efd;
+    }
+</style>
+
+<div class="container">
+    <div class="quiz-container">
+        <h2>Quiz: @Model.Title</h2>
+        <p class="lead">Test your knowledge about @Model.TrainingType training</p>
+
+        <form id="quizForm">
+            @foreach (var question in Model.QuizQuestions)
+            {
+                <div class="question-container">
+                    <div class="question-text">@question.QuestionText</div>
+
+                    <div class="option-item">
+                        <input type="radio" id="q@(question.Id)_true" name="q@(question.Id)" value="true" class="option-input" />
+                        <label for="q@(question.Id)_true" class="option-label">
+                            True
+                        </label>
+                    </div>
+
+                    <div class="option-item">
+                        <input type="radio" id="q@(question.Id)_false" name="q@(question.Id)" value="false" class="option-input" />
+                        <label for="q@(question.Id)_false" class="option-label">
+                            False
+                        </label>
+                    </div>
+                </div>
+            }
+
+            <button type="submit" class="btn btn-primary">
+                Submit Quiz
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#quizForm').submit(function(e) {
+                e.preventDefault();
+
+                // Collect answers
+                var answers = [];
+                $('.question-container').each(function() {
+                    var questionId = $(this).find('input[type="radio"]').first().attr('name').substring(1);
+                    var selectedOption = $(this).find('input[type="radio"]:checked').val();
+
+                    if (selectedOption) {
+                        answers.push({
+                            QuestionId: questionId,
+                            SelectedOptionId: selectedOption === "true" ? 1 : 0
+                        });
+                    }
+                });
+
+                // Submit quiz (would call your SubmitQuiz action)
+                console.log('Submitting quiz:', answers);
+                alert('Quiz submitted! In a real app, this would be sent to the server.');
+            });
+        });
+    </script>
+}

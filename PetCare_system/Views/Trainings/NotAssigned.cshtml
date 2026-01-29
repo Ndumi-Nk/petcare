@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Access Not Granted";
+}
+
+<div class="alert alert-warning">
+    <h3>@ViewBag.Message</h3>
+    <p>This section is only available to registered trainers.</p>
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <p>@Html.ActionLink("Login as Trainer", "Login", "Account")</p>
+    }
+    else
+    {
+        <p>You are logged in as @User.Identity.Name but not registered as a trainer.</p>
+    }
+</div>
+
+@Html.ActionLink("Back to Home", "Index", "Home", null, new { @class = "btn btn-default" })

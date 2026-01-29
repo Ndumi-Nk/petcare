@@ -1,0 +1,90 @@
+﻿@model PetCare_system.Models.EmergencyRequestTransport
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { onsubmit = "return checkLocation();" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Emergency Transport Request</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <!-- Hidden Coordinates -->
+        @Html.HiddenFor(model => model.PickupLatitude, new { id = "PickupLatitude" })
+        @Html.HiddenFor(model => model.PickupLongitude, new { id = "PickupLongitude" })
+
+        <!-- Location Button -->
+        <button type="button" class="btn btn-info" onclick="getLocation()">📍 Use My Current Location</button>
+        <p id="location-status" style="color: green; margin-top: 5px;"></p>
+
+        <!-- Pet Selector -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.PetId, "Select Pet", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PetId, (SelectList)ViewBag.PetId, "Select a pet", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PetId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Emergency Type -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmergencyTypes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.EmergencyTypes, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EmergencyTypes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Emergency Description -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmergencyDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmergencyDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmergencyDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            document.getElementById("location-status").innerText = "Getting your current location...";
+            navigator.geolocation.getCurrentPosition(function (position) {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+
+                // Set hidden fields
+                document.getElementById("PickupLatitude").value = lat.toString().replace(",", ".");
+                document.getElementById("PickupLongitude").value = lon.toString().replace(",", ".");
+
+                // Show confirmation with correct syntax
+                document.getElementById("location-status").innerText =
+                    `Location set: ${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+            }, function (error) {
+                document.getElementById("location-status").innerText = "Error retrieving location.";
+                console.error("Geolocation error:", error);
+            });
+        } else {
+            document.getElementById("location-status").innerText =
+                "Geolocation is not supported by your browser.";
+        }
+    }
+
+    function checkLocation() {
+        const lat = document.getElementById("PickupLatitude").value;
+        const lon = document.getElementById("PickupLongitude").value;
+        if (!lat || !lon) {
+            alert("Please click 'Use My Current Location' before submitting.");
+            return false;
+        }
+        return true;
+    }
+</script>

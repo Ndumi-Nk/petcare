@@ -1,0 +1,179 @@
+﻿@model PetCare_system.Models.Trainer
+@{
+    ViewBag.Title = "Add New Trainer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid px-4">
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+                <i class="fas fa-user-plus me-2"></i>@ViewBag.Title
+            </h5>
+        </div>
+        <div class="card-body">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
+
+            @using (Html.BeginForm("Create", "Trainers", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", placeholder = "Full Name" })
+                            @Html.LabelFor(model => model.FullName)
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email", type = "email" })
+                            @Html.LabelFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            @Html.PasswordFor(model => model.TempPassword, new { @class = "form-control", placeholder = "Password" })
+                            @Html.LabelFor(model => model.TempPassword)
+                            @Html.ValidationMessageFor(model => model.TempPassword, "", new { @class = "text-danger" })
+                            <small class="form-text text-muted">Leave blank to auto-generate</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            @Html.PasswordFor(model => model.ConfirmTempPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                            @Html.LabelFor(model => model.ConfirmTempPassword)
+                            @Html.ValidationMessageFor(model => model.ConfirmTempPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", placeholder = "Phone Number" })
+                            @Html.LabelFor(model => model.PhoneNumber)
+                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.YearsOfExperience, new { @class = "form-control", placeholder = "Years of Experience", type = "number" })
+                            @Html.LabelFor(model => model.YearsOfExperience)
+                            @Html.ValidationMessageFor(model => model.YearsOfExperience, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            @Html.TextBoxFor(model => model.Specializations, new { @class = "form-control", placeholder = "Specializations" })
+                            @Html.LabelFor(model => model.Specializations)
+                            @Html.ValidationMessageFor(model => model.Specializations, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="form-label">Profile Picture</label>
+                            <div class="custom-file">
+                                @Html.TextBoxFor(model => model.ImageFile, new { type = "file", @class = "form-control", id = "customFile" })
+                                @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            @Html.TextAreaFor(model => model.Bio, new { @class = "form-control", placeholder = "Bio", style = "height: 120px" })
+                            @Html.LabelFor(model => model.Bio)
+                            @Html.ValidationMessageFor(model => model.Bio, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-check form-switch mb-4">
+                    @Html.CheckBoxFor(model => model.IsActive, new { @class = "form-check-input", id = "flexSwitchCheckChecked" })
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Active Trainer</label>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-primary me-md-2 px-4">
+                        <i class="fas fa-save me-2"></i>Save Trainer
+                    </button>
+                    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-outline-secondary px-4" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .form-floating > label {
+            padding: 1rem 1.25rem;
+            color: #6c757d;
+        }
+
+        .form-control, .form-select, .form-check-input {
+            border-radius: 0.5rem;
+            padding: 1rem 1.25rem;
+            border: 1px solid #ced4da;
+        }
+
+            .form-control:focus, .form-select:focus {
+                border-color: #86b7fe;
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            }
+
+        .btn {
+            border-radius: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+        }
+
+        .text-danger {
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .form-text.text-muted {
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+    </style>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            // Enable client-side validation
+            $.validator.unobtrusive.parse("form");
+
+            // File input display
+            $('#customFile').on('change', function () {
+                var fileName = $(this).val().split('\\').pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,588 @@
+﻿@model PetCare_system.Models.BookingSessionRequest
+@{
+    ViewBag.Title = "Book Training Session";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container booking-container">
+    @using (Html.BeginForm("BookSession", "Trainings", FormMethod.Post, new { id = "booking-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="booking-header">
+            <h2><i class="fas fa-calendar-alt"></i> Book Training Session</h2>
+            <p class="text-muted">Schedule personalized training for your pet</p>
+        </div>
+
+        <!-- Booking Steps -->
+        <div class="booking-steps">
+            <div class="step active" data-step="1">
+                <div class="step-circle">1</div>
+                <p>Select Pet</p>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-circle">2</div>
+                <p>Training Type</p>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-circle">3</div>
+                <p>Date & Time</p>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-circle">4</div>
+                <p>Confirm</p>
+            </div>
+        </div>
+
+        <!-- Step 1: Pet Selection -->
+        <div class="form-step active" id="step-1">
+            <h4 class="mb-4">Select Your Pet</h4>
+            <div class="row pet-selection">
+                @foreach (var pet in ViewBag.Pets)
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="pet-card" data-pet-id="@pet.Id">
+                            <img src="@pet.PicturePath" alt="@pet.Name" class="pet-img">
+                            <div class="pet-info">
+                                <h5>@pet.Name</h5>
+                                <p>@pet.Breed</p>
+                                <p>Age: @((DateTime.Now.Year - pet.DateOfBirth.Year)) years</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="text-right mt-4">
+                <!-- Initially hidden -->
+                <button type="button" class="btn btn-primary next-step" data-next="2" id="step1-continue" style="display:none;">
+                    Continue <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+
+        <!-- Step 2: Training Type -->
+        <div class="form-step" id="step-2">
+            <h4 class="mb-4">Select Training Type</h4>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="training-card" data-type="Obedience" data-price="350">
+                        <div class="training-icon bg-pink">
+                            <i class="fas fa-dog"></i>
+                        </div>
+                        <h5>Basic Obedience</h5>
+                        <p>Sit, Stay, Come commands</p>
+                        <div class="price-badge">R350/session</div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="training-card" data-type="Agility" data-price="450">
+                        <div class="training-icon bg-blue">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h5>Agility Training</h5>
+                        <p>Obstacle course training</p>
+                        <div class="price-badge">R450/session</div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="training-card" data-type="Behavioral" data-price="500">
+                        <div class="training-icon bg-purple">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h5>Behavioral</h5>
+                        <p>Correct unwanted behaviors</p>
+                        <div class="price-badge">R500/session</div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-4">
+                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="1"><i class="fas fa-arrow-left"></i> Back</button>
+                <button type="button" class="btn btn-primary next-step" data-next="3">Continue <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Step 3: Date & Time -->
+        <div class="form-step" id="step-3">
+            <h4 class="mb-4">Select Date & Time</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="datepicker"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="time-slots-container">
+                        <h5>Available Time Slots</h5>
+                        <div class="alert alert-info" id="time-slots-loading">
+                            <i class="fas fa-spinner fa-spin"></i> Loading available slots...
+                        </div>
+                        <div class="time-slots" id="time-slots">
+                            <!-- Slots will be loaded via AJAX -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-4">
+                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="2"><i class="fas fa-arrow-left"></i> Back</button>
+                <button type="button" class="btn btn-primary next-step" data-next="4">Continue <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+
+        <!-- Step 4: Confirmation -->
+        <div class="form-step" id="step-4">
+            <h4 class="mb-4">Confirm Booking</h4>
+            <div class="booking-summary">
+                <div class="summary-item">
+                    <span>Pet:</span>
+                    <span id="summary-pet">Not selected</span>
+                </div>
+                <div class="summary-item">
+                    <span>Training Type:</span>
+                    <span id="summary-type">Not selected</span>
+                </div>
+                <div class="summary-item">
+                    <span>Date:</span>
+                    <span id="summary-date">Not selected</span>
+                </div>
+                <div class="summary-item">
+                    <span>Time:</span>
+                    <span id="summary-time">Not selected</span>
+                </div>
+                <div class="summary-item">
+                    <span>Trainer:</span>
+                    <span id="summary-trainer">Not selected</span>
+                </div>
+                <div class="summary-item total-price">
+                    <span>Total:</span>
+                    <span id="summary-price">R0.00</span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-4">
+                <button type="button" class="btn btn-outline-secondary prev-step" data-prev="3"><i class="fas fa-arrow-left"></i> Back</button>
+                <button type="submit" class="btn btn-success" id="confirm-booking"><i class="fas fa-check"></i> Confirm Booking</button>
+            </div>
+        </div>
+
+        <!-- Hidden fields for form submission -->
+        @Html.Hidden("PetId", "")
+        @Html.Hidden("TrainerId", "")
+        @Html.Hidden("SessionDate", "")
+        @Html.Hidden("StartTime", "")
+        @Html.Hidden("TrainingType", "")
+        @Html.Hidden("Price", "")
+    }
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .booking-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-top: 20px;
+        }
+
+        .booking-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .booking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+            .step:not(:last-child):after {
+                content: '';
+                position: absolute;
+                top: 15px;
+                left: 50%;
+                right: 0;
+                height: 2px;
+                background: #e9ecef;
+                z-index: 1;
+            }
+
+        .step-circle {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 50%;
+            background: #e9ecef;
+            color: #6c757d;
+            margin: 0 auto 10px;
+            font-weight: bold;
+        }
+
+        .step.active .step-circle {
+            background: #FF9AA2;
+            color: white;
+        }
+
+        .pet-card {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+            .pet-card:hover {
+                border-color: #FF9AA2;
+                transform: translateY(-5px);
+            }
+
+            .pet-card.selected {
+                border-color: #FF9AA2;
+                background-color: rgba(255, 154, 162, 0.05);
+            }
+
+        .pet-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .training-card {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+            .training-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .training-card.selected {
+                border-color: #FF9AA2;
+            }
+
+        .training-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .bg-pink {
+            background: #FF9AA2;
+        }
+
+        .bg-blue {
+            background: #A2E1FF;
+        }
+
+        .bg-purple {
+            background: #B5B2FF;
+        }
+
+        .price-badge {
+            background: #FFD166;
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .time-slot {
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 5px;
+            border: 2px solid #e9ecef;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+            .time-slot:hover {
+                border-color: #FF9AA2;
+            }
+
+            .time-slot.selected {
+                background: #FF9AA2;
+                color: white;
+                border-color: #FF9AA2;
+            }
+
+        .booking-summary {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #dee2e6;
+        }
+
+            .summary-item:last-child {
+                border-bottom: none;
+            }
+
+        .total-price {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #FF9AA2;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+            .form-step.active {
+                display: block;
+                animation: fadeIn 0.3s ease;
+            }
+
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Datepicker customization */
+        .datepicker {
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+            .datepicker table tr td.active.active {
+                background-color: #FF9AA2;
+            }
+
+            .datepicker table tr td.today {
+                background-color: #ffecee;
+            }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Initialize variables
+            let selectedPet = null;
+            let selectedPetName = null;
+            let selectedType = null;
+            let selectedTypeName = null;
+            let selectedPrice = 0;
+            let selectedDate = null;
+            let selectedTime = null;
+            let selectedTrainerId = null;
+            let selectedTrainerName = null;
+
+            // Initialize datepicker
+            $('#datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                startDate: '+1d',
+                daysOfWeekDisabled: [0], // Disable Sundays
+                beforeShowDay: function (date) {
+                    return {
+                        enabled: date >= new Date()
+                    };
+                }
+            }).on('changeDate', function (e) {
+                selectedDate = e.format('yyyy-mm-dd');
+                $('#summary-date').text(e.format('dd MMM yyyy'));
+                $('#SessionDate').val(selectedDate);
+                loadTimeSlots();
+            });
+
+            // Pet selection
+            $('.pet-card').click(function () {
+                $('.pet-card').removeClass('selected');
+                $(this).addClass('selected');
+
+                selectedPet = $(this).data('pet-id');
+                selectedPetName = $(this).find('h5').text();
+
+                $('#summary-pet').text(selectedPetName);
+                $('#PetId').val(selectedPet);
+
+                // Show continue button for Step 1
+                $('#step1-continue').fadeIn();
+            });
+
+
+            // Training type selection
+            $('.training-card').click(function () {
+                $('.training-card').removeClass('selected');
+                $(this).addClass('selected');
+                selectedType = $(this).data('type');
+                selectedTypeName = $(this).find('h5').text();
+                selectedPrice = $(this).data('price');
+                $('#summary-type').text(selectedTypeName);
+                $('#summary-price').text('R' + selectedPrice.toFixed(2));
+                $('#TrainingType').val(selectedType);
+                $('#Price').val(selectedPrice);
+            });
+
+            // Time slot selection
+            $(document).on('click', '.time-slot', function () {
+                $('.time-slot').removeClass('selected');
+                $(this).addClass('selected');
+                selectedTime = $(this).data('time');
+                selectedTrainerId = $(this).data('trainer-id');
+                selectedTrainerName = $(this).data('trainer-name');
+                $('#summary-time').text(selectedTime);
+                $('#summary-trainer').text(selectedTrainerName);
+                $('#StartTime').val(selectedTime);
+                $('#TrainerId').val(selectedTrainerId);
+            });
+
+            // Step navigation
+            $('.next-step').click(function () {
+                const nextStep = $(this).data('next');
+                navigateToStep(nextStep);
+            });
+
+            $('.prev-step').click(function () {
+                const prevStep = $(this).data('prev');
+                navigateToStep(prevStep);
+            });
+
+            function navigateToStep(step) {
+                // Validate current step before proceeding
+                const currentStep = $('.form-step.active').attr('id').split('-')[1];
+
+                if (currentStep == 1 && !selectedPet) {
+                    showValidationError('Please select a pet');
+                    return;
+                }
+                else if (currentStep == 2 && !selectedType) {
+                    showValidationError('Please select a training type');
+                    return;
+                }
+                else if (currentStep == 3 && (!selectedDate || !selectedTime)) {
+                    showValidationError('Please select a date and time');
+                    return;
+                }
+
+                // Update step indicators
+                $('.step').removeClass('active');
+                $(`.step[data-step="${step}"]`).addClass('active');
+
+                // Show the selected step
+                $('.form-step').removeClass('active');
+                $(`#step-${step}`).addClass('active');
+            }
+
+            function showValidationError(message) {
+                // You could replace this with a more elegant error display
+                alert(message);
+            }
+
+            // Load available time slots
+            function loadTimeSlots() {
+                if (!selectedPet || !selectedType || !selectedDate) return;
+
+                $('#time-slots-loading').show();
+                $('#time-slots').empty();
+
+                $.ajax({
+                    url: '/Trainings/GetAvailableSlots',
+                    type: 'GET',
+                    data: {
+                        petId: selectedPet,
+                        trainingType: selectedType,
+                        date: selectedDate
+                    },
+                    success: function (data) {
+                        $('#time-slots-loading').hide();
+
+                        if (data.success && data.slots.length > 0) {
+                            let html = '';
+                            data.slots.forEach(slot => {
+                                html += `
+                                        <div class="time-slot"
+                                             data-time="${slot.time}"
+                                             data-trainer-id="${slot.trainerId}"
+                                             data-trainer-name="${slot.trainerName}">
+                                            ${slot.time}
+                                            <span class="badge badge-light ml-2">R${slot.price.toFixed(2)}</span>
+                                        </div>`;
+                            });
+                            $('#time-slots').html(html);
+                        } else {
+                            $('#time-slots').html('<div class="alert alert-warning">No available slots for this date</div>');
+                        }
+                    },
+                    error: function () {
+                        $('#time-slots-loading').hide();
+                        $('#time-slots').html('<div class="alert alert-danger">Error loading time slots</div>');
+                    }
+                });
+            }
+
+            // Form submission
+            $('#booking-form').submit(function (e) {
+                e.preventDefault();
+
+                if (!selectedPet || !selectedType || !selectedDate || !selectedTime || !selectedTrainerId) {
+                    showValidationError('Please complete all booking details');
+                    return;
+                }
+
+                // Show loading state
+                $('#confirm-booking').html('<i class="fas fa-spinner fa-spin"></i> Processing...');
+                $('#confirm-booking').prop('disabled', true);
+
+                // Submit the form
+                $.ajax({
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = response.redirectUrl;
+                        } else {
+                            $('#confirm-booking').html('<i class="fas fa-check"></i> Confirm Booking');
+                            $('#confirm-booking').prop('disabled', false);
+                            alert(response.message || 'Booking failed. Please try again.');
+                        }
+                    },
+                    error: function (xhr) {
+                        $('#confirm-booking').html('<i class="fas fa-check"></i> Confirm Booking');
+                        $('#confirm-booking').prop('disabled', false);
+                        alert('Error: ' + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+}

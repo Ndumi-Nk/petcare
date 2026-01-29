@@ -1,0 +1,453 @@
+﻿@model PetCare_system.Controllers.PetProgressDetailsViewModel
+
+@{
+    ViewBag.Title = "Progress Details for " + Model.Progress.Pet.Name;
+}
+
+<div class="container">
+    <h2>Training Progress for @Model.Progress.Pet.Name</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Progress Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h6>Obedience Training</h6>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar" role="progressbar"
+                                 style="width: @Model.Progress.ObedienceProgress%;"
+                                 aria-valuenow="@Model.Progress.ObedienceProgress"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">
+                                @Model.Progress.ObedienceProgress%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Agility Training</h6>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-success" role="progressbar"
+                                 style="width: @Model.Progress.AgilityProgress%;"
+                                 aria-valuenow="@Model.Progress.AgilityProgress"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">
+                                @Model.Progress.AgilityProgress%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Behavior Training</h6>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-info" role="progressbar"
+                                 style="width: @Model.Progress.BehaviorProgress%;"
+                                 aria-valuenow="@Model.Progress.BehaviorProgress"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">
+                                @Model.Progress.BehaviorProgress%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Overall Progress</h6>
+                        <div class="progress" style="height: 25px;">
+                            <div class="progress-bar bg-warning" role="progressbar"
+                                 style="width: @Model.Progress.ProgressPercentage%;"
+                                 aria-valuenow="@Model.Progress.ProgressPercentage"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">
+                                @Model.Progress.ProgressPercentage%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">Training Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <h6>Last Training Date</h6>
+                        <p>@(Model.Progress.LastTrainingDate?.ToString("dddd, MMMM d, yyyy") ?? "No training recorded")</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Total Training Sessions</h6>
+                        <p>@Model.Progress.TotalTrainingSessions</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Videos Watched</h6>
+                        <p>@Model.Progress.VideosWatched</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6>Quizzes Completed</h6>
+                        <p>@Model.Progress.QuizzesCompleted (Avg Score: @Model.Progress.AverageQuizScore.ToString("0.0")%)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New sections for videos watched and quizzes completed -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">Videos Watched (@Model.VideosWatched.Count)</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.VideosWatched.Any())
+                    {
+                        <div class="list-group" style="max-height: 300px; overflow-y: auto;">
+                            @foreach (var video in Model.VideosWatched)
+                            {
+                                <div class="list-group-item">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">@video.Video.Title</h6>
+                                        <small class="text-muted">@video.WatchedDate.ToString("MMM dd, yyyy")</small>
+                                    </div>
+                                    <p class="mb-1 text-muted small">Module: @video.Video.TrainingModule.Title</p>
+                                    <p class="mb-0 small">
+                                        <span class="badge bg-secondary">Duration: @video.Video.DurationMinutes min</span>
+                                        <span class="badge bg-primary ms-1">Level: @video.Video.DifficultyLevel</span>
+                                    </p>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No videos watched yet.</p>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">Quizzes Completed (@Model.QuizzesCompleted.Count)</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.QuizzesCompleted.Any())
+                    {
+                        <div class="list-group" style="max-height: 300px; overflow-y: auto;">
+                            @foreach (var quiz in Model.QuizzesCompleted)
+                            {
+                                <div class="list-group-item">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">@quiz.TrainingModule.Title</h6>
+                                        <span class="badge @(quiz.Score >= 70 ? "bg-success" : "bg-warning")">@quiz.Score%</span>
+                                    </div>
+                                    <p class="mb-1">
+                                        @if (quiz.Score >= 70)
+                                        {
+                                            <span class="badge bg-success">Passed</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning">Needs Improvement</span>
+                                        }
+                                    </p>
+                                    <p class="mb-0 text-muted small">Completed on: @quiz.CompletedAt.ToString("MMM dd, yyyy hh:mm tt")</p>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No quizzes completed yet.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Completed Modules Section -->
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Completed Modules (@Model.CompletedModules.Count)</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.CompletedModules.Any())
+            {
+                <div class="row">
+                    @foreach (var module in Model.CompletedModules)
+                    {
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">@module.Module.Title</h5>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="badge @(module.Score >= 70 ? "bg-success" : "bg-warning")">
+                                            Score: @module.Score.ToString("0.0")%
+                                        </span>
+                                        <span class="badge bg-info">@module.Module.DifficultyLevel</span>
+                                    </div>
+                                    <p class="card-text small text-muted">
+                                        <strong>Type:</strong> @module.Module.TrainingType<br>
+                                        <strong>Duration:</strong> @module.Module.DurationMinutes minutes
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Completed on: @module.CompletionDate.ToString("MMM dd, yyyy")</small>
+                                    </p>
+                                </div>
+                                <div class="card-footer bg-transparent">
+                                    <small class="text-muted">
+                                        @module.Module.Description
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">No modules completed yet.</p>
+            }
+        </div>
+    </div>
+
+    <!-- Training Notes Section -->
+    <div class="card mt-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">Training Notes</h5>
+        </div>
+        <div class="card-body">
+            @if (!string.IsNullOrEmpty(Model.Progress.Notes))
+            {
+                <div style="white-space: pre-line; background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                    @Model.Progress.Notes
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">No training notes available.</p>
+            }
+        </div>
+    </div>
+
+    <!-- Statistics Section -->
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">@Model.VideosWatched.Count</h5>
+                    <p class="card-text">Total Videos Watched</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title text-success">@Model.QuizzesCompleted.Count</h5>
+                    <p class="card-text">Quizzes Completed</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title text-info">@Model.CompletedModules.Count</h5>
+                    <p class="card-text">Modules Completed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity Timeline -->
+    <div class="card mt-4">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0">Recent Activity Timeline</h5>
+        </div>
+        <div class="card-body">
+            @{
+                var recentActivities = new List<object>();
+
+                // Add video activities
+                foreach (var video in Model.VideosWatched.Take(5))
+                {
+                    recentActivities.Add(new
+                    {
+                        Type = "Video",
+                        Title = video.Video.Title,
+                        Date = video.WatchedDate,
+                        Icon = "fas fa-video",
+                        Color = "text-info"
+                    });
+                }
+
+                // Add quiz activities
+                foreach (var quiz in Model.QuizzesCompleted.Take(5))
+                {
+                    recentActivities.Add(new
+                    {
+                        Type = "Quiz",
+                        Title = quiz.TrainingModule.Title,
+                        Date = quiz.CompletedAt,
+                        Icon = "fas fa-graduation-cap",
+                        Color = "text-success",
+                        Score = quiz.Score
+                    });
+                }
+
+                // Add module completion activities
+                foreach (var module in Model.CompletedModules.Take(5))
+                {
+                    recentActivities.Add(new
+                    {
+                        Type = "Module",
+                        Title = module.Module.Title,
+                        Date = module.CompletionDate,
+                        Icon = "fas fa-trophy",
+                        Color = "text-warning",
+                        Score = module.Score
+                    });
+                }
+
+                // Sort by date descending and take top 10
+                var sortedActivities = recentActivities
+                    .OrderByDescending(a => ((DateTime)a.GetType().GetProperty("Date").GetValue(a)))
+                    .Take(10)
+                    .ToList();
+            }
+
+            @if (sortedActivities.Any())
+            {
+                <div class="timeline">
+                    @foreach (var activity in sortedActivities)
+                    {
+                        var type = activity.GetType().GetProperty("Type").GetValue(activity).ToString();
+                        var title = activity.GetType().GetProperty("Title").GetValue(activity).ToString();
+                        var date = (DateTime)activity.GetType().GetProperty("Date").GetValue(activity);
+                        var icon = activity.GetType().GetProperty("Icon").GetValue(activity).ToString();
+                        var color = activity.GetType().GetProperty("Color").GetValue(activity).ToString();
+
+                        <div class="timeline-item">
+                            <div class="timeline-marker @color">
+                                <i class="@icon"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="mb-1">@title</h6>
+                                    <small class="text-muted">@date.ToString("MMM dd, hh:mm tt")</small>
+                                </div>
+                                <p class="mb-0 small text-muted">
+                                    @type @if (activity.GetType().GetProperty("Score") != null)
+                                    {
+                                        var score = activity.GetType().GetProperty("Score").GetValue(activity);
+                                        <span class="badge bg-secondary ms-2">Score: @score%</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">No recent activity recorded.</p>
+            }
+        </div>
+    </div>
+
+    <div class="mt-4">
+        @Html.ActionLink("Back to Dashboard", "TrainerDashboard", null, new { @class = "btn btn-secondary" })
+        @Html.ActionLink("Update Progress", "UpdateProgress", new { petId = Model.Progress.PetId }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("View Full History", "PetProgressHistory", new { petId = Model.Progress.PetId }, new { @class = "btn btn-outline-info" })
+    </div>
+</div>
+
+<style>
+    .timeline {
+        position: relative;
+        padding-left: 2rem;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding: 0.5rem 0;
+        border-left: 2px solid #dee2e6;
+        margin-left: 1rem;
+    }
+
+    .timeline-marker {
+        position: absolute;
+        left: -1.5rem;
+        top: 1rem;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #dee2e6;
+    }
+
+    .timeline-content {
+        margin-left: 2rem;
+        padding: 0.5rem;
+        background-color: #f8f9fa;
+        border-radius: 0.25rem;
+    }
+
+    .progress-bar {
+        transition: width 0.6s ease;
+    }
+
+    .card {
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        border: 1px solid rgba(0, 0, 0, 0.125);
+    }
+
+    .list-group-item {
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        margin-bottom: 0.5rem;
+        border-radius: 0.25rem;
+    }
+
+    .badge {
+        font-size: 0.75em;
+    }
+</style>
+
+@section scripts {
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            // Animate progress bars
+            $('.progress-bar').each(function () {
+                var width = $(this).attr('aria-valuenow');
+                $(this).css('width', '0%').animate({
+                    width: width + '%'
+                }, 1000);
+            });
+
+            // Tooltip initialization
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Smooth scrolling for anchor links
+            $('a[href^="#"]').on('click', function (event) {
+                event.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $($.attr(this, 'href')).offset().top
+                }, 500);
+            });
+        });
+    </script>
+}
+

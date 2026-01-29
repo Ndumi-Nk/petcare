@@ -1,0 +1,1311 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\home\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\home\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|c:\\users\\fortu\\onedrive\\desktop\\petcare_system (2)\\petcare_system\\views\\paymentfortraining\\success.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\paymentfortraining\\success.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\paymentfortraining\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\paymentfortraining\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainings\\confirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\confirmation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\paymentfortraining.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\paymentfortraining.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\paymentfortrainingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\paymentfortrainingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainings\\book.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\book.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\driverscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\driverscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\trainingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\trainingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\migrations\\202508200319170_fxdriver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:migrations\\202508200319170_fxdriver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDb__MSSQLLocalDB/aspnet_PetCare_system_20250331101952/True/SqlTable/dbo.Drivers.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\drivers\\adddriver.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\drivers\\adddriver.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\driver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\driver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\app_start\\startup.auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:app_start\\startup.auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainings\\modules.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\modules.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\migrations\\202508200146552_in.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:migrations\\202508200146552_in.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\drivers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\drivers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\drivers\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\drivers\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\drivers\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\drivers\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\drivers\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\drivers\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\drivers\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\drivers\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\paymentprods2\\receipt.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\paymentprods2\\receipt.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\ratingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\ratingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\adminproductscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\adminproductscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\accountviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\accountviewmodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\migrations\\202508200048512_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:migrations\\202508200048512_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\identitymodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\identitymodels.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\products.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\changepasswordsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\changepasswordsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\bookingsessionrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\bookingsessionrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\bookingspar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\bookingspar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\allbookingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\allbookingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainings\\petprogressdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\petprogressdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\petcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\petcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\trainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\trainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainings\\notassigned.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\notassigned.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\petprogressdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\petprogressdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\trainingcontentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\trainingcontentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainings\\quiz.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\quiz.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\trainingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\trainingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\trainerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\trainerscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\migrations\\202508171249126_paymt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:migrations\\202508171249126_paymt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\trainingsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\trainingsession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\migrations\\202508171019047_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:migrations\\202508171019047_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\migrations\\configuration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:migrations\\configuration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\spargroomingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\spargroomingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainings\\trainerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\trainerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\petprogress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\petprogress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\membershipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\membershipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainings\\updateprogress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\updateprogress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainings\\trainersessions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\trainersessions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainings\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainingcontent\\petprogress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainingcontent\\petprogress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\spacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\spacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainingcontent\\starttraining.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainingcontent\\starttraining.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainingcontent\\completedmodules.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainingcontent\\completedmodules.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainings\\startmodule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainings\\startmodule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\controllers\\videocallcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:controllers\\videocallcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\trainers\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\trainers\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\manage\\verifyphonenumber.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\verifyphonenumber.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\manage\\setpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\setpassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\manage\\managelogins.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\managelogins.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\manage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\manage\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\manage\\addphonenumber.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\manage\\addphonenumber.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.Trainers.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.AspNetUsers.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\pet\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\pet\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\views\\videocall\\joinsession.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:views\\videocall\\joinsession.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\training.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\training.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\videohub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\videohub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\models\\submitquizrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DEFA6DA-D715-4E07-A822-873F2E2EF28F}|PetCare_system.csproj|solutionrelative:models\\submitquizrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 26,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\PaymentForTraining\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\PaymentForTraining\\Create.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\PaymentForTraining\\Create.cshtml",
+              "RelativeToolTip": "Views\\PaymentForTraining\\Create.cshtml",
+              "ViewState": "AgIAAEMAAAAAmZmZmZkBwBoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-17T13:00:10.619Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Book.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\Book.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\Book.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\Book.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\Book.cshtml",
+              "ViewState": "AgIAAJcBAAAAAAAAAAAkwLcBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T01:13:36.331Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PaymentForTraining.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\PaymentForTraining.cs",
+              "RelativeDocumentMoniker": "Models\\PaymentForTraining.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\PaymentForTraining.cs",
+              "RelativeToolTip": "Models\\PaymentForTraining.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T12:44:18.753Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Success.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\PaymentForTraining\\Success.cshtml",
+              "RelativeDocumentMoniker": "Views\\PaymentForTraining\\Success.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\PaymentForTraining\\Success.cshtml",
+              "RelativeToolTip": "Views\\PaymentForTraining\\Success.cshtml",
+              "ViewState": "AgIAAAcAAAAAaGZmZmb6vyMAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-17T13:05:14.13Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PaymentForTrainingController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\PaymentForTrainingController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PaymentForTrainingController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\PaymentForTrainingController.cs",
+              "RelativeToolTip": "Controllers\\PaymentForTrainingController.cs",
+              "ViewState": "AgIAAEYAAABAMzMzMzMNwBIAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T12:53:52.794Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Confirmation.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\Confirmation.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\Confirmation.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\Confirmation.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\Confirmation.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T23:45:26.814Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-17T13:12:41.307Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DriversController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\DriversController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DriversController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\DriversController.cs",
+              "RelativeToolTip": "Controllers\\DriversController.cs",
+              "ViewState": "AgIAAA4AAADAzMzMzMwjwC8AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T01:34:39.735Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "202508200319170_fxdriver.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\202508200319170_fxdriver.cs",
+              "RelativeDocumentMoniker": "Migrations\\202508200319170_fxdriver.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\202508200319170_fxdriver.cs",
+              "RelativeToolTip": "Migrations\\202508200319170_fxdriver.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T03:19:27.567Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "TrainingsController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\TrainingsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TrainingsController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\TrainingsController.cs",
+              "RelativeToolTip": "Controllers\\TrainingsController.cs",
+              "ViewState": "AgIAABoEAAAAZmZmZiYiwC8AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:05:12.926Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AddDriver.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\AddDriver.cshtml",
+              "RelativeDocumentMoniker": "Views\\Drivers\\AddDriver.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\AddDriver.cshtml",
+              "RelativeToolTip": "Views\\Drivers\\AddDriver.cshtml",
+              "ViewState": "AgIAADwAAAAAAAAAAAAkwFsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-20T01:30:56.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Views\\Drivers\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\Delete.cshtml",
+              "RelativeToolTip": "Views\\Drivers\\Delete.cshtml",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAAAHIAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-20T01:28:51.01Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "dbo.Drivers.sql",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDb__MSSQLLocalDB/aspnet_PetCare_system_20250331101952/True/SqlTable/dbo.Drivers.sql",
+              "ToolTip": "ViewDataWindow_MSSQL__/_LocalDb__MSSQLLocalDB/aspnet_PetCare_system_20250331101952/True/SqlTable/dbo.Drivers.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-20T03:14:25.978Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Startup.Auth.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\App_Start\\Startup.Auth.cs",
+              "RelativeDocumentMoniker": "App_Start\\Startup.Auth.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\App_Start\\Startup.Auth.cs",
+              "RelativeToolTip": "App_Start\\Startup.Auth.cs",
+              "ViewState": "AgIAACwAAACgZmZmZqYjwDkAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T02:47:24.389Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAADwv3sAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:04:19.997Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Driver.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\Driver.cs",
+              "RelativeDocumentMoniker": "Models\\Driver.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\Driver.cs",
+              "RelativeToolTip": "Models\\Driver.cs",
+              "ViewState": "AgIAABQAAAAgMzMzM/MtwBoAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T01:41:55.064Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Web.config",
+              "RelativeDocumentMoniker": "Web.config",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Web.config",
+              "RelativeToolTip": "Web.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-08-15T01:49:42.9Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Modules.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\Modules.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\Modules.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\Modules.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\Modules.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T23:45:30.004Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "202508200146552_In.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\202508200146552_In.cs",
+              "RelativeDocumentMoniker": "Migrations\\202508200146552_In.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\202508200146552_In.cs",
+              "RelativeToolTip": "Migrations\\202508200146552_In.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T01:47:05.877Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\Drivers\\Details.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\Details.cshtml",
+              "RelativeToolTip": "Views\\Drivers\\Details.cshtml",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAAAHEAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-20T01:28:25.13Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Drivers\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Drivers\\Edit.cshtml",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAAAHEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-20T01:27:55.019Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Drivers\\Create.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\Create.cshtml",
+              "RelativeToolTip": "Views\\Drivers\\Create.cshtml",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAAAHYAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-20T01:27:33.026Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Drivers\\Index.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Drivers\\Index.cshtml",
+              "RelativeToolTip": "Views\\Drivers\\Index.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAADIAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-20T01:25:54.212Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "RatingsController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\RatingsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\RatingsController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\RatingsController.cs",
+              "RelativeToolTip": "Controllers\\RatingsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T01:17:29.688Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "AdminProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\AdminProductsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AdminProductsController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\AdminProductsController.cs",
+              "RelativeToolTip": "Controllers\\AdminProductsController.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAuwA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T00:59:33.754Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Home\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Home\\Dashboard.cshtml",
+              "RelativeToolTip": "Views\\Home\\Dashboard.cshtml",
+              "ViewState": "AgIAAGoCAAAAAAAAAAAqwKICAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-20T00:44:09.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Receipt.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\PaymentProds2\\Receipt.cshtml",
+              "RelativeDocumentMoniker": "Views\\PaymentProds2\\Receipt.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\PaymentProds2\\Receipt.cshtml",
+              "RelativeToolTip": "Views\\PaymentProds2\\Receipt.cshtml",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAAAKYAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-20T01:17:48.685Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "IdentityModels.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\IdentityModels.cs",
+              "RelativeDocumentMoniker": "Models\\IdentityModels.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\IdentityModels.cs",
+              "RelativeToolTip": "Models\\IdentityModels.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAA3wFQAAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T12:45:56.113Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "Models\\Product.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\Product.cs",
+              "RelativeToolTip": "Models\\Product.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T00:18:25.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAHUDAAAAAAAAAAAAAIoDAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-20T00:38:44.136Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "AccountViewModels.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\AccountViewModels.cs",
+              "RelativeDocumentMoniker": "Models\\AccountViewModels.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\AccountViewModels.cs",
+              "RelativeToolTip": "Models\\AccountViewModels.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAzwA4AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:11:17.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "202508200048512_Init.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\202508200048512_Init.cs",
+              "RelativeDocumentMoniker": "Migrations\\202508200048512_Init.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\202508200048512_Init.cs",
+              "RelativeToolTip": "Migrations\\202508200048512_Init.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T00:49:03.446Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Products.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\Products.cs",
+              "RelativeDocumentMoniker": "Models\\Products.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\Products.cs",
+              "RelativeToolTip": "Models\\Products.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T00:18:03.789Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Web.config",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Web.config",
+              "RelativeDocumentMoniker": "Views\\Web.config",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Web.config",
+              "RelativeToolTip": "Views\\Web.config",
+              "ViewState": "AgIAADwAAAAAAAAAAAAWwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-08-15T01:51:32.099Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "ChangePasswordsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\ChangePasswordsViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ChangePasswordsViewModel.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\ChangePasswordsViewModel.cs",
+              "RelativeToolTip": "Models\\ChangePasswordsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T23:41:19.474Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "BookingSessionRequest.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\BookingSessionRequest.cs",
+              "RelativeDocumentMoniker": "Models\\BookingSessionRequest.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\BookingSessionRequest.cs",
+              "RelativeToolTip": "Models\\BookingSessionRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T23:37:11.747Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "BookingSpar.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\BookingSpar.cs",
+              "RelativeDocumentMoniker": "Models\\BookingSpar.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\BookingSpar.cs",
+              "RelativeToolTip": "Models\\BookingSpar.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T23:37:20.105Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "PetProgressDetails.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\PetProgressDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\PetProgressDetails.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\PetProgressDetails.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\PetProgressDetails.cshtml",
+              "ViewState": "AgIAAPwAAAAAAAAAAAAAAAUBAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T19:41:46.847Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "AllBookingsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\AllBookingsViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\AllBookingsViewModel.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\AllBookingsViewModel.cs",
+              "RelativeToolTip": "Models\\AllBookingsViewModel.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAA7wCYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:11:58.667Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "PetController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\PetController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PetController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\PetController.cs",
+              "RelativeToolTip": "Controllers\\PetController.cs",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAtwNgAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T23:37:29.224Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Trainer.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\Trainer.cs",
+              "RelativeDocumentMoniker": "Models\\Trainer.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\Trainer.cs",
+              "RelativeToolTip": "Models\\Trainer.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAMAgwBQAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-31T20:26:50.853Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "TrainingController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\TrainingController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TrainingController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\TrainingController.cs",
+              "RelativeToolTip": "Controllers\\TrainingController.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAcwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T23:26:05.46Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "PetProgressDetailsViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\PetProgressDetailsViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\PetProgressDetailsViewModel.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\PetProgressDetailsViewModel.cs",
+              "RelativeToolTip": "Models\\PetProgressDetailsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-19T19:14:02.626Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "NotAssigned.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\NotAssigned.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\NotAssigned.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\NotAssigned.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\NotAssigned.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-19T19:47:02.116Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Quiz.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\Quiz.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\Quiz.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\Quiz.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\Quiz.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T22:48:13.358Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "TrainingContentController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\TrainingContentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TrainingContentController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\TrainingContentController.cs",
+              "RelativeToolTip": "Controllers\\TrainingContentController.cs",
+              "ViewState": "AgIAAKYDAAAAAAAAAAAwwLcDAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T23:19:37.612Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "_LoginPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_LoginPartial.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_LoginPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:11:55.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainers\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainers\\Index.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainers\\Index.cshtml",
+              "RelativeToolTip": "Views\\Trainers\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:42:43.989Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "TrainersController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\TrainersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TrainersController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\TrainersController.cs",
+              "RelativeToolTip": "Controllers\\TrainersController.cs",
+              "ViewState": "AgIAAKEAAAAAzMzMzMz2v/YAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T02:05:13.385Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "202508171249126_PayMT.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\202508171249126_PayMT.cs",
+              "RelativeDocumentMoniker": "Migrations\\202508171249126_PayMT.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\202508171249126_PayMT.cs",
+              "RelativeToolTip": "Migrations\\202508171249126_PayMT.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T12:49:29.489Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "Configuration.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\Configuration.cs",
+              "RelativeDocumentMoniker": "Migrations\\Configuration.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\Configuration.cs",
+              "RelativeToolTip": "Migrations\\Configuration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T10:16:42.252Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "SparGroomingController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\SparGroomingController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SparGroomingController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\SparGroomingController.cs",
+              "RelativeToolTip": "Controllers\\SparGroomingController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T10:15:03.971Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "TrainingSession.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\TrainingSession.cs",
+              "RelativeDocumentMoniker": "Models\\TrainingSession.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\TrainingSession.cs",
+              "RelativeToolTip": "Models\\TrainingSession.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAA1wEYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:26:27.296Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "202508171019047_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\202508171019047_InitialCreate.cs",
+              "RelativeDocumentMoniker": "Migrations\\202508171019047_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Migrations\\202508171019047_InitialCreate.cs",
+              "RelativeToolTip": "Migrations\\202508171019047_InitialCreate.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T10:20:02.672Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "SpaController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\SpaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\SpaController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\SpaController.cs",
+              "RelativeToolTip": "Controllers\\SpaController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T23:37:26.775Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "PetProgress.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\TrainingContent\\PetProgress.cshtml",
+              "RelativeDocumentMoniker": "Views\\TrainingContent\\PetProgress.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\TrainingContent\\PetProgress.cshtml",
+              "RelativeToolTip": "Views\\TrainingContent\\PetProgress.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T23:32:11.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "MembershipController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\MembershipController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MembershipController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\MembershipController.cs",
+              "RelativeToolTip": "Controllers\\MembershipController.cs",
+              "ViewState": "AgIAAJ4AAAAAnJmZmZkBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T00:20:35.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "PetProgress.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\PetProgress.cs",
+              "RelativeDocumentMoniker": "Models\\PetProgress.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\PetProgress.cs",
+              "RelativeToolTip": "Models\\PetProgress.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAAAGoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-17T00:22:57.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "CompletedModules.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\TrainingContent\\CompletedModules.cshtml",
+              "RelativeDocumentMoniker": "Views\\TrainingContent\\CompletedModules.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\TrainingContent\\CompletedModules.cshtml",
+              "RelativeToolTip": "Views\\TrainingContent\\CompletedModules.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T23:30:56.734Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "StartTraining.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\TrainingContent\\StartTraining.cshtml",
+              "RelativeDocumentMoniker": "Views\\TrainingContent\\StartTraining.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\TrainingContent\\StartTraining.cshtml",
+              "RelativeToolTip": "Views\\TrainingContent\\StartTraining.cshtml",
+              "ViewState": "AgIAAJgAAAAAmZmZmZkBwKIAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T23:14:31.406Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "StartModule.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\StartModule.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\StartModule.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\StartModule.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\StartModule.cshtml",
+              "ViewState": "AgIAACkAAAAAmZmZmZkRwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T22:47:48.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "UpdateProgress.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\UpdateProgress.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\UpdateProgress.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\UpdateProgress.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\UpdateProgress.cshtml",
+              "ViewState": "AgIAACUAAAAAAAAAAAAgwEUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T22:47:33.946Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\Dashboard.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\Dashboard.cshtml",
+              "ViewState": "AgIAAAgCAAAAAAAAAAAAANEBAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-16T22:40:57.315Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "TrainerSessions.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\TrainerSessions.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\TrainerSessions.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\TrainerSessions.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\TrainerSessions.cshtml",
+              "ViewState": "AgIAAEMAAADA/////38bwGAAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T03:00:01.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "VerifyPhoneNumber.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\VerifyPhoneNumber.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\VerifyPhoneNumber.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\VerifyPhoneNumber.cshtml",
+              "RelativeToolTip": "Views\\Manage\\VerifyPhoneNumber.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.545Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "SetPassword.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\SetPassword.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\SetPassword.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\SetPassword.cshtml",
+              "RelativeToolTip": "Views\\Manage\\SetPassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.422Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "ManageLogins.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\ManageLogins.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\ManageLogins.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\ManageLogins.cshtml",
+              "RelativeToolTip": "Views\\Manage\\ManageLogins.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.33Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\Index.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\Index.cshtml",
+              "RelativeToolTip": "Views\\Manage\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.235Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "ChangePassword.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\ChangePassword.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\ChangePassword.cshtml",
+              "RelativeToolTip": "Views\\Manage\\ChangePassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "AddPhoneNumber.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\AddPhoneNumber.cshtml",
+              "RelativeDocumentMoniker": "Views\\Manage\\AddPhoneNumber.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Manage\\AddPhoneNumber.cshtml",
+              "RelativeToolTip": "Views\\Manage\\AddPhoneNumber.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T02:43:12.003Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "dbo.Trainers.sql",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.Trainers.sql",
+              "ToolTip": "ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.Trainers.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-15T02:27:05.218Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "dbo.AspNetUsers.sql",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.AspNetUsers.sql",
+              "ToolTip": "ViewDataWindow_MSSQL__/KWAZI_SQLEXPRESS01/PetCareSystem/True/SqlTable/dbo.AspNetUsers.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2025-08-15T02:26:48.556Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Pet\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Views\\Pet\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Pet\\Dashboard.cshtml",
+              "RelativeToolTip": "Views\\Pet\\Dashboard.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T01:59:37.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainers\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainers\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainers\\Dashboard.cshtml",
+              "RelativeToolTip": "Views\\Trainers\\Dashboard.cshtml",
+              "ViewState": "AgIAAOYAAAAAaGZmZiYiwPQAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T01:35:06.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "JoinSession.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\VideoCall\\JoinSession.cshtml",
+              "RelativeDocumentMoniker": "Views\\VideoCall\\JoinSession.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\VideoCall\\JoinSession.cshtml",
+              "RelativeToolTip": "Views\\VideoCall\\JoinSession.cshtml",
+              "ViewState": "AgIAABQAAACAmZmZmRkXwAAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-15T01:33:31.5Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "Training.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\Training.cs",
+              "RelativeDocumentMoniker": "Models\\Training.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\Training.cs",
+              "RelativeToolTip": "Models\\Training.cs",
+              "ViewState": "AgIAAAIAAADgZmZmZmbqvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:25:51.845Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "VideoCallController.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\VideoCallController.cs",
+              "RelativeDocumentMoniker": "Controllers\\VideoCallController.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Controllers\\VideoCallController.cs",
+              "RelativeToolTip": "Controllers\\VideoCallController.cs",
+              "ViewState": "AgIAAGoAAACgmZmZmZkRwHAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:17:52.012Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Startup.cs",
+              "RelativeDocumentMoniker": "Startup.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Startup.cs",
+              "RelativeToolTip": "Startup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-15T01:13:41.94Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "VideoHub.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\VideoHub.cs",
+              "RelativeDocumentMoniker": "Models\\VideoHub.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\VideoHub.cs",
+              "RelativeToolTip": "Models\\VideoHub.cs",
+              "ViewState": "AgIAABgAAACAmZmZmZkGwEsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-03T21:50:28.78Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "TrainerDashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\TrainerDashboard.cshtml",
+              "RelativeDocumentMoniker": "Views\\Trainings\\TrainerDashboard.cshtml",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Views\\Trainings\\TrainerDashboard.cshtml",
+              "RelativeToolTip": "Views\\Trainings\\TrainerDashboard.cshtml",
+              "ViewState": "AgIAAJYAAAAAAAAAAIAgwMcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-03T20:44:07.854Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "SubmitQuizRequest.cs",
+              "DocumentMoniker": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\SubmitQuizRequest.cs",
+              "RelativeDocumentMoniker": "Models\\SubmitQuizRequest.cs",
+              "ToolTip": "C:\\Users\\fortu\\OneDrive\\Desktop\\PetCare_system (2)\\PetCare_system\\Models\\SubmitQuizRequest.cs",
+              "RelativeToolTip": "Models\\SubmitQuizRequest.cs",
+              "ViewState": "AgIAAAMAAABgZmZmZmYKwBQAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-01T15:46:25.146Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

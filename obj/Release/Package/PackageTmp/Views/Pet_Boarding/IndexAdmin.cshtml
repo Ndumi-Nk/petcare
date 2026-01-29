@@ -1,0 +1,278 @@
+﻿@model IEnumerable<PetCare_system.Models.Pet_Boarding>
+@{
+    ViewBag.Title = "Pet Boarding Bookings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Bootstrap + Font Awesome -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+<style>
+    body {
+        background-color: #eef2f7;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .container {
+        margin-top: 40px;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #343a40;
+    }
+
+    .search-bar {
+        width: 300px;
+        position: relative;
+    }
+
+    .search-bar input {
+        width: 100%;
+        padding: 8px 12px 8px 36px;
+        border: 1px solid #ccc;
+        border-radius: 30px;
+        transition: 0.3s;
+    }
+
+    .search-bar input:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    }
+
+    .search-bar i {
+        position: absolute;
+        top: 10px;
+        left: 12px;
+        color: #6c757d;
+    }
+
+    .btn-back {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn-back:hover {
+        background-color: #5a6268;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        padding: 20px;
+        font-size: 1.25rem;
+        font-weight: 500;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+        color: #343a40;
+        font-weight: 600;
+    }
+
+    .badge.confirmed {
+        background-color: #28a745;
+    }
+
+    .badge.pending {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+    .badge.cancelled {
+        background-color: #dc3545;
+    }
+
+    .btn-sm {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    .alert {
+        font-weight: 500;
+    }
+
+    @@media (max-width: 768px) {
+        .search-bar {
+            width: 100%;
+            margin-top: 15px;
+        }
+    }
+</style>
+
+<div class="container">
+    <!-- Messages -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">@TempData["Message"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    <!-- Header Controls -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+        <a class="btn btn-back mb-2" href="@Url.Action("Dashboard", "Home")">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <div class="search-bar mb-2">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search bookings..." onkeyup="filterTable()" />
+        </div>
+    </div>
+
+    <!-- Bookings Card -->
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-paw"></i> Pet Boarding Bookings
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered" id="bookingsTable">
+                    <thead>
+                        <tr>
+                            <th>Owner</th>
+                            <th>Pet</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Type</th>
+                            <th>Breed</th>
+                            <th>Check-In</th>
+                            <th>Check-Out</th>
+                            <th>Booked</th>
+                            <th>Package</th>
+                            <th>Price</th>
+                            <th>Needs</th>
+                            <th>Status</th>
+                            <th>Agreement</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var booking in Model)
+                        {
+                            <tr>
+                                <td>@booking.OwnerName</td>
+                                <td>@booking.PetName</td>
+                                <td>@booking.Email</td>
+                                <td>@booking.Phone</td>
+                                <td>@booking.PetType</td>
+                                <td>@booking.PetBreed</td>
+                                <td>@booking.CheckInDate.ToString("dd MMM yyyy")</td>
+                                <td>@booking.CheckOutDate.ToString("dd MMM yyyy")</td>
+                                <td>@booking.BookingDate.ToString("dd MMM yyyy")</td>
+                                <td>@booking.Package</td>
+                                <td>@booking.PackagePrice.ToString("C")</td>
+                                <td>@booking.SpecialNeeds</td>
+                                <td>
+                                    <span class="badge @(booking.Check_Status == "Confirmed" ? "confirmed" : booking.Check_Status == "Pending" ? "pending" : "cancelled")">
+                                        @booking.Check_Status
+                                    </span>
+                                </td>
+                                <td>@(booking.Agreement ? "Yes" : "No")</td>
+                                <td>
+                                    @if (booking.Check_Status == "Cancelled")
+                                    {
+                                        <button class="btn btn-sm btn-secondary" disabled title="Cancelled bookings cannot be checked in/out.">
+                                            <i class="fas fa-ban"></i>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-sm btn-success" onclick="openCheckInModal(@booking.board_Id)">
+                                            <i class="fas fa-sign-in-alt"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-primary" onclick="openCheckOutModal(@booking.board_Id)">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                        </button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<div class="modal fade" id="checkInModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post" action="@Url.Action("AdminCheckIn")">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Check-In</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to check in this pet?
+                    <input type="hidden" name="id" id="checkInBookingId" />
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Yes, Check In</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="checkOutModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form method="post" action="@Url.Action("CheckOut")">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Check-Out</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to check out this pet?
+                    <input type="hidden" name="id" id="checkOutBookingId" />
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Yes, Check Out</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function openCheckInModal(id) {
+        $('#checkInBookingId').val(id);
+        $('#checkInModal').modal('show');
+    }
+
+    function openCheckOutModal(id) {
+        $('#checkOutBookingId').val(id);
+        $('#checkOutModal').modal('show');
+    }
+
+    function filterTable() {
+        const query = document.getElementById("searchInput").value.toLowerCase();
+        const rows = document.querySelectorAll("#bookingsTable tbody tr");
+
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(query) ? "" : "none";
+        });
+    }
+</script>

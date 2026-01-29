@@ -1,0 +1,30 @@
+﻿@model PetCare_system.Models.CheckOutViewModel
+
+@{
+    ViewBag.Title = "Check Out Pet";
+}
+
+<h2>Check Out @Model.PetName after @Model.TrainingType Training</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.SessionId)
+    @Html.HiddenFor(model => model.PetName)
+    @Html.HiddenFor(model => model.TrainingType)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProgressNotes, "Training Progress Notes")
+        @Html.TextAreaFor(model => model.ProgressNotes, new { @class = "form-control", rows = 4 })
+        @Html.ValidationMessageFor(model => model.ProgressNotes)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CheckOutNotes, "Final Observations")
+        @Html.TextAreaFor(model => model.CheckOutNotes, new { @class = "form-control", rows = 4 })
+        @Html.ValidationMessageFor(model => model.CheckOutNotes)
+    </div>
+
+    <button type="submit" class="btn btn-success">Check Out</button>
+    @Html.ActionLink("Cancel", "TrainerSessions", null, new { @class = "btn btn-default" })
+}

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<PetCare_system.Models.TrainingModule>
+@{
+    ViewBag.Title = "Training Modules";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .module-card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 25px;
+        overflow: hidden;
+        border: none;
+    }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+    .module-thumbnail {
+        height: 160px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+
+    .badge-difficulty {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 12px;
+    }
+
+    .badge-duration {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: rgba(0,0,0,0.7);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 12px;
+    }
+
+    .difficulty-easy {
+        background-color: #28a745;
+    }
+
+    .difficulty-medium {
+        background-color: #ffc107;
+    }
+
+    .difficulty-hard {
+        background-color: #dc3545;
+    }
+</style>
+
+<div class="container">
+    <h2>Training Modules</h2>
+    <p class="lead">Browse our collection of training modules</p>
+
+    <div class="row">
+        @foreach (var module in Model)
+        {
+            <div class="col-md-4">
+                <div class="module-card">
+                    <div class="module-thumbnail" style="background-image: url('@(string.IsNullOrEmpty(module.ThumbnailUrl) ? "/Content/default-module.jpg" : module.ThumbnailUrl)')">
+                        <span class="badge-difficulty difficulty-@module.Difficulty.ToLower()">@module.Difficulty</span>
+                        <span class="badge-duration">@module.DurationMinutes min</span>
+                    </div>
+                    <div class="card-body">
+                        <h5>@module.Title</h5>
+                        <p class="card-text">@(module.Description.Length > 100 ? module.Description.Substring(0, 100) + "..." : module.Description)</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">@module.TrainingType</small>
+                            <a href="@Url.Action("StartModule", new { moduleId = module.Id })" class="btn btn-sm btn-primary">
+                                Start Module
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

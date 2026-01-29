@@ -1,0 +1,215 @@
+﻿@model PetCare_system.Models.VaccinationRecord
+
+@{
+    ViewBag.Title = "Create Vaccination Record";
+}
+
+@section Styles {
+    <style>
+        .preview-panel {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #007bff;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .tooltip-icon {
+            cursor: pointer;
+            color: #17a2b8;
+        }
+
+        .progressbar {
+            counter-reset: step;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+            .progressbar li {
+                list-style: none;
+                width: 100%;
+                position: relative;
+                text-align: center;
+                color: #999;
+            }
+
+                .progressbar li:before {
+                    content: counter(step);
+                    counter-increment: step;
+                    width: 30px;
+                    height: 30px;
+                    line-height: 30px;
+                    border: 2px solid #ddd;
+                    display: block;
+                    text-align: center;
+                    margin: 0 auto 10px;
+                    border-radius: 50%;
+                    background-color: white;
+                }
+
+                .progressbar li.active {
+                    color: #007bff;
+                }
+
+                    .progressbar li.active:before {
+                        border-color: #007bff;
+                    }
+    </style>
+}
+
+<h2 class="mb-4">Create Vaccination Record</h2>
+
+<ul class="progressbar">
+    <li class="active">Pet Info</li>
+    <li class="active">Vaccine Details</li>
+    <li class="active">Dates</li>
+    <li class="active">Notes & Review</li>
+</ul>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <!-- PET DROPDOWN -->
+                <div class="form-group form-section">
+                    @Html.LabelFor(model => model.PetId, htmlAttributes: new { @class = "form-label fw-bold" })
+
+                    @Html.DropDownListFor(model => model.PetId, (IEnumerable<SelectListItem>)ViewBag.PetId, "-- Select Pet --", new
+                    {
+                        @class = "form-select",
+                        @id = "PetId"
+                    })
+
+                    <div class="form-text text-muted">Choose the pet this vaccination record is for.</div>
+                    @Html.ValidationMessageFor(model => model.PetId, "", new { @class = "text-danger" })
+                </div>
+
+
+
+
+                <!-- VACCINE NAME -->
+                <div class="form-group form-section">
+                    @Html.LabelFor(model => model.VaccineName, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.VaccineName, new { htmlAttributes = new { @class = "form-control", @id = "VaccineName" } })
+                    @Html.ValidationMessageFor(model => model.VaccineName, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- VACCINE TYPE (with datalist and tooltip) -->
+                <div class="form-group form-section">
+                    @Html.LabelFor(model => model.VaccineType, htmlAttributes: new { @class = "control-label" })
+                    <input list="vaccineTypes" id="VaccineType" name="VaccineType" class="form-control" />
+                    <datalist id="vaccineTypes">
+                        <option value="Rabies">
+                        <option value="Distemper">
+                        <option value="Parvo">
+                        <option value="Leptospirosis">
+                        <option value="Bordetella">
+                    </datalist>
+                    <small id="vaccineInfo" class="form-text text-muted"></small>
+                    @Html.ValidationMessageFor(model => model.VaccineType, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- DATE GIVEN -->
+                <div class="form-group form-section">
+                    @Html.LabelFor(model => model.DateGiven, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.DateGiven, new { htmlAttributes = new { @class = "form-control", @id = "DateGiven" } })
+                    @Html.ValidationMessageFor(model => model.DateGiven, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- NEXT DUE DATE (auto-suggested) -->
+                <div class="form-group form-section">
+                    @Html.LabelFor(model => model.NextDueDate, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.NextDueDate, new { htmlAttributes = new { @class = "form-control", @id = "NextDueDate" } })
+                    <small class="form-text text-info">Automatically suggested based on 6-month cycle</small>
+                    @Html.ValidationMessageFor(model => model.NextDueDate, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- NOTES -->
+                <div class="form-group form-section">
+                    @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", rows = "4", @id = "Notes" })
+                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                </div>
+
+                <!-- SUBMIT -->
+                <div class="form-group form-section">
+                    <input type="submit" value="Create" class="btn btn-success btn-lg" />
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT-SIDE LIVE PREVIEW PANEL -->
+        <div class="col-md-4">
+            <div class="preview-panel shadow-sm">
+                <h5 class="mb-3">Live Preview</h5>
+                <p><strong>🐾 Pet:</strong> <span id="previewPet">-</span></p>
+                <p><strong>💉 Vaccine:</strong> <span id="previewVaccine">-</span></p>
+                <p><strong>📘 Type:</strong> <span id="previewType">-</span></p>
+                <p><strong>📅 Date Given:</strong> <span id="previewGiven">-</span></p>
+                <p><strong>🔁 Next Due:</strong> <span id="previewDue">-</span></p>
+                <p><strong>📝 Notes:</strong> <span id="previewNotes">-</span></p>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="mt-3">
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-secondary" })
+</div>
+
+@section Scripts {
+    <script>
+        const vaccineInfoMap = {
+            "Rabies": "Protects against fatal rabies virus. Required every 3 years.",
+            "Distemper": "Essential for all dogs. Protects against multiple viruses.",
+            "Parvo": "Vital for puppies. Prevents canine parvovirus.",
+            "Leptospirosis": "Prevents bacterial infection from contaminated water.",
+            "Bordetella": "Protects against kennel cough. Needed for boarding."
+        };
+
+        document.getElementById("VaccineType").addEventListener("input", function () {
+            const val = this.value;
+            document.getElementById("vaccineInfo").innerText = vaccineInfoMap[val] || "";
+        });
+
+        document.getElementById("DateGiven").addEventListener("change", function () {
+            const givenDate = new Date(this.value);
+            if (!isNaN(givenDate.getTime())) {
+                const nextDue = new Date(givenDate);
+                nextDue.setMonth(givenDate.getMonth() + 6);
+                document.getElementById("NextDueDate").value = nextDue.toISOString().split("T")[0];
+            }
+        });
+
+        function updatePreview() {
+            const petSelect = document.getElementById("PetId");
+            const selectedPet = petSelect.options[petSelect.selectedIndex]?.text || "-";
+            document.getElementById("previewPet").innerText = selectedPet;
+
+            document.getElementById("previewVaccine").innerText = document.getElementById("VaccineName").value || "-";
+            document.getElementById("previewType").innerText = document.getElementById("VaccineType").value || "-";
+            document.getElementById("previewGiven").innerText = document.getElementById("DateGiven").value || "-";
+            document.getElementById("previewDue").innerText = document.getElementById("NextDueDate").value || "-";
+            document.getElementById("previewNotes").innerText = document.getElementById("Notes").value || "-";
+        }
+
+        const inputsToWatch = ["PetId", "VaccineName", "VaccineType", "DateGiven", "NextDueDate", "Notes"];
+        inputsToWatch.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener("input", updatePreview);
+                el.addEventListener("change", updatePreview);
+            }
+        });
+    </script>
+}

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<PetCare_system.Models.Driver>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DriverSurname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.License)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CarInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Destination)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Driverstatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Userr_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pet_Id)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverSurname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Latitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Longitude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.License)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CarInfo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Destination)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Driverstatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliveryStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Userr_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pet_Id)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DriverId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DriverId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DriverId })
+        </td>
+    </tr>
+}
+
+</table>

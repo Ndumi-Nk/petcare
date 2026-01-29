@@ -1,0 +1,186 @@
+﻿@model PetCare_system.Models.PaymentForTraining
+
+@{
+    ViewBag.Title = "Secure Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="payment-container">
+    <div class="payment-header">
+        <h2><i class="fas fa-paw"></i> PetCare Training Payment</h2>
+        <p class="secure-notice"><i class="fas fa-lock"></i> 256-bit SSL Secure Payment</p>
+    </div>
+
+    <div class="payment-card">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.TrainingSessionId)
+            @Html.HiddenFor(m => m.Amount)
+            @Html.HiddenFor(m => m.UserId)
+            @Html.HiddenFor(m => m.Status)
+            @Html.HiddenFor(m => m.PaymentDate)
+
+            <div class="payment-summary">
+                <h4>Payment Summary</h4>
+                <div class="summary-item">
+                    <span>Pet Name:</span>
+                    <strong>@Html.DisplayFor(m => m.PetName)</strong>
+                </div>
+                <div class="summary-item total">
+                    <span>Amount Due:</span>
+                    @Html.DisplayFor(m => m.Amount)
+                </div>
+            </div>
+
+            <div class="payment-details">
+                <h4><i class="fas fa-credit-card"></i> Payment Details</h4>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PaymentMethod)
+                    @Html.DropDownListFor(m => m.PaymentMethod, new SelectList(new[] { "Visa", "MasterCard", "Debit" }), "Select Card Type", new { @class = "form-control", required = "required" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.BankType)
+                    @Html.DropDownListFor(m => m.BankType, new SelectList(new[] { "Chase", "Bank of America", "Wells Fargo", "Citibank", "Capital One", "US Bank" }), "Select Your Bank", new { @class = "form-control", required = "required" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.CardHolderName)
+                    @Html.TextBoxFor(m => m.CardHolderName, new { @class = "form-control", placeholder = "As it appears on your card", required = "required" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.AccountNumber)
+                    @Html.TextBoxFor(m => m.AccountNumber, new { @class = "form-control", placeholder = "16-digit card number", required = "required", maxlength = "16", pattern = "[0-9]{16}" })
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(m => m.ExpiryDate)
+                        @Html.TextBoxFor(m => m.ExpiryDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", min = DateTime.Now.ToString("yyyy-MM-dd"), required = "required" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(m => m.CVV)
+                        @Html.TextBoxFor(m => m.CVV, new { @class = "form-control", placeholder = "CVV", required = "required", maxlength = "3", pattern = "[0-9]{3}" })
+                    </div>
+                </div>
+
+                <div class="form-group submit-section">
+                    <button type="submit" class="btn btn-pay-now">
+                        <i class="fas fa-lock"></i> Pay @String.Format("R {0:N2}", Model.Amount)
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="payment-security">
+        <p><i class="fas fa-shield-alt"></i> Your payment information is encrypted and secure</p>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .payment-container {
+            max-width: 600px;
+            margin: 30px auto;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .secure-notice {
+            color: #27ae60;
+            font-weight: 500;
+        }
+
+        .payment-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-top: 4px solid #3498db;
+        }
+
+        .payment-summary {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+            .summary-item.total {
+                border-top: 1px solid #ddd;
+                padding-top: 10px;
+                font-size: 1.1em;
+            }
+
+        .payment-details h4 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            height: 45px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-pay-now {
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 4px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+            .btn-pay-now:hover {
+                background: #219653;
+                transform: translateY(-2px);
+            }
+
+        .payment-security {
+            text-align: center;
+            margin-top: 20px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        // Format card number with spaces while typing
+        $('#AccountNumber').on('input', function () {
+            $(this).val($(this).val().replace(/\D/g, '').slice(0, 16));
+        });
+
+        // Format CVV to digits only
+        $('#CVV').on('input', function () {
+            $(this).val($(this).val().replace(/\D/g, '').slice(0, 3));
+        });
+    </script>
+}

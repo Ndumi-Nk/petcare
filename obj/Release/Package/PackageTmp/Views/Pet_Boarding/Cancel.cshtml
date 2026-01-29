@@ -1,0 +1,115 @@
+﻿@model PetCare_system.Models.Pet_Boarding
+
+@{
+    ViewBag.Title = "Cancel Boarding Reservation";
+}
+
+<style>
+    .cancel-container {
+        background-color: #fdfdfd;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .alert-warning-custom {
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+        color: #856404;
+        border-radius: 6px;
+    }
+
+    .card-header-custom {
+        background: linear-gradient(45deg, #0d6efd, #0b5ed7);
+        color: #fff;
+        font-weight: bold;
+        border-bottom: none;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .btn-lg-custom {
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+    }
+
+    .badge-status {
+        font-size: 0.95rem;
+        padding: 0.5em 0.75em;
+    }
+</style>
+
+<div class="container mt-5 cancel-container">
+    <h2 class="mb-4 text-center text-danger">
+        <i class="fas fa-exclamation-triangle"></i> @ViewBag.Title
+    </h2>
+    <hr />
+
+    <div class="alert alert-warning-custom mb-4">
+        <h5><strong>Before you cancel:</strong></h5>
+        <ul class="mb-0">
+            <li>Cancellations must be made at least <strong>24 hours</strong> before check-in.</li>
+            <li>You <strong>cannot cancel</strong> a reservation that is already <strong>Checked-In</strong> or <strong>Completed</strong>.</li>
+            <li><strong>No refunds</strong> for cancellations within 24 hours of check-in.</li>
+        </ul>
+    </div>
+
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header card-header-custom">
+            Booking Summary
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">Booking ID:</dt>
+                <dd class="col-sm-8">@Model.board_Id</dd>
+
+                <dt class="col-sm-4">Pet:</dt>
+                <dd class="col-sm-8">@Model.PetName (@Model.PetType)</dd>
+
+                <dt class="col-sm-4">Check-In Date:</dt>
+                <dd class="col-sm-8">@Model.CheckInDate.ToString("dd MMM yyyy")</dd>
+
+                <dt class="col-sm-4">Check-Out Date:</dt>
+                <dd class="col-sm-8">@Model.CheckOutDate.ToString("dd MMM yyyy")</dd>
+
+                <dt class="col-sm-4">Status:</dt>
+                <dd class="col-sm-8">
+                    <span class="badge bg-secondary badge-status">@Model.Status</span>
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    @if (Model.Status != "Checked-In" && Model.Status != "Completed" && Model.CheckInDate > DateTime.Now.AddHours(24))
+    {
+        using (Html.BeginForm("CancelConfirmed", "Pet_Boarding", new { id = Model.board_Id }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger btn-lg btn-lg-custom">
+                    <i class="fas fa-times-circle"></i> Confirm Cancellation
+                </button>
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary btn-lg btn-lg-custom">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-danger text-center">
+            <strong>Cancellation not allowed.</strong><br />
+            This reservation cannot be cancelled due to policy restrictions.
+        </div>
+        <div class="form-actions">
+            <a href="@Url.Action("Index")" class="btn btn-outline-secondary btn-lg btn-lg-custom">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
+        </div>
+    }
+</div>

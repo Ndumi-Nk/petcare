@@ -1,0 +1,76 @@
+﻿@model IEnumerable<PetCare_system.Models.ModuleProgress>
+
+@{
+    ViewBag.Title = "Training Progress";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            <i class="bi bi-graph-up"></i> @ViewBag.Title
+            <small class="text-muted">@ViewBag.PetName</small>
+        </h2>
+        <a href="@Url.Action("Dashboard", "Pet")" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Pets
+        </a>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach (var progress in Model)
+        {
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title mb-0">@progress.Module.Title</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Overall Progress</span>
+                                <span>@progress.Progress%</span>
+                            </div>
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar progress-bar-striped @(progress.Progress >= 100 ? "bg-success" : "bg-info")"
+                                     role="progressbar" style="width: @progress.Progress%"
+                                     aria-valuenow="@progress.Progress" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-play-circle me-2"></i>
+                                    <span>@progress.VideosWatched/@progress.Module.Videos.Count videos watched</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-question-circle me-2"></i>
+                                    <span>@progress.QuizAttempts quiz attempts</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-star me-2"></i>
+                            <span>Average Score: @progress.QuizScore.ToString("0.0")%</span>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">
+                                Last accessed: @progress.LastAccessed.ToString("g")
+                            </small>
+                            @if (progress.IsCompleted)
+                            {
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle"></i> Completed
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

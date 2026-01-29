@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Adoption Application Received";
+}
+
+<h2>Thank You for Your Adoption Application!</h2>
+
+@using (Html.BeginForm("SubmitAdoptionSelection", "Adoption", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="pet-card">
+        <div class="pet-info">
+            <strong>@(ViewBag.PetName ?? "Unknown")</strong>
+            <p>Type: @(ViewBag.PetType ?? "Unknown")</p>
+            <p>Breed: @(ViewBag.PetBreed ?? "Unknown")</p>
+            <p>Date of Birth: @(ViewBag.DateOfBirth ?? "Unknown")</p>
+        </div>
+    </div>
+}
+
+<p>We will review your application and notify you once it's processed.</p>
+<p>If you have any questions, please feel free to contact us.</p>
+
+<p>You will be redirected to the homepage in <span id="countdown">5</span> seconds...</p>
+
+<script>
+    let seconds = 5;
+    const countdownElement = document.getElementById('countdown');
+
+    const countdown = setInterval(() => {
+        seconds--;
+        countdownElement.textContent = seconds;
+
+        if (seconds <= 0) {
+            clearInterval(countdown);
+            window.location.href = '@Url.Action("Index", "Home")';
+        }
+    }, 1000);
+</script>

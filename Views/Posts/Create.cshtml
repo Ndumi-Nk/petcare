@@ -1,0 +1,97 @@
+﻿@model PetCare_system.Models.Post
+
+@{
+    ViewBag.Title = "Create";
+    var categories = new List<SelectListItem>
+{
+        new SelectListItem { Text = "General", Value = "General" },
+        new SelectListItem { Text = "Vet", Value = "Vet" },
+        new SelectListItem { Text = "Grooming", Value = "Grooming" },
+        new SelectListItem { Text = "Photos", Value = "Photos" }
+    };
+}
+
+<h2>Create Post</h2>
+
+@using (Html.BeginForm("Create", "Posts", FormMethod.Post, new { enctype = "multipart/form-data", @class = "needs-validation", novalidate = "novalidate", id = "petForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Post</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Category, categories, "Select a Category", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Body, new { @class = "form-control", rows = 5 })
+                @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.AttachmentUrl, htmlAttributes: new { @class = "control-label col-md-2 fw-bold" })
+
+            <div class="col-md-10">
+                <div class="input-group">
+                    <span class="input-group-text bg-light bg-opacity-50">
+                        <i class="fas fa-camera text-primary"></i>
+                    </span>
+
+                    <!-- Input name must match the parameter in your controller -->
+                    <input type="file" name="ImageFile" id="attachmentImage" class="form-control" accept="image/*" />
+
+                    <button class="btn btn-outline-secondary" type="button" id="clearAttachmentImage">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <small class="form-text text-muted">JPEG or PNG, max 5MB</small>
+                @Html.ValidationMessageFor(model => model.AttachmentUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <!-- UserName and UserProfilePic will be populated from session/user data in controller, not entered manually -->
+        @* These fields are hidden from user input *@
+        @Html.HiddenFor(model => model.UserName)
+        @*@Html.HiddenFor(model => model.UserProfilePic)
+            @Html.HiddenFor(model => model.Timestamp)*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script>
+    document.getElementById("clearAttachmentImage").addEventListener("click", function () {
+        document.getElementById("attachmentImage").value = "";
+    });
+</script>

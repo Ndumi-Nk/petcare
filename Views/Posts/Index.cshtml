@@ -1,0 +1,154 @@
+﻿@model List<PetCare_system.Models.Post>
+@{
+    ViewBag.Title = "Community";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    
+
+
+<div class="container mt-4">
+    <h2 class="mb-4">Pet Community</h2>
+    <a href="@Url.Action("Create", "Posts")" class="btn btn-primary mb-3">Create Post</a>
+
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" id="petTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" href="#general">General Pet Talk</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#vet">Vet Advice</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#grooming">Grooming Tips</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#photos">Pet Photos</a>
+        </li>
+    </ul>
+
+    <!-- Content Tabs -->
+    @{
+        var currentUserId = Session["LoggedInUserId"]?.ToString();
+    }
+
+    <div class="tab-content pt-3">
+        @foreach (var category in new[] { "General", "Vet", "Grooming", "Photos" })
+        {
+            var tabId = category.ToLower();
+            var active = category == "General" ? "show active" : "";
+            <div class="tab-pane fade @active" id="@tabId">
+                @{
+                    var categoryPosts = Model.Where(p => p.Category == category).ToList();
+                    if (!categoryPosts.Any())
+                    {
+                        <p>No posts in this category yet.</p>
+                    }
+                    else
+                    {
+                        foreach (var post in categoryPosts)
+                        {
+                            var latestComment = post.Comments.OrderByDescending(c => c.CreatedAt).FirstOrDefault();
+                            var isSelfPost = post.UserId == currentUserId;
+                            var isSelfLatestComment = latestComment?.UserId == currentUserId;
+
+                            if (latestComment != null)
+                            {
+                                <div class="border p-2 mb-2 rounded bg-light latest-comment" data-text="@latestComment.Body">
+                                    <strong>@latestComment.UserName</strong>
+                                    <small class="text-muted">(@latestComment.CreatedAt.ToString("g"))</small><br />
+                                    @latestComment.Body
+                                </div>
+                            }
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <!-- Post Content -->
+                                    <h5 class="card-title">@post.Title</h5>
+                                    <p class="card-text">@post.Body</p>
+
+                                    @if (!string.IsNullOrEmpty(post.AttachmentUrl))
+                                    {
+                                        <div class="mb-2">
+                                            <img src="@post.AttachmentUrl" class="img-fluid rounded" alt="Attachment" />
+                                        </div>
+                                    }
+
+                                    <!-- Buttons and Comments -->
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <button type="button" class="btn btn-sm btn-outline-primary me-1 btn-toggle-like">Like</button>
+                                    </div>
+
+                                    @if (post.Comments != null && post.Comments.Any())
+                                    {
+                                        <div class="mt-3 ms-3">
+                                            <h6>Comments:</h6>
+                                            @foreach (var comment in post.Comments)
+                                            {
+                                                <div class="border p-2 mb-2 rounded bg-light">
+                                                    <strong>@comment.UserName</strong> <small class="text-muted">(@comment.CreatedAt.ToString("g"))</small><br />
+                                                    @comment.Body
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+
+                                    <!-- Add Comment Form (blocked if self-reply) -->
+                                    @if (post.UserId != currentUserId)
+                                    {
+                                        using (Html.BeginForm("AddComment", "Posts", FormMethod.Post))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            @Html.Hidden("Post_Id", post.Post_Id)
+
+                                            <div class="mt-2">
+                                                @Html.TextArea("Body", "", new { @class = "form-control", placeholder = "Write a comment...", rows = 2 })
+                                                <button type="submit" class="btn btn-sm btn-primary mt-2">Post Comment</button>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="text-muted mt-2">You can't reply to your own post.</div>
+                                    }
+
+                                </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        }
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll(".btn-toggle-like").forEach(function (btn) { btn.addEventListener("click", function () { btn.classList.toggle("btn-outline-primary"); btn.classList.toggle("btn-primary"); if (btn.textContent.trim() === "Like") { btn.textContent = "Liked"; } else { btn.textContent = "Like"; } }); }); });
+</script>
+@section Scripts {
+    <script>
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                speechSynthesis.speak(utterance);
+            } else {
+                console.warn("Text-to-speech not supported in this browser.");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const latestComments = document.querySelectorAll(".latest-comment");
+
+            latestComments.forEach(function (commentDiv) {
+                const commentText = commentDiv.getAttribute("data-text");
+
+                // Auto-speak the latest comment on page load
+                if (commentText) {
+                    speakText(commentText);
+                }
+            });
+        });
+    </script>
+}

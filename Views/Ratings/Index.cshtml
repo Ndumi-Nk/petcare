@@ -1,0 +1,107 @@
+﻿@model IEnumerable<PetCare_system.Models.Rating>
+
+@{
+    ViewBag.Title = "Ratings";
+}
+
+<!-- Page Header -->
+<h2 style="text-align: center; color: #2c3e50; margin-bottom: 30px;">Visitor Ratings</h2>
+
+<div class="container">
+    <!-- Search Bar -->
+    <div class="row mb-4">
+        <div class="col-md-6 offset-md-3">
+            <input type="text" class="form-control" id="searchInput" placeholder="Search by rating or comment..." onkeyup="filterRatings()">
+        </div>
+    </div>
+
+    <!-- Ratings Table -->
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Rating</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody id="ratingsTable">
+            @foreach (var rating in Model)
+            {
+                <tr>
+                    <td>@rating.Score</td>
+                    <td>@rating.Comment</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    h2 {
+        font-weight: 700;
+        font-size: 2.5rem;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    .table {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+        .table thead {
+            background-color: #2c3e50;
+            color: #fff;
+        }
+
+    .table-hover tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f2f2f2;
+    }
+
+    #searchInput {
+        border-radius: 50px;
+        padding: 10px 20px;
+        border: 2px solid #ddd;
+        font-size: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: border 0.3s ease;
+    }
+
+        #searchInput:focus {
+            border-color: #2c3e50;
+            outline: none;
+        }
+</style>
+
+<!-- JavaScript for Search Functionality -->
+<script>
+    function filterRatings() {
+        const input = document.getElementById("searchInput");
+        const filter = input.value.toLowerCase();
+        const table = document.getElementById("ratingsTable");
+        const rows = table.getElementsByTagName("tr");
+
+        for (let i = 0; i < rows.length; i++) {
+            const ratingCell = rows[i].getElementsByTagName("td")[0]; // First column is the Rating
+            const commentCell = rows[i].getElementsByTagName("td")[1]; // Second column is the Comment
+            if (ratingCell || commentCell) {
+                const rating = ratingCell.textContent || ratingCell.innerText;
+                const comment = commentCell.textContent || commentCell.innerText;
+
+                // Filter rows based on the rating or comment content
+                if (rating.toLowerCase().indexOf(filter) > -1 || comment.toLowerCase().indexOf(filter) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

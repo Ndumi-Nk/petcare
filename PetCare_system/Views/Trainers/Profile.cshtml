@@ -1,0 +1,203 @@
+﻿@model PetCare_system.Models.Trainer
+
+@{
+    ViewBag.Title = "My Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .profile-container {
+        background-color: #f8f9fc;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .profile-sidebar {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 30px;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        height: 100%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-img {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+    }
+
+    .profile-details {
+        background-color: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .detail-item {
+        padding: 15px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+    .detail-label {
+        font-weight: 600;
+        color: #4e73df;
+        min-width: 150px;
+    }
+
+    .bio-section {
+        background-color: #f8f9fe;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 25px 0;
+    }
+
+    .specialization-badge {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        margin: 5px;
+        display: inline-block;
+    }
+
+    .action-btn {
+        border-radius: 30px;
+        padding: 10px 25px;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+    .back-btn {
+        background-color: #f8f9fc;
+        color: #4e73df;
+        border: 2px solid #4e73df;
+    }
+
+        .back-btn:hover {
+            background-color: #4e73df;
+            color: white;
+        }
+
+    .edit-btn {
+        background-color: #4e73df;
+        color: white;
+    }
+
+        .edit-btn:hover {
+            background-color: #2e59d9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 89, 217, 0.3);
+        }
+</style>
+
+<div class="container profile-container">
+    <div class="row">
+        <!-- Sidebar with profile image -->
+        <div class="col-md-4">
+            <div class="profile-sidebar">
+                <img src="@(string.IsNullOrEmpty(Model.ProfilePicture) ? "/Content/default-profile.png" : Model.ProfilePicture)"
+                     class="profile-img img-thumbnail" alt="Profile Picture">
+                <h3>@Model.FullName</h3>
+
+                @if (!string.IsNullOrEmpty(Model.Specializations))
+                {
+                    <div class="mt-3">
+                        @foreach (var spec in Model.Specializations.Split(','))
+                        {
+                            <span class="specialization-badge">@spec.Trim()</span>
+                        }
+                    </div>
+                }
+
+                <div class="mt-4">
+                    <a href="@Url.Action("Dashboard")" class="btn action-btn back-btn mr-2">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main profile details -->
+        <div class="col-md-8">
+            <div class="profile-details">
+                <h2 class="mb-4">Profile Information</h2>
+
+                <div class="detail-item row">
+                    <div class="col-md-3 detail-label">Email</div>
+                    <div class="col-md-9">@Model.Email</div>
+                </div>
+
+                <div class="detail-item row">
+                    <div class="col-md-3 detail-label">Phone</div>
+                    <div class="col-md-9">@(Model.PhoneNumber ?? "Not provided")</div>
+                </div>
+
+                <div class="detail-item row">
+                    <div class="col-md-3 detail-label">Experience</div>
+                    <div class="col-md-9">@Model.YearsOfExperience years</div>
+                </div>
+
+                <div class="detail-item row">
+                    <div class="col-md-3 detail-label">Status</div>
+                    <div class="col-md-9">
+                        <span class="badge @(Model.IsActive ? "bg-success" : "bg-secondary")">
+                            @(Model.IsActive ? "Active" : "Inactive")
+                        </span>
+                    </div>
+                </div>
+
+                <div class="detail-item row">
+                    <div class="col-md-3 detail-label">Member Since</div>
+                    <div class="col-md-9">@Model.CreatedAt.ToString("MMMM d, yyyy")</div>
+                </div>
+
+                <div class="bio-section">
+                    <h4><i class="fas fa-user-edit mr-2"></i> About Me</h4>
+                    <p class="mt-3">@(string.IsNullOrEmpty(Model.Bio) ? "No bio provided. You can add one by editing your profile." : Model.Bio)</p>
+                </div>
+
+                <div class="text-right mt-4">
+                    <a href="@Url.Action("Edit", new { id = Model.TrainerId })" class="btn action-btn edit-btn">
+                        <i class="fas fa-edit mr-2"></i> Edit Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<script>
+    // Add animation on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const elements = document.querySelectorAll('.profile-sidebar, .profile-details');
+        elements.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, index * 150);
+        });
+    });
+</script>
+
+<style>
+    /* Initial state for animations */
+    .profile-sidebar, .profile-details {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.5s ease-out;
+    }
+</style>

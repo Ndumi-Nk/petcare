@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PetCare_system.Models.TrainingVideo>
+
+@{
+    ViewBag.Title = "Module Videos";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>
+            <i class="bi bi-play-circle"></i> @ViewBag.Title
+            <small class="text-muted">@ViewBag.ModuleTitle</small>
+        </h2>
+
+
+        </div>
+            <a href="@Url.Action("CreateVideo", new { moduleId = ViewContext.RouteData.Values["id"] })"
+               class="btn btn-success">
+                Add New Video
+            </a>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <div class="list-group">
+                @foreach (var video in Model)
+                {
+                    <div class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <i class="bi bi-play-btn-fill text-primary" style="font-size: 2rem;"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">@video.Title</h5>
+                                    <p class="mb-1">@video.Description</p>
+                                    <small class="text-muted">
+                                        <span class="badge bg-@(video.DifficultyLevel == 1 ? "success" : video.DifficultyLevel == 2 ? "warning" : "danger")">
+                                            @video.DifficultyLevel.ToString()
+                                        </span>
+                                        <span class="ms-2"><i class="bi bi-clock"></i> @video.DurationMinutes min</span>
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="videoActions" data-bs-toggle="dropdown">
+                                    <i class="bi bi-gear"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="@Url.Action("EditVideo", new { id = video.Id })">
+                                            <i class="bi bi-pencil"></i> Edit
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <form action="@Url.Action("DeleteVideo", new { id = video.Id })" method="post" onsubmit="return confirm('Are you sure you want to delete this video?');">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="dropdown-item text-danger">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="mt-3">
+                <a href="@Url.Action("Modules")" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to Modules
+                </a>
+            </div>
+        </div>

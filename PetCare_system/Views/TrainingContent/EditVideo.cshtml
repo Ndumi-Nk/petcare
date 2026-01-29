@@ -1,0 +1,78 @@
+﻿@model PetCare_system.Models.TrainingVideo
+
+@{
+    ViewBag.Title = "Edit Video";
+}
+
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3><i class="bi bi-pencil-square"></i> @ViewBag.Title</h3>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("EditVideo", "TrainingContent", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.TrainingModuleId)
+                @Html.HiddenFor(model => model.VideoUrl)
+                @Html.HiddenFor(model => model.UploadDate)
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Title, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Description, new { @class = "form-label" })
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control", rows = 3 })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.DurationMinutes, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.DurationMinutes, new { @class = "form-control", type = "number" })
+                            @Html.ValidationMessageFor(model => model.DurationMinutes, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.DifficultyLevel, new { @class = "form-label" })
+                            @Html.DropDownListFor(model => model.DifficultyLevel, new SelectList(Enumerable.Range(1, 5)), new { @class = "form-select" })
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Video File (Leave empty to keep current)</label>
+                            <input type="file" name="videoFile" class="form-control" accept="video/*" />
+                            @if (!string.IsNullOrEmpty(Model.VideoUrl))
+                            {
+                                <div class="mt-2">
+                                    <small>Current video:</small>
+                                    <div class="ratio ratio-16x9">
+                                        <video controls style="max-width: 100%;">
+                                            <source src="@Model.VideoUrl" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="@Url.Action("ModuleVideos", new { id = Model.TrainingModuleId })" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Videos
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Save Changes
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

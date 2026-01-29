@@ -1,0 +1,29 @@
+﻿@model PetCare_system.Models.TrainingVideo
+
+@{
+    ViewBag.Title = "Watch Video";
+    Layout = null;  // no layout to isolate
+}
+
+<h3>@Model.Title</h3>
+<video id="trainingVideo" width="640" height="360" controls>
+    <source src="@Model.VideoUrl" type="video/mp4" />
+    Your browser does not support the video tag.
+</video>
+
+<script>
+    const moduleId = @Model.TrainingModuleId;
+    const videoId = @Model.Id;
+    const video = document.getElementById('trainingVideo');
+
+    video.onended = function () {
+        let watched = JSON.parse(localStorage.getItem("watchedVideos_" + moduleId)) || [];
+
+        if (!watched.includes(videoId)) {
+            watched.push(videoId);
+            localStorage.setItem("watchedVideos_" + moduleId, JSON.stringify(watched));
+        }
+
+        alert("✅ Video completed! Go back to the module to continue.");
+    };
+</script>
